@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
+import {MusicListPage} from "../music-list/music-list";
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+  //TODO: Change of tabs by swiping (NativePageTraansition)
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  //TODO: name or not name ?
+  //TODO: update root
+  tabs = [
+    {root: MusicListPage, name:"Musiques", rootparams: {}, icon: "musical-notes"},
+    {root: HomePage, name:"Artistes", rootparams: {}, icon: "person"},
+    {root: HomePage, name:"Playlists", rootparams: {}, icon: "list-box"},
+    {root: HomePage, name:"Paramètres", rootparams: {}, icon: "settings"}
+  ];
 
   constructor() {
 

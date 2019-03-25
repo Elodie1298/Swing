@@ -7,6 +7,8 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+  //TODO: destroy
+
   constructor(public navCtrl: NavController) {
 
   }
