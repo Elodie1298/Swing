@@ -1,11 +1,16 @@
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let music of musics">
-      <ion-avatar item-start>
-        <img [src]="music.album.cover">
-      </ion-avatar>
-      <h2>{{music.title}}</h2>
-      <p>{{music.album.artist.name}}</p>
-    </ion-item>
+
+    <ion-item-group>
+      <ion-item-divider color="light">M</ion-item-divider>
+      <ion-item *ngFor="let music of musics">
+        <ion-avatar item-start>
+          <img [src]="music.album.cover">
+        </ion-avatar>
+        <h2>{{music.title}}</h2>
+        <p>{{music.album.artist.name}}</p>
+      </ion-item>
+    </ion-item-group>
+
   </ion-list>
 </ion-content>

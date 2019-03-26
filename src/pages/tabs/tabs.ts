@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { HomePage } from '../home/home';
 import {MusicListPage} from "../music-list/music-list";
+import {ArtistListPage} from "../artist-list/artist-list";
 
 @Component({
   templateUrl: 'tabs.html'
@@ -13,7 +14,7 @@ export class TabsPage {
   //TODO: update root
   tabs = [
     {root: MusicListPage, name:"Musiques", rootparams: {}, icon: "musical-notes"},
-    {root: HomePage, name:"Artistes", rootparams: {}, icon: "person"},
+    {root: ArtistListPage, name:"Artistes", rootparams: {}, icon: "person"},
     {root: HomePage, name:"Playlists", rootparams: {}, icon: "list-box"},
     {root: HomePage, name:"Paramètres", rootparams: {}, icon: "settings"}
   ];

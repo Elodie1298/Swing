@@ -8,13 +8,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {TabsPage} from "../pages/tabs/tabs";
 import {MusicListPage} from "../pages/music-list/music-list";
+import {ArtistListPage} from "../pages/artist-list/artist-list";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     TabsPage,
-    MusicListPage
+    MusicListPage,
+    ArtistListPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import {MusicListPage} from "../pages/music-list/music-list";
     MyApp,
     HomePage,
     TabsPage,
-    MusicListPage
+    MusicListPage,
+    ArtistListPage
   ],
   providers: [
     StatusBar,
