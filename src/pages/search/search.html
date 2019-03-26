@@ -4,18 +4,30 @@
   ></ion-searchbar>
 
   <music-list-component
-    [musics]="musics"
+    [isDivTitle]="true"
+    [musics]="getFirstItems(musics)"
+    (click)="onClick($event)"
   ></music-list-component>
 
   <album-list-component
-    [albums]="albums"
+    [isDivTitle]="true"
+    [albums]="getFirstItems(albums)"
+    (click)="onClick($event)"
   ></album-list-component>
 
   <artist-list-component
-    [artists]="artists"
+    [isDivTitle]="true"
+    [artists]="getFirstItems(artists)"
+    (click)="onClick($event)"
   ></artist-list-component>
 
   <playlist-list-component
-    [playlists]="playlists"
+    [isDivTitle]="true"
+    [playlists]="getFirstItems(playlists)"
+    (click)="onClick($event)"
   ></playlist-list-component>
 </ion-content>
+
+<ion-footer *ngIf="isPBEnalbed">
+  <playbar-component></playbar-component>
+</ion-footer>

@@ -1,0 +1,24 @@
+<ion-list>
+
+  <ion-item-group>
+    <ion-item-divider *ngIf="!isDivTitle" color="light">A</ion-item-divider>
+    <ion-item-divider ion-item *ngIf="isDivTitle" color="light" (click)="onClick($event)">
+      Albums
+      <ion-icon item-end name="arrow-dropright"></ion-icon>
+    </ion-item-divider>
+    <ion-grid>
+
+      <ion-row justify-content-start *ngFor="let albumsGroup of getAlbums()">
+        <ion-col col-4 *ngFor="let album of albumsGroup">
+
+          <album-list-item
+            [album]="album"
+          ></album-list-item>
+
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-item-group>
+
+</ion-list>

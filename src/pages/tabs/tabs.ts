@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { HomePage } from '../home/home';
 import {MusicListPage} from "../music-list/music-list";
 import {ArtistListPage} from "../artist-list/artist-list";
 import {PlaylistListPage} from "../playlist-list/playlist-list";
@@ -19,7 +18,7 @@ export class TabsPage {
     {root: ArtistListPage, name:"Artistes", rootparams: {}, icon: "person"},
     {root: PlaylistListPage, name:"Playlists", rootparams: {}, icon: "list-box"},
     {root: SearchPage, name:"Search", rootparams: {}, icon: "search"},
-    {root: HomePage, name:"Paramètres", rootparams: {}, icon: "settings"}
+    {root: MusicListPage, name:"Paramètres", rootparams: {}, icon: "settings"}
   ];
 
   constructor() {

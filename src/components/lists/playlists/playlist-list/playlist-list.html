@@ -1,0 +1,14 @@
+<ion-list>
+
+  <ion-item-group>
+    <ion-item-divider *ngIf="!isDivTitle" color="light">P</ion-item-divider>
+    <ion-item-divider ion-item *ngIf="isDivTitle" color="light" (click)="onClick($event)">
+      Playlist
+      <ion-icon item-end name="arrow-dropright"></ion-icon>
+    </ion-item-divider>
+    <ion-item *ngFor="let playlist of playlists" no-padding>
+      <playlist-list-item [playlist]="playlist"></playlist-list-item>
+    </ion-item>
+  </ion-item-group>
+
+</ion-list>

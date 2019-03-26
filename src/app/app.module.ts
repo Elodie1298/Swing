@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import {TabsPage} from "../pages/tabs/tabs";
 import {MusicListPage} from "../pages/music-list/music-list";
 import {ArtistListPage} from "../pages/artist-list/artist-list";
@@ -16,12 +15,11 @@ import {SearchPage} from "../pages/search/search";
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     TabsPage,
     MusicListPage,
     ArtistListPage,
     PlaylistListPage,
-    SearchPage
+    SearchPage,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +29,6 @@ import {SearchPage} from "../pages/search/search";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     TabsPage,
     MusicListPage,
     ArtistListPage,

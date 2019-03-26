@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Artist} from "../../model/Artist";
-import {ListUtil} from "../../components/ListUtil";
 
 /**
  * Generated class for the ArtistListPage page.
@@ -18,6 +17,8 @@ import {ListUtil} from "../../components/ListUtil";
 export class ArtistListPage {
 
   artists: Array<Artist>;
+
+  isPBEnalbed: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.artists = Artist.getArtistList();

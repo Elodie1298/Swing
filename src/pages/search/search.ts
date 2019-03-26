@@ -18,11 +18,14 @@ import {Playlist} from "../../model/Playlist";
   templateUrl: 'search.html',
 })
 export class SearchPage {
-  searchQuery: string = '';
+  maxLen:number = 3;
+
   albums: Array<Album>;
   musics: Array<Music>;
   artists: Array<Artist>;
   playlists: Array<Playlist>;
+
+  isPBEnalbed: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.initializeItems();
@@ -57,7 +60,22 @@ export class SearchPage {
         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
+  }
 
+  getFirstItems(items: Array<any>): Array<any> {
+    let array = new Array<any>();
+    let max = this.maxLen;
+    if (items.length < max) {
+      max = items.length;
+    }
+    for (let i=0 ; i<max ; i++) {
+      array.push(items[i])
+    }
+    return array;
+  }
+
+  onClick(ev: any) {
+    console.log('clicked');
   }
 
 }
