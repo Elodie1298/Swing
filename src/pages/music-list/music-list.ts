@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Track} from "../../model/Track";
+import {Music} from "../../model/Music";
 
 /**
  * Generated class for the MusicListPage page.
@@ -16,12 +16,12 @@ import {Track} from "../../model/Track";
 })
 export class MusicListPage {
 
-  musics: Array<Track>;
+  musics: Array<Music>;
 
   //TODO: ajouter les labels de listes
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.musics = Track.getTrackList();
+    this.musics = Music.getMusicList();
   }
 
   ionViewDidLoad() {

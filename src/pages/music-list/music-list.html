@@ -1,19 +1,9 @@
 <ion-content>
   <ion-list>
 
-    <ion-item-group>
-      <ion-item-divider color="light">M</ion-item-divider>
-      <ion-item *ngFor="let music of musics">
-        <ion-avatar item-start>
-          <img [src]="music.album.cover">
-        </ion-avatar>
-        <h2>{{music.title}}</h2>
-        <p>{{music.album.artist.name}}</p>
-        <button ion-button item-end clear large color="dark">
-          <ion-icon name="more"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-item-group>
+    <music-list-component
+      [musics]="musics"
+    ></music-list-component>
 
   </ion-list>
 </ion-content>

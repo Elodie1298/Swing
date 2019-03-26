@@ -1,25 +1,6 @@
 <ion-content>
-  <ion-list>
 
-    <ion-item-group>
-      <ion-item-divider color="light">A</ion-item-divider>
-      <ion-grid>
-
-        <ion-row justify-content-start *ngFor="let artistGroup of artists">
-          <ion-col col-4 *ngFor="let artist of artistGroup">
-            <ion-card outline padding>
-              <ion-avatar item-top>
-                <img [src]="artist.img">
-              </ion-avatar>
-              <h2 text-center>
-                {{artist.name}}
-              </h2>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-
-      </ion-grid>
-    </ion-item-group>
-
-  </ion-list>
+  <artist-list-component
+    [artists]="artists"
+  ></artist-list-component>
 </ion-content>

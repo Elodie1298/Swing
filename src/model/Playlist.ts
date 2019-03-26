@@ -1,13 +1,13 @@
-import {Track} from "./Track";
+import {Music} from "./Music";
 
 export class Playlist {
   //TODO: adapt class
-  trackList: Array<Track>;
+  trackList: Array<Music>;
   name: string;
   cover: string;
 
   constructor() {
-    this.trackList = Track.getTrackList();
+    this.trackList = Music.getMusicList();
     this.name = "Playlist test";
     this.cover = "assets/imgs/logo.png";
   }

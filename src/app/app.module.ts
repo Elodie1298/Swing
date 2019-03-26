@@ -10,6 +10,8 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {MusicListPage} from "../pages/music-list/music-list";
 import {ArtistListPage} from "../pages/artist-list/artist-list";
 import {PlaylistListPage} from "../pages/playlist-list/playlist-list";
+import {ComponentsModule} from "../components/components.module";
+import {SearchPage} from "../pages/search/search";
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import {PlaylistListPage} from "../pages/playlist-list/playlist-list";
     TabsPage,
     MusicListPage,
     ArtistListPage,
-    PlaylistListPage
+    PlaylistListPage,
+    SearchPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -31,7 +35,8 @@ import {PlaylistListPage} from "../pages/playlist-list/playlist-list";
     TabsPage,
     MusicListPage,
     ArtistListPage,
-    PlaylistListPage
+    PlaylistListPage,
+    SearchPage
   ],
   providers: [
     StatusBar,

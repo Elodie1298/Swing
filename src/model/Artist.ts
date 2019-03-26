@@ -8,7 +8,7 @@ export class Artist {
     this.img = "assets/imgs/logo.png";
   }
 
-  static getArtists(): Array<Artist> {
+  static getArtistList(): Array<Artist> {
     let artistList = new Array<Artist>();
     for (let i=0 ; i<10 ; i++) {
       artistList.push(new Artist());

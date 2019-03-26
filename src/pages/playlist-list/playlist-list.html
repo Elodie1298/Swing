@@ -1,18 +1,6 @@
 <ion-content>
-  <ion-list>
 
-    <ion-item-group>
-      <ion-item-divider color="light">P</ion-item-divider>
-      <ion-item *ngFor="let playlist of playlists">
-        <ion-avatar item-start>
-          <img [src]="playlist.cover">
-        </ion-avatar>
-        <h2>{{playlist.name}}</h2>
-        <button ion-button item-end clear large color="dark">
-          <ion-icon name="more"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-item-group>
-
-  </ion-list>
+  <playlist-list-component
+    [playlists]="playlists"
+  ></playlist-list-component>
 </ion-content>

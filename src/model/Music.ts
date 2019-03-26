@@ -1,19 +1,19 @@
 import {Album} from "./Album";
 
-export class Track {
+export class Music {
   //TODO: adapt class
   title: string;
   album: Album;
 
   constructor() {
-    this.title = "Track test";
+    this.title = "Music test";
     this.album = new Album();
   }
 
-  static getTrackList(): Array<Track> {
-    let trackList = new Array<Track>();
+  static getMusicList(): Array<Music> {
+    let trackList = new Array<Music>();
     for (let i=0 ; i<10 ; i++) {
-      trackList.push(new Track());
+      trackList.push(new Music());
     }
     return trackList;
   }
