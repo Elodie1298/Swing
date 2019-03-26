@@ -1,4 +1,5 @@
 export class Artist {
+  //TODO: adapt class
   name: string;
   img: string;
 

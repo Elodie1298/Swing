@@ -1,6 +1,7 @@
 import {Artist} from "./Artist";
 
 export class Album {
+  //TODO: adapt class
   title: string;
   cover: string;
   artist: Artist;

@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import {TabsPage} from "../pages/tabs/tabs";
 import {MusicListPage} from "../pages/music-list/music-list";
 import {ArtistListPage} from "../pages/artist-list/artist-list";
+import {PlaylistListPage} from "../pages/playlist-list/playlist-list";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {ArtistListPage} from "../pages/artist-list/artist-list";
     HomePage,
     TabsPage,
     MusicListPage,
-    ArtistListPage
+    ArtistListPage,
+    PlaylistListPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import {ArtistListPage} from "../pages/artist-list/artist-list";
     HomePage,
     TabsPage,
     MusicListPage,
-    ArtistListPage
+    ArtistListPage,
+    PlaylistListPage
   ],
   providers: [
     StatusBar,

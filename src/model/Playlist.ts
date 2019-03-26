@@ -1,12 +1,15 @@
 import {Track} from "./Track";
 
 export class Playlist {
+  //TODO: adapt class
   trackList: Array<Track>;
   name: string;
+  cover: string;
 
   constructor() {
     this.trackList = Track.getTrackList();
     this.name = "Playlist test";
+    this.cover = "assets/imgs/logo.png";
   }
 
   static getPlaylistList(): Array<Playlist> {

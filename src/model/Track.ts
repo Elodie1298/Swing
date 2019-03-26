@@ -1,6 +1,7 @@
 import {Album} from "./Album";
 
 export class Track {
+  //TODO: adapt class
   title: string;
   album: Album;
 

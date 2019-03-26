@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Playlist} from "../../model/Playlist";
 
 /**
- * Generated class for the PlaylistListPage page.
+ * Generated class for the SearchPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,19 +10,16 @@ import {Playlist} from "../../model/Playlist";
 
 @IonicPage()
 @Component({
-  selector: 'page-playlist-list',
-  templateUrl: 'playlist-list.html',
+  selector: 'page-search',
+  templateUrl: 'search.html',
 })
-export class PlaylistListPage {
-
-  playlists: Array<Playlist>;
+export class SearchPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.playlists = Playlist.getPlaylistList();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PlaylistListPage');
+    console.log('ionViewDidLoad SearchPage');
   }
 
 }
