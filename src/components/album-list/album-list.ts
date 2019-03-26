@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Album} from "../../model/Album";
+import {ListUtil} from "../ListUtil";
 
 /**
  * Generated class for the AlbumListComponent component.
@@ -7,16 +9,17 @@ import { Component } from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'album-list',
+  selector: 'album-list-component',
   templateUrl: 'album-list.html'
 })
 export class AlbumListComponent {
 
-  text: string;
+  @Input() albums: Array<Album>;
 
-  constructor() {
-    console.log('Hello AlbumListComponent Component');
-    this.text = 'Hello World';
+  constructor() {}
+
+  getAlbums(): Array<any> {
+    return ListUtil.parseCol3(this.albums);
   }
 
 }
