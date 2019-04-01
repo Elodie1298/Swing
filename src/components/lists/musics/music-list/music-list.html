@@ -3,10 +3,10 @@
   <ion-item-divider ion-item color="light" (click)="onClick($event)"
                     *ngIf="isDivTitle && isDivider">
     Musiques
-    <ion-icon item-end name="arrow-dropright"></ion-icon>
+    <ion-icon item-end name="arrow-dropright" (click)="more()"></ion-icon>
   </ion-item-divider>
 
-  <ion-item *ngFor="let music of musics" no-padding>
+  <ion-item *ngFor="let music of getMusics()" no-padding>
     <music-list-item
       [music]="music"
       [number]="number"

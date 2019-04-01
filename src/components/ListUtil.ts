@@ -18,4 +18,16 @@ export class ListUtil {
     array.push(anyArray);
     return array;
   }
+
+  public static getFirstItems(items: Array<any>, maxLen: number = 3): Array<any> {
+    let array = new Array<any>();
+    let max = maxLen;
+    if (items.length < max) {
+      max = items.length;
+    }
+    for (let i=0 ; i<max ; i++) {
+      array.push(items[i])
+    }
+    return array;
+  }
 }

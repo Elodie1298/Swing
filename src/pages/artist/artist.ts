@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Artist} from "../../model/Artist";
 import {Music} from "../../model/Music";
 import {Album} from "../../model/Album";
+import {ListUtil} from "../../components/ListUtil";
 
 /**
  * Generated class for the ArtistPage page.
@@ -22,8 +23,6 @@ export class ArtistPage {
   musics: Array<Music>;
   albums: Array<Album>;
 
-  maxLen: number = 6;
-
   isPBEnalbed: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -33,15 +32,10 @@ export class ArtistPage {
   }
 
   getFirstItems(items: Array<any>): Array<any> {
-    let array = new Array<any>();
-    let max = this.maxLen;
-    if (items.length < max) {
-      max = items.length;
+    if (items[0] instanceof Music) {
+      return ListUtil.getFirstItems(items, 3);
     }
-    for (let i=0 ; i<max ; i++) {
-      array.push(items[i])
-    }
-    return array;
+    return ListUtil.getFirstItems(items, 6);
   }
 
 }

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <music-list-component *ngIf="!!musics"
+                        [musics]="musics"
+                        [isDivider]="false"
+  ></music-list-component>
+
+  <album-list-component *ngIf="!!albums"
+                        [albums]="albums"
+                        [isDivider]="false"
+  ></album-list-component>
+
+  <artist-list-component *ngIf="!!artists"
+                        [artists]="artists"
+                        [isDivider]="false"
+  ></artist-list-component>
+
+  <playlist-list-component *ngIf="!!playlists"
+                        [playlists]="playlists"
+                        [isDivider]="false"
+  ></playlist-list-component>
+
+</ion-content>

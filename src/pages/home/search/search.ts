@@ -4,6 +4,7 @@ import {Album} from "../../../model/Album";
 import {Music} from "../../../model/Music";
 import {Artist} from "../../../model/Artist";
 import {Playlist} from "../../../model/Playlist";
+import {ListUtil} from "../../../components/ListUtil";
 
 /**
  * Generated class for the SearchPage page.
@@ -18,14 +19,14 @@ import {Playlist} from "../../../model/Playlist";
   templateUrl: 'search.html',
 })
 export class SearchPage {
-  maxLen:number = 3;
-
   albums: Array<Album>;
   musics: Array<Music>;
   artists: Array<Artist>;
   playlists: Array<Playlist>;
 
   isPBEnalbed: boolean = true;
+
+  max: number = 3;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.initializeItems();
@@ -56,18 +57,6 @@ export class SearchPage {
         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
-  }
-
-  getFirstItems(items: Array<any>): Array<any> {
-    let array = new Array<any>();
-    let max = this.maxLen;
-    if (items.length < max) {
-      max = items.length;
-    }
-    for (let i=0 ; i<max ; i++) {
-      array.push(items[i])
-    }
-    return array;
   }
 
   onClick(ev: any) {
