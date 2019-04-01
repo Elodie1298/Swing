@@ -15,6 +15,9 @@ export class MusicListComponent {
   @Input() musics: Array<Music>;
   @Input() isDivTitle: boolean = false;
 
+  @Input() isDivider: boolean = true;
+  @Input() number: number = 0;
+
   @Output() click: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {}

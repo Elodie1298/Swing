@@ -17,6 +17,8 @@ export class MusicListItemComponent {
 
   @Input() music: Music;
 
+  @Input() number: number;
+
   constructor(private navCtrl: NavController) {}
 
   onClick():void {
@@ -25,6 +27,10 @@ export class MusicListItemComponent {
     };
     console.log(this.music);
     this.navCtrl.push(PlayingListPage, navParams);
+  }
+
+  isNumber(): boolean {
+    return this.number == 0;
   }
 
 }

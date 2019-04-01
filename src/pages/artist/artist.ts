@@ -27,7 +27,7 @@ export class ArtistPage {
   isPBEnalbed: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.artist = new Artist();
+    this.artist = navParams.get("artist");
     this.albums = Album.getAlbumList();
     this.musics = Music.getMusicList();
   }

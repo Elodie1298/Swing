@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Album} from "../../../../model/Album";
+import {NavController} from "ionic-angular";
+import {AlbumPage} from "../../../../pages/album/album";
 
 /**
  * Generated class for the AlbumListItemComponent component.
@@ -15,6 +17,9 @@ export class AlbumListItemComponent {
 
   @Input() album: Album;
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
+  onClick(): void {
+    this.navCtrl.push(AlbumPage, {album: this.album});
+  }
 }

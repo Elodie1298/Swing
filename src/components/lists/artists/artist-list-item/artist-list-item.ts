@@ -20,7 +20,7 @@ export class ArtistListItemComponent {
   constructor(private navCtrl: NavController) {}
 
   onClick(): void {
-    this.navCtrl.push(ArtistPage);
+    this.navCtrl.push(ArtistPage, {artist: this.artist});
   }
 
 }

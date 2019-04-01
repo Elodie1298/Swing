@@ -13,6 +13,7 @@ import {ComponentsModule} from "../components/components.module";
 import {SearchPage} from "../pages/home/search/search";
 import {PlayingListPage} from "../pages/playing-list/playing-list";
 import {ArtistPage} from "../pages/artist/artist";
+import {AlbumPage} from "../pages/album/album";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {ArtistPage} from "../pages/artist/artist";
     PlaylistListPage,
     SearchPage,
     PlayingListPage,
-    ArtistPage
+    ArtistPage,
+    AlbumPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import {ArtistPage} from "../pages/artist/artist";
     PlaylistListPage,
     SearchPage,
     PlayingListPage,
-    ArtistPage
+    ArtistPage,
+    AlbumPage
   ],
   providers: [
     StatusBar,
