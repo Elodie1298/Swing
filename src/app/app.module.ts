@@ -11,6 +11,7 @@ import {ArtistListPage} from "../pages/artist-list/artist-list";
 import {PlaylistListPage} from "../pages/playlist-list/playlist-list";
 import {ComponentsModule} from "../components/components.module";
 import {SearchPage} from "../pages/search/search";
+import {PlayingListPage} from "../pages/playing-list/playing-list";
 
 @NgModule({
   declarations: [
@@ -20,10 +21,13 @@ import {SearchPage} from "../pages/search/search";
     ArtistListPage,
     PlaylistListPage,
     SearchPage,
+    PlayingListPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true
+    }),
     ComponentsModule
   ],
   bootstrap: [IonicApp],
@@ -33,7 +37,8 @@ import {SearchPage} from "../pages/search/search";
     MusicListPage,
     ArtistListPage,
     PlaylistListPage,
-    SearchPage
+    SearchPage,
+    PlayingListPage
   ],
   providers: [
     StatusBar,

@@ -1,10 +1,10 @@
-<ion-toolbar no-padding>
-  <ion-item no-lines>
+<ion-toolbar no-padding class="playbar">
+  <ion-item no-lines color="light">
     <img item-start [src]="music.album.cover" width="48">
     <h2>{{music.title}}</h2>
     <p>{{music.album.artist.name}}</p>
 
     <playbar-buttons-component item-end></playbar-buttons-component>
   </ion-item>
+  
 </ion-toolbar>
-

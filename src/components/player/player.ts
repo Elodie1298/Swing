@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Music} from "../../model/Music";
 
 /**
  * Generated class for the PlayerComponent component.
@@ -12,11 +13,8 @@ import { Component } from '@angular/core';
 })
 export class PlayerComponent {
 
-  text: string;
+  @Input() music: Music;
 
-  constructor() {
-    console.log('Hello PlayerComponent Component');
-    this.text = 'Hello World';
-  }
+  constructor() {}
 
 }

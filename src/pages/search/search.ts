@@ -31,10 +31,6 @@ export class SearchPage {
     this.initializeItems();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
-  }
-
   initializeItems(): void {
     this.albums = Album.getAlbumList();
     this.musics = Music.getMusicList();

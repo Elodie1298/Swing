@@ -1,4 +1,16 @@
-<!-- Generated template for the PlayerComponent component -->
-<div>
-  {{text}}
+<div class="player">
+  <ion-navbar>
+    <ion-row justify-content-center>
+      <img src="assets/imgs/logo.png" width="80%">
+    </ion-row>
+  </ion-navbar>
+
+  <ion-toolbar>
+    <div ion-item>
+      <h2>{{music.title}}</h2>
+      <p>{{music.album.artist.name}}</p>
+
+      <playbar-buttons-component item-end></playbar-buttons-component>
+    </div>
+  </ion-toolbar>
 </div>

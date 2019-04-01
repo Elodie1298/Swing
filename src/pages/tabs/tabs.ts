@@ -21,7 +21,6 @@ export class TabsPage {
     {root: MusicListPage, name:"Paramètres", rootparams: {}, icon: "settings"}
   ];
 
-  constructor() {
+  constructor() {}
 
-  }
 }

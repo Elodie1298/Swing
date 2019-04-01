@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Music} from "../../../../model/Music";
+import {NavController} from "ionic-angular";
+import {PlayingListPage} from "../../../../pages/playing-list/playing-list";
 
 /**
  * Generated class for the MusicListItemComponent component.
@@ -15,6 +17,14 @@ export class MusicListItemComponent {
 
   @Input() music: Music;
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
+
+  onClick():void {
+    let navParams = {
+      music: this.music
+    };
+    console.log(this.music);
+    this.navCtrl.push(PlayingListPage, navParams);
+  }
 
 }

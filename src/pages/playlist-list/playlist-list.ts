@@ -21,7 +21,7 @@ export class PlaylistListPage {
   isPBEnalbed: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.playlists = Playlist.getPlaylistList();
+    this.playlists = Playlist.getPlaylistList()
   }
 
   ionViewDidLoad() {
