@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Playlist} from "../../../../model/Playlist";
+import {NavController} from "ionic-angular";
+import {PlaylistPage} from "../../../../pages/playlist/playlist";
 
 /**
  * Generated class for the PlaylistListItemComponent component.
@@ -15,6 +17,9 @@ export class PlaylistListItemComponent {
 
   @Input() playlist: Playlist;
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
+  onClick(): void {
+    this.navCtrl.push(PlaylistPage, {playlist: this.playlist});
+  }
 }

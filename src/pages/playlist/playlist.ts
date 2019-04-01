@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Album} from "../../model/Album";
-import {Music} from "../../model/Music";
+import {Playlist} from "../../model/Playlist";
 
 /**
- * Generated class for the AlbumPage page.
+ * Generated class for the PlaylistPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,18 +11,17 @@ import {Music} from "../../model/Music";
 
 @IonicPage()
 @Component({
-  selector: 'page-album',
-  templateUrl: 'album.html',
+  selector: 'page-playlist',
+  templateUrl: 'playlist.html',
 })
-export class AlbumPage {
+export class PlaylistPage {
 
-  album: Album;
-  musics: Array<Music>;
+  playlist: Playlist;
 
   isPBEnalbed: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.album = navParams.get("album");
-    this.musics = Music.getMusicList();
+    this.playlist = navParams.get("playlist");
   }
+
 }
