@@ -1,3 +1,5 @@
+import {Album} from "./Album";
+
 export class Artist {
   //TODO: adapt class
   name: string;

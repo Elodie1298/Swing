@@ -5,13 +5,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import {TabsPage} from "../pages/tabs/tabs";
-import {MusicListPage} from "../pages/music-list/music-list";
-import {ArtistListPage} from "../pages/artist-list/artist-list";
-import {PlaylistListPage} from "../pages/playlist-list/playlist-list";
+import {TabsPage} from "../pages/home/tabs/tabs";
+import {MusicListPage} from "../pages/home/music-list/music-list";
+import {ArtistListPage} from "../pages/home/artist-list/artist-list";
+import {PlaylistListPage} from "../pages/home/playlist-list/playlist-list";
 import {ComponentsModule} from "../components/components.module";
-import {SearchPage} from "../pages/search/search";
+import {SearchPage} from "../pages/home/search/search";
 import {PlayingListPage} from "../pages/playing-list/playing-list";
+import {ArtistPage} from "../pages/artist/artist";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {PlayingListPage} from "../pages/playing-list/playing-list";
     ArtistListPage,
     PlaylistListPage,
     SearchPage,
-    PlayingListPage
+    PlayingListPage,
+    ArtistPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import {PlayingListPage} from "../pages/playing-list/playing-list";
     ArtistListPage,
     PlaylistListPage,
     SearchPage,
-    PlayingListPage
+    PlayingListPage,
+    ArtistPage
   ],
   providers: [
     StatusBar,

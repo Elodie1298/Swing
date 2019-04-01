@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Artist} from "../../../../model/Artist";
+import {NavController} from "ionic-angular";
+import {ArtistPage} from "../../../../pages/artist/artist";
 
 /**
  * Generated class for the ArtistListItemComponent component.
@@ -15,6 +17,10 @@ export class ArtistListItemComponent {
 
   @Input() artist: Artist;
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
+
+  onClick(): void {
+    this.navCtrl.push(ArtistPage);
+  }
 
 }

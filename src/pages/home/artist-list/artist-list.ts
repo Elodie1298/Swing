@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Music} from "../../model/Music";
+import {Artist} from "../../../model/Artist";
 
 /**
- * Generated class for the MusicListPage page.
+ * Generated class for the ArtistListPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,23 +11,22 @@ import {Music} from "../../model/Music";
 
 @IonicPage()
 @Component({
-  selector: 'page-music-list',
-  templateUrl: 'music-list.html',
+  selector: 'page-artist-list',
+  templateUrl: 'artist-list.html',
 })
-export class MusicListPage {
+export class ArtistListPage {
 
-  musics: Array<Music>;
+  artists: Array<Artist>;
 
   isPBEnalbed: boolean = true;
 
-  //TODO: ajouter les labels de listes
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.musics = Music.getMusicList();
+    this.artists = Artist.getArtistList();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MusicListPage');
+    console.log('ionViewDidLoad ArtistListPage');
   }
+
 
 }

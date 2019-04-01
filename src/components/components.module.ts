@@ -11,6 +11,7 @@ import { PlaylistListItemComponent } from './lists/playlists/playlist-list-item/
 import { PlaybarComponent } from './playbar/playbar';
 import { PlaybarButtonsComponent } from './playbar/playbar-buttons/playbar-buttons';
 import { PlayerComponent } from './player/player';
+import { ImgHeaderComponent } from './img-header/img-header';
 @NgModule({
 	declarations: [MusicListComponent,
     ArtistListComponent,
@@ -22,7 +23,8 @@ import { PlayerComponent } from './player/player';
     PlaylistListItemComponent,
     PlaybarComponent,
     PlaybarButtonsComponent,
-    PlayerComponent],
+    PlayerComponent,
+    ImgHeaderComponent],
 	imports: [IonicModule],
 	exports: [MusicListComponent,
     ArtistListComponent,
@@ -34,6 +36,7 @@ import { PlayerComponent } from './player/player';
     PlaylistListItemComponent,
     PlaybarComponent,
     PlaybarButtonsComponent,
-    PlayerComponent]
+    PlayerComponent,
+    ImgHeaderComponent]
 })
 export class ComponentsModule {}

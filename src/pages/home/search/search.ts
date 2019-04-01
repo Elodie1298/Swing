@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {Album} from "../../model/Album";
-import {Music} from "../../model/Music";
-import {Artist} from "../../model/Artist";
-import {Playlist} from "../../model/Playlist";
+import {Album} from "../../../model/Album";
+import {Music} from "../../../model/Music";
+import {Artist} from "../../../model/Artist";
+import {Playlist} from "../../../model/Playlist";
 
 /**
  * Generated class for the SearchPage page.
