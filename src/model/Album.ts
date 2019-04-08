@@ -17,6 +17,7 @@ export class Album {
     for (let i=0 ; i<10 ; i++) {
       albumList.push(new Album());
     }
+    albumList[1].title = "coucou";
     return albumList;
   }
 }

@@ -1,0 +1,9 @@
+.playlist-fav-item {
+  ion-icon {
+    color: color($theme-colors, primary, base);
+    margin-left: 8px !important;
+  }
+  .item-inner {
+    margin-left: 16px !important;
+  }
+}

@@ -14,3 +14,65 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+
+///////////////// Colors
+
+// Background
+.tabbar, .header, .footer {
+  background: color($theme-colors, dark, base) !important;
+}
+.content, .item {
+  background-color: color($theme-colors, dark, dark) !important;
+}
+.searchbar-input {
+  background: color($theme-colors, light, dark) !important;
+}
+.toolbar .item, .toolbar-background, .card, ion-item {
+  background: transparent !important;
+}
+
+// Text color
+.tabbar .tab-button ion-icon, p, h1, h2, .label,
+.header ion-icon, .toolbar-title {
+  color: color($theme-colors, light, base) !important;
+}
+.tabbar .tab-button[aria-selected=true] .tab-button-icon {
+  color: color($theme-colors, primary, base) !important;
+}
+.item-inner ion-icon {
+  color: color($theme-colors, primary, base) !important;
+}
+.searchbar-input {
+  color: color($theme-colors, dark, dark) !important;
+}
+
+// Border
+.item-divider {
+  border-color: color($theme-colors, primary, base);
+}
+.item .item-inner {
+  border-color: color($theme-colors, primary, dark) !important;
+}
+.item-divider .item-inner {
+  border: none !important;
+}
+ion-item-group {
+  border-width: 1px 0 !important;
+  border-color: color($theme-colors, primary, dark);
+}
+
+
+
+//////////////////// Shapes
+
+.card img, .item img {
+  border-radius: 1% !important;
+}
+.header img {
+  padding-top: 10px;
+}
+.card {
+  padding: 0 !important;
+}

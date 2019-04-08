@@ -3,6 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { File } from '@ionic-native/file';
+
 
 import { MyApp } from './app.component';
 import {TabsPage} from "../pages/home/tabs/tabs";
@@ -16,6 +18,9 @@ import {ArtistPage} from "../pages/artist/artist";
 import {AlbumPage} from "../pages/album/album";
 import {PlaylistPage} from "../pages/playlist/playlist";
 import {MoreListsPage} from "../pages/more-lists/more-lists";
+import {SQLite} from "@ionic-native/sqlite";
+import {SqlProvider} from "../providers/sql/sql";
+import { FilesManagerProvider } from '../providers/files-manager/files-manager';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,11 @@ import {MoreListsPage} from "../pages/more-lists/more-lists";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SQLite,
+    SqlProvider,
+    FilesManagerProvider,
+    File,
   ]
 })
 export class AppModule {}

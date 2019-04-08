@@ -1,0 +1,17 @@
+.playbar-slider {
+  .range-knob{
+    background: color($theme-colors, primary, base) !important;
+    border: none !important;
+  }
+  .range-bar-active {
+    background: color($theme-colors, primary, dark);
+  }
+
+  .item-inner {
+    min-height: 12px;
+  }
+  .input-wrapper, .item-inner {
+    height: fit-content;
+  }
+  min-height: fit-content;
+}

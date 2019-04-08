@@ -5,12 +5,5 @@
     </ion-row>
   </ion-navbar>
 
-  <ion-toolbar>
-    <div ion-item>
-      <h2>{{music.title}}</h2>
-      <p>{{music.album.artist.name}}</p>
-
-      <playbar-buttons-component item-end></playbar-buttons-component>
-    </div>
-  </ion-toolbar>
+  <playbar-component [isCover]="false"></playbar-component>
 </div>

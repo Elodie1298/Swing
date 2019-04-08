@@ -25,19 +25,23 @@ export class ArtistListComponent {
   constructor(private navCtrl: NavController) {}
 
   getArtists(): Array<any> {
-    let list = this.artists;
+    let list = new Array<any>();
     if (this.max != undefined) {
-      list = ListUtil.getFirstItems(list, this.max);
+      list = [{letter: "Artistes", list: ListUtil.getFirstItems(this.artists, this.max)}];
     }
-    return ListUtil.parseCol3(list);
-  }
-
-  onClick(ev: any): void {
-    this.click.emit(ev);
+    else {
+      list = ListUtil.getGroupsByName(this.artists);
+    }
+    for (let l of list) {
+      l.list = ListUtil.parseCol3(l.list);
+    }
+    return list;
   }
 
   more(): void {
-    this.navCtrl.push(MoreListsPage, {title:"Artists", artists: this.artists});
+    if (this.max != undefined) {
+      this.navCtrl.push(MoreListsPage, {title:"Artists", artists: this.artists});
+    }
   }
 
 }

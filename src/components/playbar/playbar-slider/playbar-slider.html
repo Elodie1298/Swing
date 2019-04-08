@@ -1,0 +1,6 @@
+<ion-item class="playbar-slider">
+  <ion-range min="0" max="songTime" [ngModel]="time/1000">
+    <ion-label range-left>{{time | date:'mm:ss'}}</ion-label>
+    <ion-label range-right>{{songTime | date:'mm:ss'}}</ion-label>
+  </ion-range>
+</ion-item>

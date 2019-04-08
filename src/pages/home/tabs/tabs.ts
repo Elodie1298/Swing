@@ -14,10 +14,10 @@ export class TabsPage {
   //TODO: name or not name ?
   //TODO: update root
   tabs = [
+    {root: SearchPage, name:"Search", rootparams: {}, icon: "search"},
     {root: MusicListPage, name:"Musiques", rootparams: {}, icon: "musical-notes"},
     {root: ArtistListPage, name:"Artistes", rootparams: {}, icon: "person"},
     {root: PlaylistListPage, name:"Playlists", rootparams: {}, icon: "list-box"},
-    {root: SearchPage, name:"Search", rootparams: {}, icon: "search"},
     {root: MusicListPage, name:"Paramètres", rootparams: {}, icon: "settings"}
   ];
 

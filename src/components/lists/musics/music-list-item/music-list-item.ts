@@ -25,7 +25,6 @@ export class MusicListItemComponent {
     let navParams = {
       music: this.music
     };
-    console.log(this.music);
     this.navCtrl.push(PlayingListPage, navParams);
   }
 

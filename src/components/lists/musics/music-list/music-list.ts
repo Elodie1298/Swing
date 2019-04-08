@@ -33,13 +33,15 @@ export class MusicListComponent {
   }
 
   more(): void {
-    this.navCtrl.push(MoreListsPage, {title: "Musiques", musics: this.musics});
+    if (this.max != undefined) {
+      this.navCtrl.push(MoreListsPage, {title: "Musiques", musics: this.musics});
+    }
   }
 
-  getMusics(): Array<Music> {
+  getMusics(): Array<any> {
     if (this.max != undefined) {
-      return ListUtil.getFirstItems(this.musics, this.max);
+      return [{letter: "Musiques", list: ListUtil.getFirstItems(this.musics, this.max)}];
     }
-    return this.musics;
+    return ListUtil.getGroupsByTitle(this.musics);
   }
 }

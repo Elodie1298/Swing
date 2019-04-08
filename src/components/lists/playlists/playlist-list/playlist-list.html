@@ -1,12 +1,11 @@
-<ion-list>
+<ion-list class="playing-list">
 
-  <ion-item-group>
-    <ion-item-divider *ngIf="!isDivTitle && isDivider" color="light">P</ion-item-divider>
-    <ion-item-divider ion-item *ngIf="isDivTitle && isDivider" color="light">
-      Playlist
-      <ion-icon item-end name="arrow-dropright" (click)="more()"></ion-icon>
+  <ion-item-group *ngFor="let group of getPlaylists()">
+    <ion-item-divider *ngIf="isDivider" (click)="more()">
+      {{group.letter}}
+      <ion-icon *ngIf="isDivTitle" item-end name="arrow-dropright"></ion-icon>
     </ion-item-divider>
-    <ion-item *ngFor="let playlist of getPlaylists()" no-padding>
+    <ion-item *ngFor="let playlist of group.list" no-padding>
       <playlist-list-item [playlist]="playlist"></playlist-list-item>
     </ion-item>
   </ion-item-group>

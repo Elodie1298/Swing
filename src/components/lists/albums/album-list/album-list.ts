@@ -26,20 +26,36 @@ export class AlbumListComponent {
 
   constructor(private navCtrl: NavController) {}
 
-  getAlbums(): Array<any> {
-    let list = this.albums;
-    if (this.max != undefined) {
-      list = ListUtil.getFirstItems(this.albums, this.max);
-    }
-    return ListUtil.parseCol3(list);
-  }
+  // getAlbums(): Array<any> {
+  //   let list = this.albums;
+  //   if (this.max != undefined) {
+  //     list = ListUtil.getFirstItems(this.albums, this.max);
+  //   }
+  //   return ListUtil.parseCol3(list);
+  // }
 
   onClick(ev: any): void {
     this.click.emit(ev);
   }
 
   more(): void{
-    this.navCtrl.push(MoreListsPage, {title: "Albums", albums: this.albums});
+    if (this.max != undefined) {
+      this.navCtrl.push(MoreListsPage, {title: "Albums", albums: this.albums});
+    }
+  }
+
+  getAlbums(): Array<any> {
+    let list = new Array<any>();
+    if (this.max != undefined) {
+      list = [{letter: "Albums", list: ListUtil.getFirstItems(this.albums, this.max)}];
+    }
+    else {
+      list = ListUtil.getGroupsByTitle(this.albums);
+    }
+    for (let l of list) {
+      l.list = ListUtil.parseCol3(l.list);
+    }
+    return list;
   }
 
 }

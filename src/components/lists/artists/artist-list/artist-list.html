@@ -1,14 +1,13 @@
 <ion-list>
 
-  <ion-item-group>
-    <ion-item-divider *ngIf="!isDivTitle && isDivider" color="light">A</ion-item-divider>
-    <ion-item-divider ion-item *ngIf="isDivTitle && isDivider" color="light" (click)="onClick($event)">
-      Artistes
-      <ion-icon item-end name="arrow-dropright" (click)="more()"></ion-icon>
+  <ion-item-group *ngFor="let group of getArtists()">
+    <ion-item-divider *ngIf="isDivider" (click)="more()">
+      {{group.letter}}
+      <ion-icon *ngIf="isDivTitle" item-end name="arrow-dropright"></ion-icon>
     </ion-item-divider>
     <ion-grid>
 
-      <ion-row justify-content-start *ngFor="let artistGroup of getArtists()">
+      <ion-row justify-content-start *ngFor="let artistGroup of group.list">
         <ion-col col-4 *ngFor="let artist of artistGroup">
 
           <artist-list-item

@@ -30,4 +30,84 @@ export class ListUtil {
     }
     return array;
   }
+
+  public static getGroupsByTitle(list: Array<any>): Array<any> {
+    let gr, letter, objs, groups;
+    groups = new Array<any>();
+
+    for (let obj of list) {
+      letter = obj.title.substring(0, 1).toUpperCase();
+      if (letter.match(/[A-Z]/i) == null){
+        letter = '#';
+      }
+      if ((gr = this.isLetter(letter, groups)) != null) {
+        gr.list.push(obj);
+      }
+      else {
+        objs = new Array<any>();
+        objs.push(obj);
+        gr = {letter: letter, list: objs};
+        groups.push(gr);
+      }
+    }
+
+    for (let group of groups) {
+      group.list.sort((a, b) => this.compareString(a.title, b.title));
+    }
+    groups.sort((a, b) => this.compareString(a.letter, b.letter));
+    return groups;
+  }
+  public static getGroupsByName(list: Array<any>): Array<any> {
+    let gr, letter, objs, groups;
+    groups = new Array<any>();
+
+    for (let obj of list) {
+      letter = obj.name.substring(0, 1).toUpperCase();
+      if (letter.match(/[A-Z]/i) == null){
+        letter = '#';
+      }
+      if ((gr = this.isLetter(letter, groups)) != null) {
+        gr.list.push(obj);
+      }
+      else {
+        objs = new Array<any>();
+        objs.push(obj);
+        gr = {letter: letter, list: objs};
+        groups.push(gr);
+      }
+    }
+
+    for (let group of groups) {
+      group.list.sort((a, b) => this.compareString(a.name, b.name));
+    }
+    groups.sort((a, b) => this.compareString(a.letter, b.letter));
+    return groups;
+  }
+
+  static isLetter(letter, groups): any  {
+    for (let group of groups) {
+      if (group.letter == letter) {
+        return group;
+      }
+    }
+    return null;
+  }
+
+  static compareString(a: string, b: string): number {
+    if (a.length == 0) {
+      return -1;
+    }
+    if (b.length == 0) {
+      return 1;
+    }
+    if (a[0] < b[0]) {
+      return -1;
+    }
+    if (a[0] > b[0]) {
+      return 1;
+    }
+    a = a.substring(1);
+    b = b.substring(1);
+    return this.compareString(a, b);
+  }
 }

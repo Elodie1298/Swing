@@ -1,7 +1,14 @@
 .playbar {
-  div {
-    background-color: transparent !important;
+  .item-inner {
     border: none !important;
+  }
+
+  ion-item {
+    background: transparent;
+  }
+
+  ion-datetime, .datetime-text {
+    color: color($theme-colors, light, base);
   }
 
 }

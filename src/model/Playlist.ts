@@ -17,6 +17,7 @@ export class Playlist {
     for (let i=0 ; i<10 ; i++) {
       playlistList.push(new Playlist());
     }
+    playlistList[1].name = "coucou";
     return playlistList;
   }
 }

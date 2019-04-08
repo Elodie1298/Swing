@@ -24,8 +24,4 @@ export class PlaylistListPage {
     this.playlists = Playlist.getPlaylistList()
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PlaylistListPage');
-  }
-
 }

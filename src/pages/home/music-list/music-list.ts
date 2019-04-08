@@ -20,14 +20,8 @@ export class MusicListPage {
 
   isPBEnalbed: boolean = true;
 
-  //TODO: ajouter les labels de listes
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.musics = Music.getMusicList();
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MusicListPage');
   }
 
 }

@@ -1,5 +1,5 @@
 .player {
-  div {
+  ion-item {
     background-color: transparent !important;
     border: none !important;
   }
@@ -11,5 +11,8 @@
     align-self: center;
   }
 
+  .back-button {
+    top: -69px;
+  }
 }
 

@@ -1,3 +1,7 @@
-playbar-buttons {
-
+.playbar-buttons {
+  ion-icon {
+    display: flex;
+    align-items: center;
+    padding: 13px;
+  }
 }

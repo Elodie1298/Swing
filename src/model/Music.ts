@@ -4,6 +4,7 @@ export class Music {
   //TODO: adapt class
   title: string;
   album: Album;
+  file: string;
 
   constructor() {
     this.title = "Music test";
@@ -15,6 +16,7 @@ export class Music {
     for (let i=0 ; i<10 ; i++) {
       trackList.push(new Music());
     }
+    trackList[1].title="coucou";
     return trackList;
   }
 }

@@ -1,0 +1,8 @@
+
+.tab-button[aria-selected=false] {
+  color: transparent;
+
+  span {
+    height: 0;
+  }
+}
