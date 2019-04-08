@@ -20,7 +20,7 @@ export class FilesManagerProvider {
 
     this.interval = setInterval(() => {
       this.addTemp();
-      console.log('addTemp', this.musics);
+      console.log('addTemp', Date(), this.musics);
     }, 2000, this.temp);
   }
 
@@ -35,33 +35,39 @@ export class FilesManagerProvider {
   init(): void {
     this.file.listDir(this.musicRoot, this.dirRoot)
       .then((listFiles: any[]) => {
-        this.getFiles(listFiles);
+        this.getFiles(listFiles)
+          .then(_ => console.log('done'));
       })
       .catch(e => console.log(e))
   }
 
-  private getFiles(listFiles): void {
-    for (let file of listFiles) {
-      if (file.isDirectory) {
-        this.file.listDir("file:///", file.fullPath.substring(1))
-          .then((files: any[]) => {
-            this.getFiles(files);
-          })
-          .catch(err => {
-            console.log(err)
-          });
-      } else if (file.isFile) {
-        let ext = file.name.split('.');
-        ext = ext[ext.length - 1];
-        if (this.music_ext.indexOf(ext) > -1) {
-          this.getMetadata(file.fullPath, ext)
-            .then((music: Music) => {
-              this.musics.push(music);
+  private getFiles(listFiles): Promise<any> {
+    return new Promise<any>(() => {
+      let ans: Promise<any>;
+      for (let file of listFiles) {
+        if (file.isDirectory) {
+          ans = this.file.listDir("file:///", file.fullPath.substring(1))
+            .then((files: any[]) => {
+              this.getFiles(files)
+                .then(ans => console.log(ans));
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+              console.log(err)
+            });
+        } else if (file.isFile) {
+          let ext = file.name.split('.');
+          ext = ext[ext.length - 1];
+          if (this.music_ext.indexOf(ext) > -1) {
+            ans = this.getMetadata(file.fullPath, ext)
+              .then((music: Music) => {
+                this.musics.push(music);
+              })
+              .catch(err => console.log(err));
+          }
         }
       }
-    }
+      return ans;
+    })
   }
 
   getMetadata(path: string, ext: string): Promise<Music> {

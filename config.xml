@@ -85,11 +85,10 @@
     <allow-navigation href="http://192.168.43.84:8101" />
     <allow-navigation href="http://192.168.43.84:8100" />
     <allow-navigation href="http://192.168.1.30:8101" />
+    <engine name="android" spec="7.1.4" />
     <allow-navigation href="http://172.18.216.227:8100" />
     <allow-navigation href="http://172.18.200.238:8101" />
     <plugin name="cordova-sqlite-storage" spec="3.2.0" />
     <allow-navigation href="http://172.18.248.255:8101" />
     <plugin name="cordova-plugin-file" spec="6.0.1" />
-    <engine name="android" spec="7.1.4" />
-    <plugin name="cordova-plugin-media" spec="5.0.2" />
 </widget>
