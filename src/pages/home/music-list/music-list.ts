@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Music} from "../../../model/Music";
+import {FilesManagerProvider} from "../../../providers/files-manager/files-manager";
 
 /**
  * Generated class for the MusicListPage page.
@@ -20,8 +21,8 @@ export class MusicListPage {
 
   isPBEnalbed: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.musics = Music.getMusicList();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public fm: FilesManagerProvider) {
+    // this.musics = Music.getMusicList();
   }
 
 }
