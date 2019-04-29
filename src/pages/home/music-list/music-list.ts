@@ -22,7 +22,6 @@ export class MusicListPage {
   isPBEnalbed: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public fm: FilesManagerProvider) {
-    // this.musics = Music.getMusicList();
   }
 
 }

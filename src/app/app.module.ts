@@ -21,6 +21,7 @@ import {MoreListsPage} from "../pages/more-lists/more-lists";
 import {SQLite} from "@ionic-native/sqlite";
 import {SqlProvider} from "../providers/sql/sql";
 import { FilesManagerProvider } from '../providers/files-manager/files-manager';
+import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { FilesManagerProvider } from '../providers/files-manager/files-manager';
     SqlProvider,
     FilesManagerProvider,
     File,
+    DataProvider,
   ]
 })
 export class AppModule {}

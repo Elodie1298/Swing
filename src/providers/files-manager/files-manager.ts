@@ -3,6 +3,7 @@ import {File} from '@ionic-native/file';
 import {Music} from "../../model/Music";
 import {Album} from "../../model/Album";
 import {Artist} from "../../model/Artist";
+import {DataProvider} from "../data/data";
 
 @Injectable()
 export class FilesManagerProvider {
@@ -14,24 +15,22 @@ export class FilesManagerProvider {
   dirRoot: string = "Musique";
   temp: number = 10000;
 
-  musics: Array<Music>;
   private musics_temp: Array<Music>;
 
   interval;
 
-  constructor(private file: File) {
-    this.musics = new Array<Music>();
+  constructor(private file: File, private data: DataProvider) {
     this.musics_temp = new Array<Music>();
 
     this.interval = setInterval(() => {
       this.addTemp();
-      if (this.dev_files_searching) console.log(Date(), this.musics);
+      if (this.dev_files_searching) console.log(Date(), this.data.musics);
     }, 2000, this.temp);
   }
 
   addTemp(): void {
     for (let m of this.musics_temp) {
-      this.musics.push(m);
+      this.data.musics.push(m);
     }
     this.musics_temp = new Array<Music>();
   }

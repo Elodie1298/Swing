@@ -1,4 +1,5 @@
 import {Album} from "./Album";
+import {ArtistListItemComponent} from "../components/lists/artists/artist-list-item/artist-list-item";
 
 export class Artist {
   //TODO: adapt class
@@ -15,8 +16,12 @@ export class Artist {
   }
 
   static new (name: string, img?: string): Artist {
+    if (Artist.artists == undefined) {
+      Artist.artists = new Array<Artist>();
+    }
+    console.log(Artist.artists);
     let artists = Artist.artists.filter(a => a.name == name);
-    if (artists.length == 0) {
+    if (artists == undefined) {
       let artist = new Artist();
       if (img) artist.img = img;
 

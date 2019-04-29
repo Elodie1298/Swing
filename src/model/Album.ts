@@ -16,13 +16,17 @@ export class Album {
   }
 
   static new (artist: Artist, title?: string, cover?: string) : Album {
+    if (Album.albums == undefined) {
+      Album.albums = new Map<Artist, Array<Album>>();
+    }
+
     let albums = Album.albums.get(artist);
     if (albums == null) {
       Album.albums.set(artist, new Array<Album>());
       albums = Album.albums.get(artist);
     }
     let a = albums.filter(a => a.title == title).filter(a => a.artist == artist);
-    if (a.length == 0){
+    if (a == undefined){
       let album = new Album();
       album.artist = artist;
       if (title) album.title = title;

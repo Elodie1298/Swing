@@ -19,7 +19,7 @@ export class PlaybarComponent {
   @Input() isCover: boolean = true;
 
   constructor(private navCtrl: NavController) {
-    this.music = new Music();
+    this.music = new Music("Musique", null);
   }
 
   onClick():void {

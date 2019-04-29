@@ -21,12 +21,6 @@ export class ArtistListPage {
   isPBEnalbed: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.artists = Artist.getArtistList();
+    this.artists = Artist.artists;
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ArtistListPage');
-  }
-
-
 }
