@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import {File} from '@ionic-native/file';
 import {Music} from "../../model/Music";
+import {Album} from "../../model/Album";
+import {Artist} from "../../model/Artist";
 
 @Injectable()
 export class FilesManagerProvider {
+  dev_files_searching = false;
+  dev_metadata = false;
+
   music_ext: string[] = ['mp3'];
   musicRoot: string = "file:///storage/9016-4EF8/";
   dirRoot: string = "Musique";
@@ -12,7 +17,7 @@ export class FilesManagerProvider {
   musics: Array<Music>;
   private musics_temp: Array<Music>;
 
-  interval: number;
+  interval;
 
   constructor(private file: File) {
     this.musics = new Array<Music>();
@@ -20,7 +25,7 @@ export class FilesManagerProvider {
 
     this.interval = setInterval(() => {
       this.addTemp();
-      console.log(Date(), this.musics);
+      if (this.dev_files_searching) console.log(Date(), this.musics);
     }, 2000, this.temp);
   }
 
@@ -52,7 +57,7 @@ export class FilesManagerProvider {
           let file = listFiles[i];
 
           if (file.isDirectory) {
-            console.log("dir : ", file.fullPath);
+            if (this.dev_files_searching) console.log("dir : ", file.fullPath);
             this.file.listDir("file:///", file.fullPath.substring(1))
               .then(list => {
                 this.dirLoop(list, 0)
@@ -63,11 +68,12 @@ export class FilesManagerProvider {
           }
 
           else if (file.isFile) {
-            console.log("file : ", file.fullPath);
+            if (this.dev_files_searching) console.log("file : ", file.fullPath);
+            if (this.dev_metadata) console.log(file);
             let ext = file.name.split('.');
             ext = ext[ext.length - 1];
             if (this.music_ext.indexOf(ext) > -1) {
-              this.getMetadata(file.fullPath, ext)
+              this.getMetadata(file, ext)
                 .then((music: Music) => {
                   this.musics_temp.push(music);
                   resolve(true);
@@ -88,42 +94,25 @@ export class FilesManagerProvider {
     });
   }
 
-  private getFiles(listFiles): Promise<any> {
-    return new Promise<any>(() => {
-      let ans: Promise<any>;
-      for (let file of listFiles) {
-        if (file.isDirectory) {
-          console.log(file.fullPath);
-          ans = this.file.listDir("file:///", file.fullPath.substring(1))
-            .then((files: any[]) => {
-              this.getFiles(files)
-                .then(ans => console.log(ans));
-            })
-            .catch(err => {
-              console.log(err)
-            });
-        } else if (file.isFile) {
-          let ext = file.name.split('.');
-          ext = ext[ext.length - 1];
-          if (this.music_ext.indexOf(ext) > -1) {
-            ans = this.getMetadata(file.fullPath, ext)
-              .then((music: Music) => {
-                this.musics.push(music);
-              })
-              .catch(err => console.log(err));
-          }
-        }
-      }
-      return ans;
-    })
-  }
-
-  getMetadata(path: string, ext: string): Promise<Music> {
-    let music = new Music();
-    music.file = path;
+  getMetadata(file, ext: string): Promise<Music> {
+    let path = file.fullPath;
     return new Promise<Music>((resolve, reject) => {
-      let file = path.split('/')[path.split('/').length - 1];
-      music.title = file.substring(0, file.length - (ext.length + 1));
+      path = path.split('/');
+      let fileName = path[path.length - 1];
+      let title = fileName.substring(0, fileName.length - (ext.length + 1));
+
+
+      //TODO : check img and covers
+      let album: Album;
+      if (path[path.length-4]=="Musique") {
+        let artist = Artist.new(path[path.length-3]);
+        album = Album.new(artist, path[path.length-2]);
+      } else if (path[path.length-3]=="Musique") {
+        let artist = Artist.new(path[path.length-2]);
+        album = artist.default_alb;
+      }
+      let music = new Music(title, path, album);
+
       resolve(music);
     });
   }
