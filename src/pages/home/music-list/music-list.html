@@ -2,13 +2,13 @@
   <ion-list>
 
     <music-list-component
-      [musics]="fm.musics"
+      [musics]="musics"
     ></music-list-component>
 
   </ion-list>
 </ion-content>
 
 
-<ion-footer *ngIf="isPBEnalbed">
+<ion-footer>
   <playbar-component></playbar-component>
 </ion-footer>

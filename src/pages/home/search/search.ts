@@ -4,14 +4,6 @@ import {Album} from "../../../model/Album";
 import {Music} from "../../../model/Music";
 import {Artist} from "../../../model/Artist";
 import {Playlist} from "../../../model/Playlist";
-import {ListUtil} from "../../../components/ListUtil";
-
-/**
- * Generated class for the SearchPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -24,8 +16,6 @@ export class SearchPage {
   artists: Array<Artist>;
   playlists: Array<Playlist>;
 
-  isPBEnalbed: boolean = true;
-
   max: number = 3;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -33,10 +23,10 @@ export class SearchPage {
   }
 
   initializeItems(): void {
-    this.albums = Album.getAlbumList();
-    this.musics = Music.getMusicList();
-    this.artists = Artist.getArtistList();
-    this.playlists = Playlist.getPlaylistList();
+    this.albums = Album.albums;
+    this.musics = Music.musics;
+    this.artists = Artist.artists;
+    this.playlists = Playlist.playlists;
   }
 
   getItems(ev: any) {

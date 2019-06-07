@@ -5,13 +5,6 @@ import {Music} from "../../model/Music";
 import {Album} from "../../model/Album";
 import {ListUtil} from "../../components/ListUtil";
 
-/**
- * Generated class for the ArtistPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-artist',
@@ -23,12 +16,12 @@ export class ArtistPage {
   musics: Array<Music>;
   albums: Array<Album>;
 
-  isPBEnalbed: boolean = true;
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.artist = navParams.get("artist");
-    this.albums = Album.getAlbumList();
-    this.musics = Music.getMusicList();
+
+    //TODO: get from album and music classes
+    this.albums = new Array<Album>();
+    this.musics = new Array<Music>();
   }
 
   getFirstItems(items: Array<any>): Array<any> {

@@ -6,18 +6,30 @@ export class Playlist {
   name: string;
   cover: string;
 
-  constructor() {
-    this.trackList = Music.getMusicList();
+  static playlists: Array<Playlist> = new Array<Playlist>();
+
+  static playingList: Array<Music>;
+
+  private constructor() {
+    this.trackList = new Array<Music>();
     this.name = "Playlist test";
     this.cover = "assets/imgs/logo.png";
   }
 
-  static getPlaylistList(): Array<Playlist> {
-    let playlistList = new Array<Playlist>();
-    for (let i=0 ; i<10 ; i++) {
-      playlistList.push(new Playlist());
+  static new (name: string, cover?: string): Playlist {
+    if (Playlist.playlists == undefined) {
+      Playlist.playlists = new Array<Playlist>();
     }
-    playlistList[1].name = "coucou";
-    return playlistList;
+
+    let p = Playlist.playlists.filter(p => p.name = name);
+    if (p.length == 0) {
+      let playlist = new Playlist();
+      playlist.name = name;
+      if (cover) playlist.cover = cover;
+      Playlist.playlists.push(playlist);
+      return playlist;
+    } else {
+      return p[0];
+    }
   }
 }

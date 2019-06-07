@@ -7,10 +7,8 @@ import {DataProvider} from "../data/data";
 
 @Injectable()
 export class FilesManagerProvider {
-  dev_files_searching = false;
-  dev_metadata = false;
-
   music_ext: string[] = ['mp3'];
+  cover_ext: string[] = ['jpg', 'png'];
   musicRoot: string = "file:///storage/9016-4EF8/";
   dirRoot: string = "Musique";
   temp: number = 10000;
@@ -24,7 +22,6 @@ export class FilesManagerProvider {
 
     this.interval = setInterval(() => {
       this.addTemp();
-      if (this.dev_files_searching) console.log(Date(), this.data.musics);
     }, 2000, this.temp);
   }
 
@@ -56,7 +53,6 @@ export class FilesManagerProvider {
           let file = listFiles[i];
 
           if (file.isDirectory) {
-            if (this.dev_files_searching) console.log("dir : ", file.fullPath);
             this.file.listDir("file:///", file.fullPath.substring(1))
               .then(list => {
                 this.dirLoop(list, 0)
@@ -67,8 +63,6 @@ export class FilesManagerProvider {
           }
 
           else if (file.isFile) {
-            if (this.dev_files_searching) console.log("file : ", file.fullPath);
-            if (this.dev_metadata) console.log(file);
             let ext = file.name.split('.');
             ext = ext[ext.length - 1];
             if (this.music_ext.indexOf(ext) > -1) {
@@ -78,6 +72,17 @@ export class FilesManagerProvider {
                   resolve(true);
                 })
                 .catch(err => reject(err));
+            } else if (this.cover_ext.indexOf(ext) > -1) {
+              //TODO : check img and covers
+              let path = file.fullPath.split('/');
+              if (path[path.length-4]=="Musique") {
+                let artist = Artist.new(path[path.length-3]);
+                let album = Album.new(artist, path[path.length-2]);
+                album.cover = file.fullPath;
+              } else if (path[path.length-3]=="Musique") {
+                let artist = Artist.new(path[path.length-2]);
+                artist.img = file.fullPath;
+              }
             } else {
               resolve(false);
             }
@@ -100,8 +105,6 @@ export class FilesManagerProvider {
       let fileName = path[path.length - 1];
       let title = fileName.substring(0, fileName.length - (ext.length + 1));
 
-
-      //TODO : check img and covers
       let album: Album;
       if (path[path.length-4]=="Musique") {
         let artist = Artist.new(path[path.length-3]);
@@ -110,7 +113,7 @@ export class FilesManagerProvider {
         let artist = Artist.new(path[path.length-2]);
         album = artist.default_alb;
       }
-      let music = new Music(title, path, album);
+      let music = Music.new(title, file.fullPath, album);
 
       resolve(music);
     });

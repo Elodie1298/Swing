@@ -1,5 +1,4 @@
 import {Album} from "./Album";
-import {ArtistListItemComponent} from "../components/lists/artists/artist-list-item/artist-list-item";
 
 export class Artist {
   //TODO: adapt class
@@ -13,32 +12,22 @@ export class Artist {
   private constructor() {
     this.name = "Artist";
     this.img = "assets/imgs/logo.png";
+    this.default_alb = Album.new(this);
   }
 
   static new (name: string, img?: string): Artist {
     if (Artist.artists == undefined) {
       Artist.artists = new Array<Artist>();
     }
-    console.log(Artist.artists);
     let artists = Artist.artists.filter(a => a.name == name);
-    if (artists == undefined) {
+    if (artists.length==0) {
       let artist = new Artist();
+      artist.name = name;
       if (img) artist.img = img;
-
+      Artist.artists.push(artist);
       return artist;
     } else {
       return artists[0];
     }
   }
-
-  //TODO : delete
-  static getArtistList(): Array<Artist> {
-    let artistList = new Array<Artist>();
-    for (let i=0 ; i<10 ; i++) {
-      artistList.push(new Artist());
-    }
-    artistList[1].name = "coucou";
-    return artistList;
-  }
-
 }

@@ -1,5 +1,4 @@
 import {Album} from "./Album";
-import {Artist} from "./Artist";
 
 export class Music {
   //TODO: adapt class
@@ -7,25 +6,39 @@ export class Music {
   album: Album;
   file: string;
 
-  constructor(title: string, file: string, album?: Album, artist?: Artist) {
-    this.title = title;
-    this.file = file;
+  static musics: Array<Music> = new Array<Music>();
+  static music_list: Map<Album, Array<Music>> = new Map<Album, Array<Music>>();
 
-    if (album) this.album = album;
-    else {
-      if (artist) this.album = artist.default_alb;
-      else {
-        this.album = Album.default;
-      }
-    }
+  constructor() {
+    this.title = "Music";
+    this.file = "";
   }
 
-  static getMusicList(): Array<Music> {
-    let trackList = new Array<Music>();
-    for (let i=0 ; i<10 ; i++) {
-      trackList.push(new Music("Musique", null));
+  static new (title, file, album?: Album): Music {
+    if (Music.music_list == undefined) {
+      Music.music_list = new Map<Album, Array<Music>>();
     }
-    trackList[1].title="coucou";
-    return trackList;
+    if (Music.musics == undefined) {
+      Music.musics = new Array<Music>();
+    }
+
+    if (!album) album = Album.default;
+    let musics = Music.music_list.get(album);
+    if (musics == null) {
+      Music.music_list.set(album, new Array<Music>());
+      musics = Music.music_list.get(album);
+    }
+    let m = musics.filter(m => m.title == m.title).filter(m => m.album == album);
+    if (m.length == 0) {
+      let music = new Music();
+      music.title = title;
+      music.file = file;
+      music.album = album;
+      musics.push(music);
+      Music.musics.push(music);
+      return music;
+    } else {
+      return m[0];
+    }
   }
 }

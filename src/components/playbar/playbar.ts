@@ -16,7 +16,7 @@ import {PlayingListPage} from "../../pages/playing-list/playing-list";
 export class PlaybarComponent {
 
   @Input() music: Music;
-  @Input() isCover: boolean = true;
+  @Input() isCover: boolean = false;
 
   constructor(private navCtrl: NavController) {
     this.music = new Music("Musique", null);

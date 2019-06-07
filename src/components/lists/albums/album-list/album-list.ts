@@ -27,9 +27,9 @@ export class AlbumListComponent {
   constructor(private navCtrl: NavController) {}
 
   // getAlbums(): Array<any> {
-  //   let list = this.albums;
+  //   let list = this.album_list;
   //   if (this.max != undefined) {
-  //     list = ListUtil.getFirstItems(this.albums, this.max);
+  //     list = ListUtil.getFirstItems(this.album_list, this.max);
   //   }
   //   return ListUtil.parseCol3(list);
   // }

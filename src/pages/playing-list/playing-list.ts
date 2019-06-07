@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Music} from "../../model/Music";
+import {Playlist} from "../../model/Playlist";
 
 /**
  * Generated class for the PlayingListPage page.
@@ -21,7 +22,7 @@ export class PlayingListPage {
 
   constructor(private navCtrl: NavController, public navParams: NavParams) {
     this.music = navParams.get("music");
-    this.musicList = Music.getMusicList();
+    this.musicList = Playlist.playingList;
 
     if (navCtrl.last().name == PlayingListPage.name) {
       navCtrl.removeView(navCtrl.last());

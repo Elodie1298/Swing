@@ -18,8 +18,6 @@ export class PlaylistPage {
 
   playlist: Playlist;
 
-  isPBEnalbed: boolean = true;
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.playlist = navParams.get("playlist");
   }
