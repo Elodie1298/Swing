@@ -1,4 +1,5 @@
 import {Artist} from "./Artist";
+import {DataProvider} from "../providers/data/data";
 
 export class Album {
   //TODO: adapt class
@@ -6,28 +7,27 @@ export class Album {
   cover: string;
   artist: Artist;
 
-  static default: Album = Album.new(Artist.default);
-  static albums: Array<Album> = new Array<Album>();
-  static album_list: Map<Artist, Array<Album>> = new Map<Artist, Array<Album>>();
+  //TODO: check if Album.get ok or need to be staticly sotkced in dataProvider
+  static default: Album = new Album();
 
-  private constructor() {
+  constructor() {
     this.title = "Album";
     this.cover = "assets/imgs/logo.png";
     this.artist = Artist.default;
   }
 
-  static new (artist: Artist, title?: string, cover?: string) : Album {
-    if (Album.album_list == undefined) {
-      Album.album_list = new Map<Artist, Array<Album>>();
+  static get (artist: Artist, data: DataProvider, title?: string, cover?: string) : Album {
+    if (data.album_list == undefined) {
+      data.album_list = new Map<Artist, Array<Album>>();
     }
-    if (Album.albums == undefined) {
-      Album.albums = new Array<Album>();
+    if (data.albums == undefined) {
+      data.albums = new Array<Album>();
     }
 
-    let albums = Album.album_list.get(artist);
+    let albums = data.album_list.get(artist);
     if (albums == null) {
-      Album.album_list.set(artist, new Array<Album>());
-      albums = Album.album_list.get(artist);
+      data.album_list.set(artist, new Array<Album>());
+      albums = data.album_list.get(artist);
     }
     let a = albums.filter(a => a.title == title).filter(a => a.artist == artist);
     if (a.length == 0){
@@ -36,7 +36,7 @@ export class Album {
       if (title) album.title = title;
       if (cover) album.cover = cover;
       albums.push(album);
-      Album.albums.push(album);
+      data.albums.push(album);
       return album;
 
     } else {

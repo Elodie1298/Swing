@@ -12,25 +12,7 @@ export class FilesManagerProvider {
   musicRoot: string = "file:///storage/9016-4EF8/";
   dirRoot: string = "Musique";
   temp: number = 10000;
-
-  private musics_temp: Array<Music>;
-
-  interval;
-
-  constructor(private file: File, private data: DataProvider) {
-    this.musics_temp = new Array<Music>();
-
-    this.interval = setInterval(() => {
-      this.addTemp();
-    }, 2000, this.temp);
-  }
-
-  addTemp(): void {
-    for (let m of this.musics_temp) {
-      this.data.musics.push(m);
-    }
-    this.musics_temp = new Array<Music>();
-  }
+  constructor(private file: File, private data: DataProvider) {}
 
 
   init(): void {
@@ -67,8 +49,7 @@ export class FilesManagerProvider {
             ext = ext[ext.length - 1];
             if (this.music_ext.indexOf(ext) > -1) {
               this.getMetadata(file, ext)
-                .then((music: Music) => {
-                  this.musics_temp.push(music);
+                .then(() => {
                   resolve(true);
                 })
                 .catch(err => reject(err));
@@ -76,11 +57,11 @@ export class FilesManagerProvider {
               //TODO : check img and covers
               let path = file.fullPath.split('/');
               if (path[path.length-4]=="Musique") {
-                let artist = Artist.new(path[path.length-3]);
-                let album = Album.new(artist, path[path.length-2]);
+                let artist = Artist.get(path[path.length-3], this.data);
+                let album = Album.get(artist, this.data, path[path.length-2]);
                 album.cover = file.fullPath;
               } else if (path[path.length-3]=="Musique") {
-                let artist = Artist.new(path[path.length-2]);
+                let artist = Artist.get(path[path.length-2], this.data);
                 artist.img = file.fullPath;
               }
             } else {
@@ -107,13 +88,13 @@ export class FilesManagerProvider {
 
       let album: Album;
       if (path[path.length-4]=="Musique") {
-        let artist = Artist.new(path[path.length-3]);
-        album = Album.new(artist, path[path.length-2]);
+        let artist = Artist.get(path[path.length-3], this.data);
+        album = Album.get(artist, this.data, path[path.length-2]);
       } else if (path[path.length-3]=="Musique") {
-        let artist = Artist.new(path[path.length-2]);
+        let artist = Artist.get(path[path.length-2], this.data);
         album = artist.default_alb;
       }
-      let music = Music.new(title, file.fullPath, album);
+      let music = Music.get(this.data, title, file.fullPath, album);
 
       resolve(music);
     });

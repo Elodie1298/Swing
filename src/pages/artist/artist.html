@@ -8,11 +8,14 @@
 <ion-content>
   <music-list-component
     [isDivTitle]="true"
-    [musics]="getFirstItems(musics)"
+    max = 3
+    [musics]="musics"
+
   ></music-list-component>
 
   <album-list-component
     [isDivTitle]="true"
+    max = 6
     [albums]="getFirstItems(albums)"
   ></album-list-component>
 </ion-content>

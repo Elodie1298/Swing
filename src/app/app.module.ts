@@ -22,6 +22,8 @@ import {SQLite} from "@ionic-native/sqlite";
 import {SqlProvider} from "../providers/sql/sql";
 import { FilesManagerProvider } from '../providers/files-manager/files-manager';
 import { DataProvider } from '../providers/data/data';
+import { MusicProvider } from '../providers/music/music';
+import {Media} from "@ionic-native/media";
 
 @NgModule({
   declarations: [
@@ -35,14 +37,14 @@ import { DataProvider } from '../providers/data/data';
     ArtistPage,
     AlbumPage,
     PlaylistPage,
-    MoreListsPage
+    MoreListsPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true
     }),
-    ComponentsModule
+    ComponentsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -56,7 +58,7 @@ import { DataProvider } from '../providers/data/data';
     ArtistPage,
     AlbumPage,
     PlaylistPage,
-    MoreListsPage
+    MoreListsPage,
   ],
   providers: [
     StatusBar,
@@ -67,6 +69,8 @@ import { DataProvider } from '../providers/data/data';
     FilesManagerProvider,
     File,
     DataProvider,
+    MusicProvider,
+    Media
   ]
 })
 export class AppModule {}

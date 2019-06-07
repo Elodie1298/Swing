@@ -26,14 +26,6 @@ export class AlbumListComponent {
 
   constructor(private navCtrl: NavController) {}
 
-  // getAlbums(): Array<any> {
-  //   let list = this.album_list;
-  //   if (this.max != undefined) {
-  //     list = ListUtil.getFirstItems(this.album_list, this.max);
-  //   }
-  //   return ListUtil.parseCol3(list);
-  // }
-
   onClick(ev: any): void {
     this.click.emit(ev);
   }

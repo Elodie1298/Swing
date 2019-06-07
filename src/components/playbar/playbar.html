@@ -1,11 +1,9 @@
-<ion-toolbar no-padding class="playbar"
-             *ngIf="music!= undefined && music.album!=undefined && music.album.artist!=undefined">
-  <ion-item no-lines color="light" (click)="onClick()">
-    <img *ngIf="isCover"
-         item-start [src]="music.album.cover" width="48">
-    <img *ngIf="!isCover" item-start src="assets/imgs/logo.png" width="48">
-    <h2>{{music.title}}</h2>
-    <p>{{music.album.artist.name}}</p>
+<ion-toolbar no-padding class="playbar" *ngIf="music.on">
+  <ion-item no-lines color="light">
+    <img *ngIf="isCover" (click)="onClick()"
+         item-start [src]="music.currentMusic.album.cover" width="48">
+    <h2 (click)="onClick()">{{music.currentMusic.title}}</h2>
+    <p (click)="onClick()">{{music.currentMusic.album.artist.name}}</p>
 
     <playbar-buttons-component item-end></playbar-buttons-component>
   </ion-item>

@@ -7,6 +7,7 @@
   <ion-item *ngFor="let music of group.list" no-padding>
     <music-list-item
       [music]="music"
+      [musicList]="musics"
       [number]="number"
     ></music-list-item>
   </ion-item>

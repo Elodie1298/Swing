@@ -3,8 +3,9 @@
     <ion-icon small name="skip-backward"></ion-icon>
   </button>
 
-  <button ion-button icon-only clear (click)="onPlayPause($event)">
-    <ion-icon name="play"></ion-icon>
+  <button ion-button icon-only clear (click)="onPlayPause()">
+    <ion-icon *ngIf="music.paused" name="play"></ion-icon>
+    <ion-icon *ngIf="!music.paused" name="pause"></ion-icon>
   </button>
 
   <button ion-button icon-only clear (click)="onNext()">

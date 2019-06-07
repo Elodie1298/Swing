@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {Artist} from "../../model/Artist";
 import {Music} from "../../model/Music";
 import {Album} from "../../model/Album";
 import {ListUtil} from "../../components/ListUtil";
+import {DataProvider} from "../../providers/data/data";
 
-@IonicPage()
 @Component({
   selector: 'page-artist',
   templateUrl: 'artist.html',
@@ -16,12 +16,11 @@ export class ArtistPage {
   musics: Array<Music>;
   albums: Array<Album>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              data: DataProvider) {
     this.artist = navParams.get("artist");
-
-    //TODO: get from album and music classes
-    this.albums = new Array<Album>();
-    this.musics = new Array<Music>();
+    this.albums = data.album_list.get(this.artist);
+    this.musics = data.musics.filter(m => m.album.artist == this.artist);
   }
 
   getFirstItems(items: Array<any>): Array<any> {

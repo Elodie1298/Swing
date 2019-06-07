@@ -1,28 +1,16 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {Music} from "../../model/Music";
-import {Playlist} from "../../model/Playlist";
+import {NavController, NavParams} from 'ionic-angular';
+import {MusicProvider} from "../../providers/music/music";
 
-/**
- * Generated class for the PlayingListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
-@IonicPage()
 @Component({
   selector: 'page-playing-list',
   templateUrl: 'playing-list.html',
 })
 export class PlayingListPage {
 
-  music: Music;
-  musicList: Array<Music>;
-
-  constructor(private navCtrl: NavController, public navParams: NavParams) {
-    this.music = navParams.get("music");
-    this.musicList = Playlist.playingList;
+  constructor(navCtrl: NavController, public navParams: NavParams,
+              public music: MusicProvider) {
 
     if (navCtrl.last().name == PlayingListPage.name) {
       navCtrl.removeView(navCtrl.last());

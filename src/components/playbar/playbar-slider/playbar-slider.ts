@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
+import {MusicProvider} from "../../../providers/music/music";
 
-/**
- * Generated class for the PlaybarSliderComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'playbar-slider',
   templateUrl: 'playbar-slider.html'
 })
 export class PlaybarSliderComponent {
 
-  songTime: number = 173000; // In milliseconds
-  time: number = 50000;
+  time: number;
 
-  constructor() {}
+  interval;
+
+  constructor(public music: MusicProvider) {
+    this.interval = setInterval(() => {
+      this.music.position
+        .then((time: number) => this.time = time)
+        .catch(e => console.log(e));
+    }, 20);
+  }
 
 }

@@ -1,4 +1,5 @@
 import {Album} from "./Album";
+import {DataProvider} from "../providers/data/data";
 
 export class Artist {
   //TODO: adapt class
@@ -6,25 +7,23 @@ export class Artist {
   img: string;
   default_alb: Album;
 
-  static default: Artist = Artist.new("Artist");
-  static artists: Array<Artist> = new Array<Artist>();
+  static default: Artist = new Artist();
 
-  private constructor() {
+  constructor() {
     this.name = "Artist";
     this.img = "assets/imgs/logo.png";
-    this.default_alb = Album.new(this);
   }
 
-  static new (name: string, img?: string): Artist {
-    if (Artist.artists == undefined) {
-      Artist.artists = new Array<Artist>();
+  static get (name: string, data: DataProvider, img?: string): Artist {
+    if (data.artists == undefined) {
+      data.artists = new Array<Artist>();
     }
-    let artists = Artist.artists.filter(a => a.name == name);
+    let artists = data.artists.filter(a => a.name == name);
     if (artists.length==0) {
       let artist = new Artist();
       artist.name = name;
       if (img) artist.img = img;
-      Artist.artists.push(artist);
+      data.artists.push(artist);
       return artist;
     } else {
       return artists[0];

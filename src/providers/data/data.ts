@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import {Music} from "../../model/Music";
-import {Artist} from "../../model/Artist";
 import {Album} from "../../model/Album";
+import {Playlist} from "../../model/Playlist";
+import {Artist} from "../../model/Artist";
 
 @Injectable()
 export class DataProvider {
+  playlists: Array<Playlist> = new Array<Playlist>();
 
-  musics: Array<Music>;
-  albums: Map<Artist, Array<Album>>;
-  artists: Array<Artist>
+  musics: Array<Music> = new Array<Music>();
+  music_list: Map<Album, Array<Music>> = new Map<Album, Array<Music>>();
 
-  constructor() {
-    this.musics = new Array<Music>();
-    this.albums = new Map<Artist, Array<Album>>();
-    this.artists = new Array<Artist>();
-  }
+  albums: Array<Album> = new Array<Album>();
+  album_list: Map<Artist, Array<Album>> = new Map<Artist, Array<Album>>();
 
+  artists: Array<Artist> = new Array<Artist>();
+
+  constructor() { }
 }
