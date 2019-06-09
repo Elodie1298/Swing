@@ -15,9 +15,10 @@ export class MusicProvider {
   constructor(private media: Media) {}
 
   setMediaPlaying(musics: Array<Music>, n: number) {
-    this._musicList = musics;;
+    this._musicList = musics;
     this._nMusic = n;
-    this._mediaObject = this.media.create(musics[0].file);
+    if (this._mediaObject) this._mediaObject.release();
+    this._mediaObject = this.media.create(musics[n].file);
     this._mediaObject.play();
     this.on = true;
   }
@@ -43,11 +44,13 @@ export class MusicProvider {
 
   next() {
     this._nMusic = (this._nMusic + 1)%this._musicList.length;
+    this._mediaObject.release();
     this._mediaObject = this.media.create(this._musicList[this._nMusic].file);
     this._mediaObject.play();
   }
   previous() {
     this._nMusic = (this._nMusic - 1)%this._musicList.length;
+    this._mediaObject.release();
     this._mediaObject = this.media.create(this._musicList[this._nMusic].file);
     this._mediaObject.play();
   }

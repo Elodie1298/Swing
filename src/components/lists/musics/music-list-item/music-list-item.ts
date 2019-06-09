@@ -1,9 +1,10 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Music} from "../../../../model/Music";
-import {NavController, PopoverController} from "ionic-angular";
+import {ActionSheetController, NavController, PopoverController} from "ionic-angular";
 import {PlayingListPage} from "../../../../pages/playing-list/playing-list";
 import {MusicProvider} from "../../../../providers/music/music";
 import {MusicMorePopoverComponent} from "../music-more-popover/music-more-popover";
+import {MetadataProvider} from "../../../../providers/metadata/metadata";
 
 
 @Component({
@@ -19,12 +20,14 @@ export class MusicListItemComponent {
   @ViewChild('moreButton', {read: ElementRef}) moreButton: ElementRef;
 
   constructor(private navCtrl: NavController,
-              private musicServ: MusicProvider,
-              private popoverCtrl: PopoverController) {}
+              private musicProvider: MusicProvider,
+              private actionSheetCtrl: ActionSheetController,
+              private popoverCtrl: PopoverController,
+              private metadataProvider: MetadataProvider) {}
 
   onClick():void {
     let n = this.musicList.indexOf(this.music);
-    this.musicServ.setMediaPlaying(this.musicList, n);
+    this.musicProvider.setMediaPlaying(this.musicList, n);
     this.navCtrl.push(PlayingListPage, {music: this.music, musicList: this.musicList});
   }
 
@@ -33,25 +36,38 @@ export class MusicListItemComponent {
   }
 
   more() {
-    let popover = this.popoverCtrl.create(
-      MusicMorePopoverComponent,
-      {
-        music: this.music,
-        moreButton: this.moreButton.nativeElement
-      });
+    // let popover = this.popoverCtrl.create(
+    //   MusicMorePopoverComponent,
+    //   {
+    //     music: this.music,
+    //     moreButton: this.moreButton.nativeElement
+    //   });
+    //
+    // console.log(Math.trunc(this.moreButton.nativeElement.getBoundingClientRect().top));
+    //
+    // let ev = {
+    //   target : {
+    //     getBoundingClientRect : () => {
+    //       return {
+    //         top: Math.trunc(this.moreButton.nativeElement.getBoundingClientRect().top)
+    //       };
+    //     }
+    //   }
+    // };
+    //
+    // popover.present({ev: ev});
 
-    console.log(Math.trunc(this.moreButton.nativeElement.getBoundingClientRect().top));
-
-    let ev = {
-      target : {
-        getBoundingClientRect : () => {
-          return {
-            top: Math.trunc(this.moreButton.nativeElement.getBoundingClientRect().top)
-          };
+    const actionSheet = this.actionSheetCtrl.create({
+      title: this.music.title,
+      buttons: [
+        {
+          text: "Récupérer les métadonnées",
+          handler: () => {
+            this.metadataProvider.acrIdentify(this.music.file);
+          }
         }
-      }
-    };
-
-    popover.present({ev: ev});
+      ]
+    });
+    actionSheet.present();
   }
 }

@@ -64,6 +64,16 @@ ion-item-group {
 }
 
 
+.action-sheet-group {
+  background: color($theme-colors, dark, base) !important;
+}
+.action-sheet-title {
+  color: color($theme-colors, light, darker) !important;
+}
+.action-sheet-group button {
+  color: color($theme-colors, primary, base) !important;
+}
+
 
 //////////////////// Shapes
 

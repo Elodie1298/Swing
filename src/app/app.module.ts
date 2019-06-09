@@ -25,6 +25,8 @@ import { DataProvider } from '../providers/data/data';
 import { MusicProvider } from '../providers/music/music';
 import {Media} from "@ionic-native/media";
 import {MusicMorePopoverComponent} from "../components/lists/musics/music-more-popover/music-more-popover";
+import { MetadataProvider } from '../providers/metadata/metadata';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import {MusicMorePopoverComponent} from "../components/lists/musics/music-more-p
       tabsHideOnSubPages: true
     }),
     ComponentsModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,7 +75,8 @@ import {MusicMorePopoverComponent} from "../components/lists/musics/music-more-p
     File,
     DataProvider,
     MusicProvider,
-    Media
+    Media,
+    MetadataProvider,
   ]
 })
 export class AppModule {}
