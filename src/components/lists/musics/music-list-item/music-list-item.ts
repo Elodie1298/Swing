@@ -1,8 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Music} from "../../../../model/Music";
-import {NavController} from "ionic-angular";
+import {NavController, PopoverController} from "ionic-angular";
 import {PlayingListPage} from "../../../../pages/playing-list/playing-list";
 import {MusicProvider} from "../../../../providers/music/music";
+import {MusicMorePopoverComponent} from "../music-more-popover/music-more-popover";
 
 
 @Component({
@@ -13,10 +14,13 @@ export class MusicListItemComponent {
 
   @Input() music: Music;
   @Input() musicList: Array<Music>;
-
   @Input() number: number;
 
-  constructor(private navCtrl: NavController, private musicServ: MusicProvider) {}
+  @ViewChild('moreButton', {read: ElementRef}) moreButton: ElementRef;
+
+  constructor(private navCtrl: NavController,
+              private musicServ: MusicProvider,
+              private popoverCtrl: PopoverController) {}
 
   onClick():void {
     let n = this.musicList.indexOf(this.music);
@@ -28,4 +32,26 @@ export class MusicListItemComponent {
     return this.number == 0;
   }
 
+  more() {
+    let popover = this.popoverCtrl.create(
+      MusicMorePopoverComponent,
+      {
+        music: this.music,
+        moreButton: this.moreButton.nativeElement
+      });
+
+    console.log(Math.trunc(this.moreButton.nativeElement.getBoundingClientRect().top));
+
+    let ev = {
+      target : {
+        getBoundingClientRect : () => {
+          return {
+            top: Math.trunc(this.moreButton.nativeElement.getBoundingClientRect().top)
+          };
+        }
+      }
+    };
+
+    popover.present({ev: ev});
+  }
 }

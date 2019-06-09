@@ -24,6 +24,7 @@ import { FilesManagerProvider } from '../providers/files-manager/files-manager';
 import { DataProvider } from '../providers/data/data';
 import { MusicProvider } from '../providers/music/music';
 import {Media} from "@ionic-native/media";
+import {MusicMorePopoverComponent} from "../components/lists/musics/music-more-popover/music-more-popover";
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {Media} from "@ionic-native/media";
     AlbumPage,
     PlaylistPage,
     MoreListsPage,
+    MusicMorePopoverComponent
   ],
   providers: [
     StatusBar,

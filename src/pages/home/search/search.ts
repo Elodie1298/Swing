@@ -11,38 +11,59 @@ import {DataProvider} from "../../../providers/data/data";
   templateUrl: 'search.html',
 })
 export class SearchPage {
-  albums: Array<Album>;
-  musics: Array<Music>;
-  artists: Array<Artist>;
-  playlists: Array<Playlist>;
-
   max: number = 3;
+  searchValue: string;
 
   constructor(public navCtrl: NavController,
               private data: DataProvider) {
   }
 
-  getItems(ev: any) {
-    const val = ev.target.value;
-
-    if (val && val.trim() != '') {
-      this.musics = this.data.musics.filter((item: Music) => {
-        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
+  get musics(): Array<Music> {
+    if (this.searchValue && this.searchValue!='') {
+      return this.data.musics.filter((item: Music) => {
+        return (item.title.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
       });
-      this.artists = this.data.artists.filter((item: Artist) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
-      this.albums = this.data.albums.filter((item: Album) => {
-        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
-      this.playlists = this.data.playlists.filter((item: Playlist) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
+    }
+    else {
+      return this.data.musics;
     }
   }
 
-  onClick(ev: any) {
-    console.log('clicked');
+  get artists(): Array<Artist> {
+    if (this.searchValue && this.searchValue!='') {
+      return this.data.artists.filter((item: Artist) => {
+        return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+      });
+    }
+    else {
+      return this.data.artists;
+    }
+  }
+
+  get albums(): Array<Album> {
+    if (this.searchValue && this.searchValue!='') {
+      return this.data.albums.filter((item: Album) => {
+        return (item.title.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+      });
+    }
+    else {
+      return this.data.albums;
+    }
+  }
+
+  get playlists(): Array<Playlist> {
+    if (this.searchValue && this.searchValue!='') {
+      return this.data.playlists.filter((item: Playlist) => {
+        return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+      });
+    }
+    else {
+      return this.data.playlists;
+    }
+  }
+
+  getItems(ev: any): void {
+    this.searchValue = ev.target.value;
   }
 
 }

@@ -18,7 +18,7 @@ export class TabsPage {
     {root: MusicListPage, name:"Musiques", rootparams: {}, icon: "musical-notes"},
     {root: ArtistListPage, name:"Artistes", rootparams: {}, icon: "person"},
     {root: PlaylistListPage, name:"Playlists", rootparams: {}, icon: "list-box"},
-    {root: MusicListPage, name:"Paramètres", rootparams: {}, icon: "settings"}
+    // {root: MusicListPage, name:"Paramètres", rootparams: {}, icon: "settings"}
   ];
 
   constructor() {}

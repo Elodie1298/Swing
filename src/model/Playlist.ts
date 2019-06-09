@@ -6,6 +6,7 @@ export class Playlist {
   trackList: Array<Music>;
   name: string;
   cover: string;
+  description: string;
 
   constructor() {
     this.trackList = new Array<Music>();

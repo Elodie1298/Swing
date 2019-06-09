@@ -14,6 +14,7 @@ import { PlayerComponent } from './player/player';
 import { ImgHeaderComponent } from './img-header/img-header';
 import { PlaybarSliderComponent } from './playbar/playbar-slider/playbar-slider';
 import { PlaylistFavItemComponent } from './lists/playlists/playlist-fav-item/playlist-fav-item';
+import { MusicMorePopoverComponent } from './lists/musics/music-more-popover/music-more-popover';
 @NgModule({
 	declarations: [MusicListComponent,
     ArtistListComponent,
@@ -28,7 +29,8 @@ import { PlaylistFavItemComponent } from './lists/playlists/playlist-fav-item/pl
     PlayerComponent,
     ImgHeaderComponent,
     PlaybarSliderComponent,
-    PlaylistFavItemComponent],
+    PlaylistFavItemComponent,
+    MusicMorePopoverComponent],
 	imports: [IonicModule],
 	exports: [MusicListComponent,
     ArtistListComponent,
@@ -43,6 +45,7 @@ import { PlaylistFavItemComponent } from './lists/playlists/playlist-fav-item/pl
     PlayerComponent,
     ImgHeaderComponent,
     PlaybarSliderComponent,
-    PlaylistFavItemComponent]
+    PlaylistFavItemComponent,
+    MusicMorePopoverComponent]
 })
 export class ComponentsModule {}
