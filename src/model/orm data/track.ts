@@ -8,7 +8,7 @@ export class Track {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({nullable: true})
   spotify_id: string;
 
   @Column()
@@ -17,43 +17,43 @@ export class Track {
   @Column()
   file: string;
 
-  @Column()
+  @Column({default: false})
   analysed: boolean;
 
-  @Column()
+  @Column({nullable: true})
   danceability: number;
 
-  @Column()
+  @Column({nullable: true})
   energy: number;
 
-  @Column()
+  @Column({nullable: true})
   speechiness: number;
 
-  @Column()
+  @Column({nullable: true})
   acousticness: number;
 
-  @Column()
+  @Column({nullable: true})
   instrumentalness: number;
 
-  @Column()
+  @Column({nullable: true})
   liveness: number;
 
-  @Column()
+  @Column({nullable: true})
   valence: number;
 
-  @Column()
+  @Column({nullable: true})
   loudness: number;
 
-  @Column()
+  @Column({nullable: true})
   key: number;
 
-  @Column()
+  @Column({nullable: true})
   mode: number;
 
-  @Column()
+  @Column({nullable: true})
   tempo: number;
 
-  @Column()
+  @Column({nullable: true})
   tempo_signature: number;
 
   @ManyToMany(type => Playlist, playlists => playlists.tracks)

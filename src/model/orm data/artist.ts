@@ -8,16 +8,16 @@ export class Artist {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({nullable: true})
   spotify_id: string;
 
   @Column()
   name: string;
 
-  @Column()
+  @Column({nullable: true})
   img_big: string;
 
-  @Column()
+  @Column({nullable: true})
   img_little: string;
 
   @ManyToMany(type => Genre, genres => genres.artists)

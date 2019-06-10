@@ -16,13 +16,13 @@ export class Album {
   @Column()
   name: string;
 
-  @Column()
+  @Column({nullable: true})
   img_big: string;
 
-  @Column()
+  @Column({nullable: true})
   img_little: string;
 
-  @Column()
+  @Column({nullable: true})
   release_year: number;
 
   @ManyToMany(type => Genre, genres => genres.albums)

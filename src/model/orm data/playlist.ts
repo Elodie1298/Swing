@@ -10,13 +10,13 @@ export class Playlist {
   @Column()
   name: string;
 
-  @Column()
+  @Column({nullable: true})
   img_big: string;
 
-  @Column()
+  @Column({nullable: true})
   img_little: string;
 
-  @Column()
+  @Column({nullable: true})
   description: string;
 
   @ManyToMany(type => Track, tracks => tracks.playlists)
