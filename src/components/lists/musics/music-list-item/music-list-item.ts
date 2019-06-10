@@ -3,7 +3,6 @@ import {Music} from "../../../../model/Music";
 import {ActionSheetController, NavController, PopoverController} from "ionic-angular";
 import {PlayingListPage} from "../../../../pages/playing-list/playing-list";
 import {MusicProvider} from "../../../../providers/music/music";
-import {MusicMorePopoverComponent} from "../music-more-popover/music-more-popover";
 import {MetadataProvider} from "../../../../providers/metadata/metadata";
 
 
@@ -36,27 +35,6 @@ export class MusicListItemComponent {
   }
 
   more() {
-    // let popover = this.popoverCtrl.create(
-    //   MusicMorePopoverComponent,
-    //   {
-    //     music: this.music,
-    //     moreButton: this.moreButton.nativeElement
-    //   });
-    //
-    // console.log(Math.trunc(this.moreButton.nativeElement.getBoundingClientRect().top));
-    //
-    // let ev = {
-    //   target : {
-    //     getBoundingClientRect : () => {
-    //       return {
-    //         top: Math.trunc(this.moreButton.nativeElement.getBoundingClientRect().top)
-    //       };
-    //     }
-    //   }
-    // };
-    //
-    // popover.present({ev: ev});
-
     const actionSheet = this.actionSheetCtrl.create({
       title: this.music.title,
       buttons: [

@@ -4,12 +4,6 @@ import {NavController} from "ionic-angular";
 import {MoreListsPage} from "../../../../pages/more-lists/more-lists";
 import {ListUtil} from "../../../ListUtil";
 
-/**
- * Generated class for the MusicListComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'music-list-component',
   templateUrl: 'music-list.html',
@@ -17,14 +11,11 @@ import {ListUtil} from "../../../ListUtil";
 export class MusicListComponent {
   @Input() musics: Array<Music>;
   @Input() isDivTitle: boolean = false;
-
   @Input() isDivider: boolean = true;
   @Input() number: number = 0;
-
   @Input() max: number;
 
   @Output() click: EventEmitter<any> = new EventEmitter<any>();
-
 
   constructor(private navCtrl: NavController) {}
 
@@ -44,4 +35,5 @@ export class MusicListComponent {
     }
     return ListUtil.getGroupsByTitle(this.musics);
   }
+
 }

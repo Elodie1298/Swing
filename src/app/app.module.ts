@@ -24,7 +24,6 @@ import { FilesManagerProvider } from '../providers/files-manager/files-manager';
 import { DataProvider } from '../providers/data/data';
 import { MusicProvider } from '../providers/music/music';
 import {Media} from "@ionic-native/media";
-import {MusicMorePopoverComponent} from "../components/lists/musics/music-more-popover/music-more-popover";
 import { MetadataProvider } from '../providers/metadata/metadata';
 import {HttpClientModule} from "@angular/common/http";
 
@@ -62,8 +61,7 @@ import {HttpClientModule} from "@angular/common/http";
     ArtistPage,
     AlbumPage,
     PlaylistPage,
-    MoreListsPage,
-    MusicMorePopoverComponent
+    MoreListsPage
   ],
   providers: [
     StatusBar,
@@ -76,7 +74,7 @@ import {HttpClientModule} from "@angular/common/http";
     DataProvider,
     MusicProvider,
     Media,
-    MetadataProvider,
+    MetadataProvider
   ]
 })
 export class AppModule {}

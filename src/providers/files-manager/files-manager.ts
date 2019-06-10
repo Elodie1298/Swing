@@ -12,6 +12,7 @@ export class FilesManagerProvider {
   musicRoot: string = "file:///storage/9016-4EF8/";
   dirRoot: string = "Musique";
   temp: number = 10000;
+
   constructor(private file: File, private data: DataProvider) {}
 
 
@@ -79,6 +80,8 @@ export class FilesManagerProvider {
     });
   }
 
+
+  //TODO : delete the part and remplace with metadata service
   getMetadata(file, ext: string): Promise<Music> {
     let path = file.fullPath;
     return new Promise<Music>((resolve, reject) => {

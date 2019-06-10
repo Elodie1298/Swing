@@ -1,20 +1,30 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Util} from "../Util";
+import {File} from "@ionic-native/file";
+import * as crypto from 'crypto-js';
 
-declare var crypto: any;
 declare var Buffer: any;
-declare var fs: any;
 
 @Injectable()
 export class MetadataProvider {
+  private headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
 
-  constructor(public http: HttpClient) {}
+  });
 
-  acrIdentify(file: string) {
-    fs.readFile(file, d => {
-        console.log(d);
-        let data = new Buffer(d);
+  constructor(public http: HttpClient,
+              private file: File) {}
+
+  acrIdentify(path: string) {
+    let fileName = path.split('/')[path.split('/').length-1];
+    let directory = path.substring(0, path.length-fileName.length);
+
+    this.file.readAsArrayBuffer("file://" + directory, fileName)
+      .then((arrayBuffer: ArrayBuffer) => {
+        let data = new Buffer(arrayBuffer);
         let timestamp = (new Date()).getTime()/1000;
 
         let stringToSign = [
@@ -26,9 +36,13 @@ export class MetadataProvider {
           timestamp
         ].join('\n');
 
-        let signature = crypto.createHmac('sha1', Util.acrOptions.accessSecret)
-          .update(new Buffer(stringToSign, 'utf-8'))
-          .digest().toString('base64');
+        let signature = crypto.HmacSHA1(new Buffer(stringToSign, 'utf-8'), Util.acrOptions.accessSecret);
+        console.log(signature);
+
+        console.log('sample', data.toString('utf-8'));
+        console.log('sample_bytes', data.length);
+        console.log(signature.toString());
+        console.log(timestamp.toString());
 
         let formData = {
           sample: data,
@@ -40,11 +54,23 @@ export class MetadataProvider {
           timestamp: timestamp
         };
 
-        this.http.post("http://"+Util.acrOptions.host+Util.acrOptions.endpoint, formData, {})
-          .toPromise()
-          .then(data => console.log(data))
-          .catch(e => console.log(e));
-      })
-  }
+        console.log(formData);
 
+
+        //TODO : get this request done
+        let url = "http://"+Util.acrOptions.host+Util.acrOptions.endpoint;
+        // let url = "http://localhost:8100/apiACR";
+        console.log(url);
+        return this.http.post(url, formData)
+          .toPromise()
+          .catch(error => {
+            console.log(error);
+            console.error(error.status);
+            console.error(error.error); // Error message as string
+            console.error(error.headers);
+          })
+      })
+      .then(data => console.log(data))
+      .catch(e => console.log(e));
+  }
 }

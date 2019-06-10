@@ -73,6 +73,9 @@ ion-item-group {
 .action-sheet-group button {
   color: color($theme-colors, primary, base) !important;
 }
+.action-sheet-group button:active, .action-sheet-group button:focus {
+  background: color($theme-colors, dark, light) !important;
+}
 
 
 //////////////////// Shapes
