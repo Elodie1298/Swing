@@ -22,6 +22,7 @@ export class MetadataProvider {
     let fileName = path.split('/')[path.split('/').length-1];
     let directory = path.substring(0, path.length-fileName.length);
 
+    //TODO: check proxy config
     this.file.readAsArrayBuffer("file://" + directory, fileName)
       .then((arrayBuffer: ArrayBuffer) => {
         let data = new Buffer(arrayBuffer);

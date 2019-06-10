@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 import {File} from '@ionic-native/file';
-import {Music} from "../../model/Music";
-import {Album} from "../../model/Album";
-import {Artist} from "../../model/Artist";
 import {DataProvider} from "../data/data";
 
 @Injectable()
 export class FilesManagerProvider {
-  music_ext: string[] = ['mp3'];
-  cover_ext: string[] = ['jpg', 'png'];
-  musicRoot: string = "file:///storage/9016-4EF8/";
+  track_ext: string[] = ['mp3'];
+  tracksRoot: string = "file:///storage/9016-4EF8/";
   dirRoot: string = "Musique";
   temp: number = 10000;
+
+  trackRepository;
 
   constructor(private file: File, private data: DataProvider) {}
 
 
   init(): void {
-    this.file.listDir(this.musicRoot, this.dirRoot)
+    this.trackRepository = this.data.localConnection.getRepository('track');
+    this.file.listDir(this.tracksRoot, this.dirRoot)
       .then((listFiles: any[]) => this.getMusicFiles(listFiles))
       .catch(e => console.log(e));
   }
@@ -48,23 +47,13 @@ export class FilesManagerProvider {
           else if (file.isFile) {
             let ext = file.name.split('.');
             ext = ext[ext.length - 1];
-            if (this.music_ext.indexOf(ext) > -1) {
-              this.getMetadata(file, ext)
-                .then(() => {
-                  resolve(true);
-                })
-                .catch(err => reject(err));
-            } else if (this.cover_ext.indexOf(ext) > -1) {
-              //TODO : check img and covers
-              let path = file.fullPath.split('/');
-              if (path[path.length-4]=="Musique") {
-                let artist = Artist.get(path[path.length-3], this.data);
-                let album = Album.get(artist, this.data, path[path.length-2]);
-                album.img_big = file.fullPath;
-              } else if (path[path.length-3]=="Musique") {
-                let artist = Artist.get(path[path.length-2], this.data);
-                artist.img = file.fullPath;
-              }
+            if (this.track_ext.indexOf(ext) > -1) {
+              let name = file.name.substring(0, file.name.length-1-ext.length);
+              let track = this.trackRepository.findOne(1);
+              track.name = name;
+              track.file = file.fullPath;
+              this.trackRepository.save(track);
+              resolve(true);
             } else {
               resolve(false);
             }
@@ -77,29 +66,6 @@ export class FilesManagerProvider {
       } else {
         resolve(true);
       }
-    });
-  }
-
-
-  //TODO : delete the part and remplace with metadata service
-  getMetadata(file, ext: string): Promise<Music> {
-    let path = file.fullPath;
-    return new Promise<Music>((resolve, reject) => {
-      path = path.split('/');
-      let fileName = path[path.length - 1];
-      let title = fileName.substring(0, fileName.length - (ext.length + 1));
-
-      let album: Album;
-      if (path[path.length-4]=="Musique") {
-        let artist = Artist.get(path[path.length-3], this.data);
-        album = Album.get(artist, this.data, path[path.length-2]);
-      } else if (path[path.length-3]=="Musique") {
-        let artist = Artist.get(path[path.length-2], this.data);
-        album = artist.default_alb;
-      }
-      let music = Music.get(this.data, title, file.fullPath, album);
-
-      resolve(music);
     });
   }
 }

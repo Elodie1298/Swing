@@ -37,18 +37,11 @@ export class MyApp {
   }
 
   initialize(): void {
-    //TODO: finish with sqlLite or start TypeORM
-    // this.sqlLite.initialize();
-    this.fm.init();
     createConnection({
-      type: "sqlite",
+      type: "cordova",
       database: 'jaz.db',
+      location: 'default',
       synchronize: true,
-      logging: [
-        'error',
-        'query',
-        'schema'
-      ],
       entities: [
         Album,
         Artist,
@@ -60,7 +53,7 @@ export class MyApp {
     })
       .then(connection => {
         this.data.localConnection = connection;
-        console.log("Connected to local database");
+        this.fm.init();
       })
       .catch(e => console.log(e));
   }
