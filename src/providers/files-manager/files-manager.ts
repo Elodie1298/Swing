@@ -60,7 +60,7 @@ export class FilesManagerProvider {
               if (path[path.length-4]=="Musique") {
                 let artist = Artist.get(path[path.length-3], this.data);
                 let album = Album.get(artist, this.data, path[path.length-2]);
-                album.cover = file.fullPath;
+                album.img_big = file.fullPath;
               } else if (path[path.length-3]=="Musique") {
                 let artist = Artist.get(path[path.length-2], this.data);
                 artist.img = file.fullPath;

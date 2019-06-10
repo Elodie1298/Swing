@@ -16,5 +16,7 @@ export class DataProvider {
 
   artists: Array<Artist> = new Array<Artist>();
 
+  localConnection;
+
   constructor() { }
 }

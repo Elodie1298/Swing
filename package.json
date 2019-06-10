@@ -10,8 +10,12 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "run android": "ionic cordova run android",
+    "build android": "ionic cordova build android",
     "run android lr": "ionic cordova run android --livereload",
     "run browser lr": "ionic cordova run browser --livereload"
+  },
+  "config": {
+    "ionic_webpack": "./config/webpack.config.js"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
@@ -44,7 +48,9 @@
     "ionic-angular": "3.9.3",
     "ionicons": "3.0.0",
     "rxjs": "5.5.11",
+    "sql.js": "^0.5.0",
     "sw-toolbox": "3.6.0",
+    "typeorm": "^0.2.18",
     "zone.js": "0.8.29"
   },
   "devDependencies": {
@@ -52,7 +58,7 @@
     "@types/crypto-js": "^3.1.43",
     "@types/musicmetadata": "^2.0.4",
     "@types/node": "^12.0.7",
-    "typescript": "~2.6.2"
+    "typescript": "~3.3.3"
   },
   "description": "An Ionic project",
   "cordova": {

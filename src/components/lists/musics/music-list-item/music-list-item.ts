@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Music} from "../../../../model/Music";
-import {ActionSheetController, NavController, PopoverController} from "ionic-angular";
+import {ActionSheetController, NavController} from "ionic-angular";
 import {PlayingListPage} from "../../../../pages/playing-list/playing-list";
 import {MusicProvider} from "../../../../providers/music/music";
 import {MetadataProvider} from "../../../../providers/metadata/metadata";
@@ -21,7 +21,6 @@ export class MusicListItemComponent {
   constructor(private navCtrl: NavController,
               private musicProvider: MusicProvider,
               private actionSheetCtrl: ActionSheetController,
-              private popoverCtrl: PopoverController,
               private metadataProvider: MetadataProvider) {}
 
   onClick():void {
@@ -36,7 +35,7 @@ export class MusicListItemComponent {
 
   more() {
     const actionSheet = this.actionSheetCtrl.create({
-      title: this.music.title,
+      title: this.music.name,
       buttons: [
         {
           text: "Récupérer les métadonnées",

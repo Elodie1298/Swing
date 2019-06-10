@@ -4,8 +4,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/home/tabs/tabs';
-import {SqlProvider} from "../providers/sql/sql";
 import {FilesManagerProvider} from "../providers/files-manager/files-manager";
+import {createConnection} from "typeorm";
+import {Album} from "../model/orm data/album";
+import {Artist} from "../model/orm data/artist";
+import {Genre} from "../model/orm data/genre";
+import {Label} from "../model/orm data/label";
+import {Track} from "../model/orm data/track";
+import {Playlist} from "../model/orm data/playlist";
+import {DataProvider} from "../providers/data/data";
 
 @Component({
   templateUrl: 'app.html'
@@ -16,8 +23,8 @@ export class MyApp {
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
-              private sqlLite: SqlProvider,
-              private fm: FilesManagerProvider) {
+              private fm: FilesManagerProvider,
+              private data: DataProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -33,5 +40,28 @@ export class MyApp {
     //TODO: finish with sqlLite or start TypeORM
     // this.sqlLite.initialize();
     this.fm.init();
+    createConnection({
+      type: "sqlite",
+      database: 'jaz.db',
+      synchronize: true,
+      logging: [
+        'error',
+        'query',
+        'schema'
+      ],
+      entities: [
+        Album,
+        Artist,
+        Track,
+        Playlist,
+        Genre,
+        Label
+      ]
+    })
+      .then(connection => {
+        this.data.localConnection = connection;
+        console.log("Connected to local database");
+      })
+      .catch(e => console.log(e));
   }
 }

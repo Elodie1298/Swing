@@ -21,7 +21,7 @@ export class SearchPage {
   get musics(): Array<Music> {
     if (this.searchValue && this.searchValue!='') {
       return this.data.musics.filter((item: Music) => {
-        return (item.title.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+        return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
       });
     }
     else {
@@ -43,7 +43,7 @@ export class SearchPage {
   get albums(): Array<Album> {
     if (this.searchValue && this.searchValue!='') {
       return this.data.albums.filter((item: Album) => {
-        return (item.title.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+        return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
       });
     }
     else {

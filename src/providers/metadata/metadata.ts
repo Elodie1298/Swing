@@ -8,12 +8,12 @@ declare var Buffer: any;
 
 @Injectable()
 export class MetadataProvider {
-  private headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
-
-  });
+  // private headers = new HttpHeaders({
+  //   'Access-Control-Allow-Origin': '*',
+  //   'Access-Control-Allow-Methods': 'GET, POST',
+  //   'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+  //
+  // });
 
   constructor(public http: HttpClient,
               private file: File) {}

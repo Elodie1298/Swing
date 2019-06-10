@@ -3,12 +3,12 @@ import {DataProvider} from "../providers/data/data";
 
 export class Music {
   //TODO: adapt class
-  title: string;
+  name: string;
   album: Album;
   file: string;
 
   constructor() {
-    this.title = "Music";
+    this.name = "Music";
     this.file = "";
   }
 
@@ -26,10 +26,10 @@ export class Music {
       data.music_list.set(album, new Array<Music>());
       musics = data.music_list.get(album);
     }
-    let m = musics.filter(m => m.title == m.title).filter(m => m.album == album);
+    let m = musics.filter(m => m.name == m.name).filter(m => m.album == album);
     if (m.length == 0) {
       let music = new Music();
-      music.title = title;
+      music.name = title;
       music.file = file;
       music.album = album;
       musics.push(music);

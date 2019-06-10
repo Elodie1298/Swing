@@ -7,7 +7,7 @@ import {DataProvider} from "../../../providers/data/data";
 })
 export class PlaylistListPage {
 
-  constructor(private data: DataProvider) {}
+  constructor(public data: DataProvider) {}
 }
 
 

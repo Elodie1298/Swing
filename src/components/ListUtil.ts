@@ -43,7 +43,7 @@ export class ListUtil {
       groups = new Array<any>();
 
       for (let obj of list) {
-        letter = obj.title.substring(0, 1).toUpperCase();
+        letter = obj.name.substring(0, 1).toUpperCase();
         if (letter.match(/[A-Z]/i) == null) {
           letter = '#';
         }
@@ -58,7 +58,7 @@ export class ListUtil {
       }
 
       for (let group of groups) {
-        group.list.sort((a, b) => this.compareString(a.title, b.title));
+        group.list.sort((a, b) => this.compareString(a.name, b.name));
       }
       groups.sort((a, b) => this.compareString(a.letter, b.letter));
       return groups;

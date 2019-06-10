@@ -1,11 +1,11 @@
 <ion-item (click)="onClick()" class="music-list-item">
 
   <ion-avatar item-start >
-    <img *ngIf="isNumber()" [src]="music.album.cover">
+    <img *ngIf="isNumber()" [src]="music.album.img_big">
     <h1 text-center *ngIf="!isNumber()">{{number}}</h1>
   </ion-avatar>
 
-  <h2>{{music.title}}</h2>
+  <h2>{{music.name}}</h2>
   <p>{{music.album.artist.name}}</p>
   <button ion-button item-end clear large color="dark"
           (click)="more()" #moreButton>

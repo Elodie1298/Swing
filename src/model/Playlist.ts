@@ -5,13 +5,13 @@ export class Playlist {
   //TODO: adapt class
   trackList: Array<Music>;
   name: string;
-  cover: string;
+  img_big: string;
   description: string;
 
   constructor() {
     this.trackList = new Array<Music>();
     this.name = "Playlist test";
-    this.cover = "assets/imgs/logo.png";
+    this.img_big = "assets/imgs/logo.png";
   }
 
   static get (data: DataProvider, name: string, cover?: string): Playlist {
@@ -23,7 +23,7 @@ export class Playlist {
     if (p.length == 0) {
       let playlist = new Playlist();
       playlist.name = name;
-      if (cover) playlist.cover = cover;
+      if (cover) playlist.img_big = cover;
       data.playlists.push(playlist);
       return playlist;
     } else {
