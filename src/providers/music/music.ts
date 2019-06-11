@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 import {Media, MediaObject} from "@ionic-native/media";
-import {Music} from "../../model/Music";
+import {Track} from "../../model/orm data/track";
 
 
 @Injectable()
 export class MusicProvider {
   private _mediaObject: MediaObject;
-  private _musicList: Array<Music>;
-  private _nMusic: number;
+  private _trackList: Array<Track>;
+  private _nTrack: number;
   private _paused: boolean = false;
 
   on: boolean = false;
 
   constructor(private media: Media) {}
 
-  setMediaPlaying(musics: Array<Music>, n: number) {
-    this._musicList = musics;
-    this._nMusic = n;
+  setMediaPlaying(trackList: Array<Track>, n: number) {
+    this._trackList = trackList;
+    this._nTrack = n;
     if (this._mediaObject) this._mediaObject.release();
-    this._mediaObject = this.media.create(musics[n].file);
+    this._mediaObject = this.media.create(trackList[n].file);
     this._mediaObject.play();
     this.on = true;
   }
 
-  get currentMusic(): Music {
-    return this._musicList[this._nMusic];
+  get currentMusic(): Track {
+    return this._trackList[this._nTrack];
   }
   get paused(): boolean {
     return this._paused;
   }
-  get musicList(): Array<Music> {
-    return this._musicList;
+  get trackList(): Array<Track> {
+    return this._trackList;
   }
 
   playpause() {
@@ -43,15 +43,15 @@ export class MusicProvider {
   }
 
   next() {
-    this._nMusic = (this._nMusic + 1)%this._musicList.length;
+    this._nTrack = (this._nTrack + 1)%this._trackList.length;
     this._mediaObject.release();
-    this._mediaObject = this.media.create(this._musicList[this._nMusic].file);
+    this._mediaObject = this.media.create(this._trackList[this._nTrack].file);
     this._mediaObject.play();
   }
   previous() {
-    this._nMusic = (this._nMusic - 1)%this._musicList.length;
+    this._nTrack = (this._nTrack - 1)%this._trackList.length;
     this._mediaObject.release();
-    this._mediaObject = this.media.create(this._musicList[this._nMusic].file);
+    this._mediaObject = this.media.create(this._trackList[this._nTrack].file);
     this._mediaObject.play();
   }
 

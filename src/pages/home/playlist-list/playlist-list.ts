@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {DataProvider} from "../../../providers/data/data";
+import {Playlist} from "../../../model/orm data/playlist";
 
 @Component({
   selector: 'page-playlist-list',
@@ -7,7 +8,15 @@ import {DataProvider} from "../../../providers/data/data";
 })
 export class PlaylistListPage {
 
-  constructor(public data: DataProvider) {}
+  constructor(private data: DataProvider) {}
+
+  get playlists(): Playlist [] {
+    if (this.data.playlists != undefined) {
+      return this.data.playlists;
+    } else {
+      return null;
+    }
+  }
 }
 
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
 import {DataProvider} from "../../../providers/data/data";
 
 @Component({
@@ -8,7 +7,14 @@ import {DataProvider} from "../../../providers/data/data";
 })
 export class ArtistListPage {
 
-  constructor(public navCtrl: NavController,
-              public data: DataProvider) {}
+  constructor(private data: DataProvider) {}
+
+  get artists() {
+    if (this.data.artists != undefined) {
+      return this.data.artists;
+    } else {
+      return null;
+    }
+  }
 
 }

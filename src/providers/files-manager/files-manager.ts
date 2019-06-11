@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {File} from '@ionic-native/file';
 import {DataProvider} from "../data/data";
+import {Track} from "../../model/orm data/track";
 
 @Injectable()
 export class FilesManagerProvider {
@@ -49,11 +50,19 @@ export class FilesManagerProvider {
             ext = ext[ext.length - 1];
             if (this.track_ext.indexOf(ext) > -1) {
               let name = file.name.substring(0, file.name.length-1-ext.length);
-              let track = this.trackRepository.findOne(1);
-              track.name = name;
-              track.file = file.fullPath;
-              this.trackRepository.save(track);
-              resolve(true);
+
+              this.trackRepository.find({file: file.fullPath})
+                .then((tracks: Track[]) => {
+                  if (tracks.length == 0) {
+                    let track = this.trackRepository.create({
+                      name: name,
+                      file: file.fullPath
+                    });
+                    this.trackRepository.save(track);
+                  }
+                  resolve(true);
+                })
+                .catch(e => console.log(e));
             } else {
               resolve(false);
             }

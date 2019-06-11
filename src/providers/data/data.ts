@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
-import {Music} from "../../model/Music";
-import {Album} from "../../model/Album";
-import {Playlist} from "../../model/Playlist";
-import {Artist} from "../../model/Artist";
+import {Track} from "../../model/orm data/track";
+import {Connection} from "typeorm";
+import {Artist} from "../../model/orm data/artist";
+import {Album} from "../../model/orm data/album";
+import {Playlist} from "../../model/orm data/playlist";
 
 @Injectable()
 export class DataProvider {
-  playlists: Array<Playlist> = new Array<Playlist>();
-
-  musics: Array<Music> = new Array<Music>();
-  music_list: Map<Album, Array<Music>> = new Map<Album, Array<Music>>();
-
-  albums: Array<Album> = new Array<Album>();
-  album_list: Map<Artist, Array<Album>> = new Map<Artist, Array<Album>>();
-
-  artists: Array<Artist> = new Array<Artist>();
 
   localConnection;
+  tracks: Array<Track>;
+  artists: Array<Artist>;
+  albums: Array<Album>;
+  playlists: Array<Playlist>;
 
-  constructor() { }
+  constructor() {}
+
+  setConnection(connection: Connection): void {
+    this.localConnection = connection;
+    setInterval(() => {
+      this.localConnection.getRepository("track")
+        .createQueryBuilder("track").getMany()
+        .then((tracks: Track[]) => {
+          this.tracks = tracks;
+        })
+    }, 2000);
+  }
+
+
 }

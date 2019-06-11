@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
 import {DataProvider} from "../../../providers/data/data";
+import {Track} from "../../../model/orm data/track";
 
 
 @Component({
@@ -9,6 +9,13 @@ import {DataProvider} from "../../../providers/data/data";
 })
 export class MusicListPage {
 
-  constructor(public navCtrl: NavController,
-              public data: DataProvider) {}
+  constructor(private data: DataProvider) {}
+
+  get tracks(): Track [] {
+    if (this.data.tracks != undefined) {
+      return this.data.tracks;
+    } else {
+      return null;
+    }
+  }
 }

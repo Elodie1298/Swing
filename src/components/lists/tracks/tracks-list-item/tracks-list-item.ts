@@ -1,32 +1,39 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {Music} from "../../../../model/Music";
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ActionSheetController, NavController} from "ionic-angular";
 import {PlayingListPage} from "../../../../pages/playing-list/playing-list";
 import {MusicProvider} from "../../../../providers/music/music";
 import {MetadataProvider} from "../../../../providers/metadata/metadata";
+import {Track} from "../../../../model/orm data/track";
+import {Album} from "../../../../model/orm data/album";
+import {DataProvider} from "../../../../providers/data/data";
 
 
 @Component({
-  selector: 'music-list-item',
-  templateUrl: 'music-list-item.html'
+  selector: 'track-list-item',
+  templateUrl: 'track-list-item.html'
 })
-export class MusicListItemComponent {
+export class TrackListItemComponent implements OnInit{
 
-  @Input() music: Music;
-  @Input() musicList: Array<Music>;
+  @Input() track: Track;
+  @Input() trackList: Array<Track>;
   @Input() number: number;
 
   @ViewChild('moreButton', {read: ElementRef}) moreButton: ElementRef;
 
+  album: Album;
+
   constructor(private navCtrl: NavController,
               private musicProvider: MusicProvider,
               private actionSheetCtrl: ActionSheetController,
-              private metadataProvider: MetadataProvider) {}
+              private metadataProvider: MetadataProvider,
+              private data: DataProvider) {}
+
+  ngOnInit(): void {}
 
   onClick():void {
-    let n = this.musicList.indexOf(this.music);
-    this.musicProvider.setMediaPlaying(this.musicList, n);
-    this.navCtrl.push(PlayingListPage, {music: this.music, musicList: this.musicList});
+    let n = this.trackList.indexOf(this.track);
+    this.musicProvider.setMediaPlaying(this.trackList, n);
+    this.navCtrl.push(PlayingListPage, {music: this.track, musicList: this.trackList});
   }
 
   isNumber(): boolean {
@@ -35,12 +42,12 @@ export class MusicListItemComponent {
 
   more() {
     const actionSheet = this.actionSheetCtrl.create({
-      title: this.music.name,
+      title: this.track.name,
       buttons: [
         {
           text: "Récupérer les métadonnées",
           handler: () => {
-            this.metadataProvider.acrIdentify(this.music.file);
+            this.metadataProvider.acrIdentify(this.track.file);
           }
         }
       ]

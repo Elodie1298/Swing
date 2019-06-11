@@ -1,4 +1,4 @@
-import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Playlist} from "./playlist";
 import {Album} from "./album";
 
@@ -57,9 +57,8 @@ export class Track {
   tempo_signature: number;
 
   @ManyToMany(type => Playlist, playlists => playlists.tracks)
-  @JoinTable()
   playlists: Playlist[];
 
-  @ManyToMany(type => Album, albums => albums.tracks)
-  albums: Album[];
+  @ManyToOne(type => Album, albums => albums.tracks)
+  albums: Album;
 }

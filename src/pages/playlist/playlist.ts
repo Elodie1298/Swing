@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {Playlist} from "../../model/Playlist";
+import {Playlist} from "../../model/orm data/playlist";
 
 @Component({
   selector: 'page-playlist',

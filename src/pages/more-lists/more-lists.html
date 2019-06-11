@@ -6,10 +6,10 @@
 
 <ion-content>
 
-  <music-list-component *ngIf="!!musics"
-                        [musics]="musics"
-                        [isDivTitle]="false"
-  ></music-list-component>
+  <tracks-list-component *ngIf="!!tracks"
+                         [tracks]="tracks"
+                         [isDivTitle]="false"
+  ></tracks-list-component>
 
   <album-list-component *ngIf="!!albums"
                         [albums]="albums"

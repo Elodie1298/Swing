@@ -25,7 +25,6 @@ export class Artist {
   genres: Genre[];
 
   @ManyToMany(type => Album, albums => albums.artists)
-  @JoinTable()
   albums: Album[];
 
 }

@@ -1,17 +1,17 @@
 <ion-header>
   <img-header-component
     [title]="artist.name"
-    [img]="artist.img"
+    [img]="artist.img_big"
   ></img-header-component>
 </ion-header>
 
 <ion-content>
-  <music-list-component
+  <tracks-list-component
     [isDivTitle]="true"
     max = 3
-    [musics]="musics"
+    [tracks]="tracks"
 
-  ></music-list-component>
+  ></tracks-list-component>
 
   <album-list-component
     [isDivTitle]="true"

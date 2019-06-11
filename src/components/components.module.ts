@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { MusicListComponent } from './lists/musics/music-list/music-list';
+import { MusicListComponent } from './lists/tracks/tracks-list/track-list';
 import { ArtistListComponent } from './lists/artists/artist-list/artist-list';
 import { PlaylistListComponent } from './lists/playlists/playlist-list/playlist-list';
 import {IonicModule} from "ionic-angular";
 import { AlbumListComponent } from './lists/albums/album-list/album-list';
-import { MusicListItemComponent } from './lists/musics/music-list-item/music-list-item';
+import { TrackListItemComponent } from './lists/tracks/tracks-list-item/tracks-list-item';
 import { AlbumListItemComponent } from './lists/albums/album-list-item/album-list-item';
 import { ArtistListItemComponent } from './lists/artists/artist-list-item/artist-list-item';
 import { PlaylistListItemComponent } from './lists/playlists/playlist-list-item/playlist-list-item';
@@ -19,7 +19,7 @@ import { PlaylistFavItemComponent } from './lists/playlists/playlist-fav-item/pl
     ArtistListComponent,
     PlaylistListComponent,
     AlbumListComponent,
-    MusicListItemComponent,
+    TrackListItemComponent,
     AlbumListItemComponent,
     ArtistListItemComponent,
     PlaylistListItemComponent,
@@ -34,7 +34,7 @@ import { PlaylistFavItemComponent } from './lists/playlists/playlist-fav-item/pl
     ArtistListComponent,
     PlaylistListComponent,
     AlbumListComponent,
-    MusicListItemComponent,
+    TrackListItemComponent,
     AlbumListItemComponent,
     ArtistListItemComponent,
     PlaylistListItemComponent,

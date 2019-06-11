@@ -1,14 +1,14 @@
-<ion-item-group *ngFor="let group of getMusics()">
+<ion-item-group *ngFor="let group of getTracks()">
   <ion-item-divider *ngIf="isDivider" (click)="more()">
     {{group.letter}}
     <ion-icon *ngIf="isDivTitle" item-end name="arrow-dropright"></ion-icon>
   </ion-item-divider>
 
-  <ion-item *ngFor="let music of group.list" no-padding>
-    <music-list-item
-      [music]="music"
-      [musicList]="musics"
+  <ion-item *ngFor="let track of group.list" no-padding>
+    <track-list-item
+      [track]="track"
+      [trackList]="tracks"
       [number]="number"
-    ></music-list-item>
+    ></track-list-item>
   </ion-item>
 </ion-item-group>

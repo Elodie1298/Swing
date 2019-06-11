@@ -29,32 +29,26 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      splashScreen.hide();
-      if (platform.is('cordova')) {
-        this.initialize();
-      }
-    });
-  }
-
-  initialize(): void {
-    createConnection({
-      type: "cordova",
-      database: 'jaz.db',
-      location: 'default',
-      synchronize: true,
-      entities: [
-        Album,
-        Artist,
-        Track,
-        Playlist,
-        Genre,
-        Label
-      ]
-    })
-      .then(connection => {
-        this.data.localConnection = connection;
-        this.fm.init();
+      createConnection({
+        type: "cordova",
+        database: 'jaz.db',
+        location: 'default',
+        synchronize: true,
+        entities: [
+          Album,
+          Artist,
+          Track,
+          Playlist,
+          Genre,
+          Label
+        ]
       })
-      .catch(e => console.log(e));
+        .then(connection => {
+          this.data.setConnection(connection);
+          this.fm.init();
+          splashScreen.hide();
+        })
+        .catch(e => console.log(e));
+    });
   }
 }

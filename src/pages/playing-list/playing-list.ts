@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import {MusicProvider} from "../../providers/music/music";
 
 
@@ -9,7 +9,7 @@ import {MusicProvider} from "../../providers/music/music";
 })
 export class PlayingListPage {
 
-  constructor(navCtrl: NavController, public navParams: NavParams,
+  constructor(navCtrl: NavController,
               public music: MusicProvider) {
 
     if (navCtrl.last().name == PlayingListPage.name) {

@@ -19,7 +19,6 @@ import {AlbumPage} from "../pages/album/album";
 import {PlaylistPage} from "../pages/playlist/playlist";
 import {MoreListsPage} from "../pages/more-lists/more-lists";
 import {SQLite} from "@ionic-native/sqlite";
-import {SqlProvider} from "../providers/sql/sql";
 import { FilesManagerProvider } from '../providers/files-manager/files-manager';
 import { DataProvider } from '../providers/data/data';
 import { MusicProvider } from '../providers/music/music';
@@ -68,7 +67,6 @@ import {HttpClientModule} from "@angular/common/http";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
-    SqlProvider,
     FilesManagerProvider,
     File,
     DataProvider,

@@ -1,4 +1,4 @@
-import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Genre} from "./genre";
 import {Label} from "./label";
 import {Artist} from "./artist";
@@ -33,11 +33,11 @@ export class Album {
   @JoinTable()
   labels: Label[];
 
-  @ManyToMany(type => Track, tracks => tracks.albums)
-  @JoinTable()
+  @OneToMany(type => Track, tracks => tracks.albums)
   tracks: Track[];
 
   @ManyToMany(type => Artist, artists => artists.genres)
+  @JoinTable()
   artists: Artist[];
 
 }

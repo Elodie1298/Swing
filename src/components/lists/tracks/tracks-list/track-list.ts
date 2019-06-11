@@ -3,13 +3,14 @@ import {Music} from "../../../../model/Music";
 import {NavController} from "ionic-angular";
 import {MoreListsPage} from "../../../../pages/more-lists/more-lists";
 import {ListUtil} from "../../../ListUtil";
+import {Track} from "../../../../model/orm data/track";
 
 @Component({
-  selector: 'music-list-component',
-  templateUrl: 'music-list.html',
+  selector: 'tracks-list-component',
+  templateUrl: 'track-list.html',
 })
 export class MusicListComponent {
-  @Input() musics: Array<Music>;
+  @Input() tracks: Array<Music>;
   @Input() isDivTitle: boolean = false;
   @Input() isDivider: boolean = true;
   @Input() number: number = 0;
@@ -25,15 +26,15 @@ export class MusicListComponent {
 
   more(): void {
     if (this.max != undefined) {
-      this.navCtrl.push(MoreListsPage, {title: "Musiques", musics: this.musics});
+      this.navCtrl.push(MoreListsPage, {title: "Musiques", musics: this.tracks});
     }
   }
 
-  getMusics(): Array<any> {
+  getTracks(): Array<any> {
     if (this.max != undefined) {
-      return [{letter: "Musiques", list: ListUtil.getFirstItems(this.musics, this.max)}];
+      return [{letter: "Musiques", list: ListUtil.getFirstItems(this.tracks, this.max)}];
     }
-    return ListUtil.getGroupsByTitle(this.musics);
+    return ListUtil.getGroupsByTitle(this.tracks);
   }
 
 }

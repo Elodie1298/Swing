@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {Album} from "../../model/Album";
-import {Music} from "../../model/Music";
-import {DataProvider} from "../../providers/data/data";
+import { NavParams } from 'ionic-angular';
+import {Album} from "../../model/orm data/album";
+import {Track} from "../../model/orm data/track";
 
 @Component({
   selector: 'page-album',
@@ -11,11 +10,12 @@ import {DataProvider} from "../../providers/data/data";
 export class AlbumPage {
 
   album: Album;
-  musics: Array<Music>;
+  tracks: Array<Track>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              data: DataProvider) {
+  constructor(private navParams: NavParams) {
     this.album = navParams.get("album");
-    this.musics = data.musics.filter(m => m.album == this.album);
+    for (let track of this.album.tracks) {
+      this.tracks.push(track);
+    }
   }
 }
