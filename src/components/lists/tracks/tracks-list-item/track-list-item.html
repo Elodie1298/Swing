@@ -1,7 +1,7 @@
 <ion-item (click)="onClick()" class="music-list-item">
 
   <ion-avatar item-start >
-    <img *ngIf="isNumber() && track.albums!=undefined && track.albums[0].img!=undefined" [src]="track.albums[0].img_big">
+    <img *ngIf="isNumber() && track.albums!=undefined && track.albums[0].img!=undefined" [src]="track.albums[0].img_little">
     <img *ngIf="isNumber() && (track.albums==undefined || track.albums[0].img==undefined)" src="assets/imgs/logo.png">
     <h1 text-center *ngIf="!isNumber()">{{number}}</h1>
   </ion-avatar>

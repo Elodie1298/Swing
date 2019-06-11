@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Track} from "../../model/orm data/track";
+import {Track} from "../../model/track";
 import {Connection} from "typeorm";
-import {Artist} from "../../model/orm data/artist";
-import {Album} from "../../model/orm data/album";
-import {Playlist} from "../../model/orm data/playlist";
+import {Artist} from "../../model/artist";
+import {Album} from "../../model/album";
+import {Playlist} from "../../model/playlist";
 
 @Injectable()
 export class DataProvider {
@@ -40,6 +40,11 @@ export class DataProvider {
           this.playlists = playlists;
         });
     }, 2000);
+    if (this.playlists.filter(p => p.name == "Favoris").length == 0) {
+      this.localConnection.getRepository("playlist").create({
+        name: "Favoris"
+      })
+    }
   }
 
 

@@ -1,15 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Album} from "../../../../model/Album";
 import {ListUtil} from "../../../ListUtil";
 import {NavController} from "ionic-angular";
 import {MoreListsPage} from "../../../../pages/more-lists/more-lists";
+import {Album} from "../../../../model/album";
 
-/**
- * Generated class for the AlbumListComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'album-list-component',
   templateUrl: 'album-list.html'

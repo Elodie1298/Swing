@@ -3,8 +3,8 @@ import {ActionSheetController, NavController} from "ionic-angular";
 import {PlayingListPage} from "../../../../pages/playing-list/playing-list";
 import {MusicProvider} from "../../../../providers/music/music";
 import {MetadataProvider} from "../../../../providers/metadata/metadata";
-import {Track} from "../../../../model/orm data/track";
-import {Album} from "../../../../model/orm data/album";
+import {Track} from "../../../../model/track";
+import {Album} from "../../../../model/album";
 import {DataProvider} from "../../../../providers/data/data";
 
 
@@ -25,8 +25,7 @@ export class TrackListItemComponent implements OnInit{
   constructor(private navCtrl: NavController,
               private musicProvider: MusicProvider,
               private actionSheetCtrl: ActionSheetController,
-              private metadataProvider: MetadataProvider,
-              private data: DataProvider) {}
+              private metadataProvider: MetadataProvider) {}
 
   ngOnInit(): void {}
 

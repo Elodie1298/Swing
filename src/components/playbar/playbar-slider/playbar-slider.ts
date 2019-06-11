@@ -16,7 +16,7 @@ export class PlaybarSliderComponent {
       this.music.position
         .then((time: number) => this.time = time)
         .catch(e => console.log(e));
-    }, 20);
+    }, 200);
   }
 
 }

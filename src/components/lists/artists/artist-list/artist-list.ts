@@ -1,15 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Artist} from "../../../../model/Artist";
 import {ListUtil} from "../../../ListUtil";
 import {NavController} from "ionic-angular";
 import {MoreListsPage} from "../../../../pages/more-lists/more-lists";
+import {Artist} from "../../../../model/artist";
 
-/**
- * Generated class for the ArtistListComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'artist-list-component',
   templateUrl: 'artist-list.html'

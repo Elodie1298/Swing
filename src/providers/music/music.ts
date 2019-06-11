@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Media, MediaObject} from "@ionic-native/media";
-import {Track} from "../../model/orm data/track";
+import {Track} from "../../model/track";
 
 
 @Injectable()

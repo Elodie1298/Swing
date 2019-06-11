@@ -6,12 +6,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/home/tabs/tabs';
 import {FilesManagerProvider} from "../providers/files-manager/files-manager";
 import {createConnection} from "typeorm";
-import {Album} from "../model/orm data/album";
-import {Artist} from "../model/orm data/artist";
-import {Genre} from "../model/orm data/genre";
-import {Label} from "../model/orm data/label";
-import {Track} from "../model/orm data/track";
-import {Playlist} from "../model/orm data/playlist";
+import {Album} from "../model/album";
+import {Artist} from "../model/artist";
+import {Genre} from "../model/genre";
+import {Label} from "../model/label";
+import {Track} from "../model/track";
+import {Playlist} from "../model/playlist";
 import {DataProvider} from "../providers/data/data";
 
 @Component({

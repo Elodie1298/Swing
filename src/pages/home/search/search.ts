@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import {DataProvider} from "../../../providers/data/data";
-import {Track} from "../../../model/orm data/track";
-import {Artist} from "../../../model/orm data/artist";
-import {Album} from "../../../model/orm data/album";
-import {Playlist} from "../../../model/orm data/playlist";
+import {Track} from "../../../model/track";
+import {Artist} from "../../../model/artist";
+import {Album} from "../../../model/album";
+import {Playlist} from "../../../model/playlist";
 
 @Component({
   selector: 'page-search',

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DataProvider} from "../../../providers/data/data";
-import {Track} from "../../../model/orm data/track";
+import {Track} from "../../../model/track";
 
 
 @Component({

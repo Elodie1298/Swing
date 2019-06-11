@@ -1,9 +1,9 @@
 <ion-toolbar no-padding class="playbar" *ngIf="music.on">
   <ion-item no-lines color="light">
     <img *ngIf="isCover" (click)="onClick()"
-         item-start [src]="music.currentMusic.album.img_big" width="48">
+         item-start [src]="music.currentMusic.albums[0].img_big" width="48">
     <h2 (click)="onClick()">{{music.currentMusic.name}}</h2>
-    <p (click)="onClick()">{{music.currentMusic.album.artist.name}}</p>
+    <p (click)="onClick()">{{music.currentMusic.albums[0].artists[0].name}}</p>
 
     <playbar-buttons-component item-end></playbar-buttons-component>
   </ion-item>

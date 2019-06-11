@@ -1,15 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Playlist} from "../../../../model/Playlist";
 import {NavController} from "ionic-angular";
 import {MoreListsPage} from "../../../../pages/more-lists/more-lists";
 import {ListUtil} from "../../../ListUtil";
+import {Playlist} from "../../../../model/playlist";
 
-/**
- * Generated class for the PlaylistListComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'playlist-list-component',
   templateUrl: 'playlist-list.html'

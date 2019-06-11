@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {ListUtil} from "../../components/ListUtil";
 import {DataProvider} from "../../providers/data/data";
-import {Artist} from "../../model/orm data/artist";
-import {Track} from "../../model/orm data/track";
-import {Album} from "../../model/orm data/album";
+import {Artist} from "../../model/artist";
+import {Track} from "../../model/track";
+import {Album} from "../../model/album";
 
 @Component({
   selector: 'page-artist',

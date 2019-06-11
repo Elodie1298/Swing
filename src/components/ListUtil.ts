@@ -1,5 +1,4 @@
-
-import {Artist} from "../model/Artist";
+import {Artist} from "../model/artist";
 
 export class ListUtil {
 

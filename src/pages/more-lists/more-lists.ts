@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {Track} from "../../model/orm data/track";
-import {Album} from "../../model/orm data/album";
-import {Artist} from "../../model/orm data/artist";
-import {Playlist} from "../../model/orm data/playlist";
+import {Track} from "../../model/track";
+import {Album} from "../../model/album";
+import {Artist} from "../../model/artist";
+import {Playlist} from "../../model/playlist";
 
 @Component({
   selector: 'page-more-lists',

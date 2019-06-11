@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {File} from '@ionic-native/file';
 import {DataProvider} from "../data/data";
-import {Track} from "../../model/orm data/track";
+import {Track} from "../../model/track";
 
 @Injectable()
 export class FilesManagerProvider {

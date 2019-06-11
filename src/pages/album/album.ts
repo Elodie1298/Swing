@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { NavParams } from 'ionic-angular';
-import {Album} from "../../model/orm data/album";
-import {Track} from "../../model/orm data/track";
+import {Album} from "../../model/album";
+import {Track} from "../../model/track";
 
 @Component({
   selector: 'page-album',
