@@ -23,7 +23,22 @@ export class DataProvider {
         .createQueryBuilder("track").getMany()
         .then((tracks: Track[]) => {
           this.tracks = tracks;
-        })
+        });
+      this.localConnection.getRepository("album")
+        .createQueryBuilder("album").getMany()
+        .then((albums: Album[]) => {
+          this.albums = albums;
+        });
+      this.localConnection.getRepository("artist")
+        .createQueryBuilder("artist").getMany()
+        .then((artists: Artist[]) => {
+          this.artists = artists;
+        });
+      this.localConnection.getRepository("playlist")
+        .createQueryBuilder("playlist").getMany()
+        .then((playlists: Playlist[]) => {
+          this.playlists = playlists;
+        });
     }, 2000);
   }
 
