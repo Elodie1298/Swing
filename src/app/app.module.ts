@@ -28,6 +28,7 @@ import { MetadataProvider } from '../providers/metadata';
 import {HttpClientModule} from "@angular/common/http";
 import { ExtractId3Provider } from '../providers/extract-id3';
 import {OrderModule} from "ngx-order-pipe";
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import {OrderModule} from "ngx-order-pipe";
   providers: [
     StatusBar,
     SplashScreen,
+    ScreenOrientation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
     SqlProvider,

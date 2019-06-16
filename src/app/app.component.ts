@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/home/tabs/tabs';
 import {SqlProvider} from "../providers/sql";
 import {FilesManagerProvider} from "../providers/files-manager";
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
 
 @Component({
   templateUrl: 'app.html'
@@ -16,12 +17,14 @@ export class MyApp {
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
+              screenOrientation: ScreenOrientation,
               private sqlLite: SqlProvider,
               private fm: FilesManagerProvider) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
+      statusBar.backgroundColorByHexString("#323232");
+      screenOrientation.lock(screenOrientation.ORIENTATIONS.PORTRAIT)
+        .then(e => console.log(e))
+        .catch(e => console.log(e));
       splashScreen.hide();
       if (platform.is('cordova')) {
         this.initialize();
