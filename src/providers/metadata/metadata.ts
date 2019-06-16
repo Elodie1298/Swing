@@ -4,7 +4,7 @@ import {Util} from "../Util";
 import {File} from "@ionic-native/file";
 import * as crypto from 'crypto-js';
 
-declare var Buffer: any;
+// declare var Buffer: any;
 
 @Injectable()
 export class MetadataProvider {
