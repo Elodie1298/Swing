@@ -14,14 +14,7 @@ export class SearchPage {
   max: number = 3;
   searchValue: string;
 
-  constructor(private data: DataProvider,
-              private navCtrl: NavController) {}
-
-  swipe(ev): void {
-    if (Math.abs(ev.deltaX)>Math.abs(ev.deltaY)) {
-      if (ev.deltaX<50) this.navCtrl.parent.select(1);
-    }
-  }
+  constructor(private data: DataProvider) {}
 
   get musics(): Array<Track> {
     if (this.data.tracks != undefined) {

@@ -25,17 +25,17 @@ export class AlbumListComponent {
   }
 
   more(): void{
-    if (this.max != undefined && this.albums!=null) {
+    if (this.max != undefined) {
       this.navCtrl.push(MoreListsPage, {title: "Albums", albums: this.albums});
     }
   }
 
   getAlbums(): Array<any> {
     let list = new Array<any>();
-    if (this.max != undefined && this.albums!=null) {
+    if (this.max != undefined) {
       list = [{letter: "Albums", list: ListUtil.getFirstItems(this.albums, this.max)}];
     }
-    else if (this.albums!=null) {
+    else {
       list = ListUtil.getGroupsByTitle(this.albums);
     }
     for (let l of list) {

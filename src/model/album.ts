@@ -33,7 +33,7 @@ export class Album {
   @JoinTable()
   labels: Label[];
 
-  @OneToMany(type => Track, tracks => tracks.album)
+  @OneToMany(type => Track, tracks => tracks.albums)
   tracks: Track[];
 
   @ManyToMany(type => Artist, artists => artists.genres)

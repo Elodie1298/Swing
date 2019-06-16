@@ -20,10 +20,10 @@ export class ArtistListComponent {
 
   getArtists(): Array<any> {
     let list = new Array<any>();
-    if (this.max != undefined && this.artists!=null) {
+    if (this.max != undefined) {
       list = [{letter: "Artistes", list: ListUtil.getFirstItems(this.artists, this.max)}];
     }
-    else if (this.artists!=null) {
+    else {
       list = ListUtil.getGroupsByName(this.artists);
     }
     for (let l of list) {
@@ -33,7 +33,7 @@ export class ArtistListComponent {
   }
 
   more(): void {
-    if (this.max != undefined && this.artists!=null) {
+    if (this.max != undefined) {
       this.navCtrl.push(MoreListsPage, {title:"Artists", artists: this.artists});
     }
   }

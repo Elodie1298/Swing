@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {Playlist} from "./playlist";
 import {Album} from "./album";
 
@@ -59,6 +59,6 @@ export class Track {
   @ManyToMany(type => Playlist, playlists => playlists.tracks)
   playlists: Playlist[];
 
-  @ManyToOne(type => Album, album => album.tracks)
-  album: Album;
+  @ManyToOne(type => Album, albums => albums.tracks)
+  albums: Album;
 }

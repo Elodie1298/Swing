@@ -25,8 +25,6 @@ import { MusicProvider } from '../providers/music/music';
 import {Media} from "@ionic-native/media";
 import { MetadataProvider } from '../providers/metadata/metadata';
 import {HttpClientModule} from "@angular/common/http";
-import {ScreenOrientation} from "@ionic-native/screen-orientation";
-import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -47,7 +45,6 @@ import {IonicStorageModule} from "@ionic/storage";
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true
     }),
-    IonicStorageModule.forRoot(),
     ComponentsModule,
     HttpClientModule
   ],
@@ -68,7 +65,6 @@ import {IonicStorageModule} from "@ionic/storage";
   providers: [
     StatusBar,
     SplashScreen,
-    ScreenOrientation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
     FilesManagerProvider,

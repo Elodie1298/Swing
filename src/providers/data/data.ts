@@ -16,42 +16,35 @@ export class DataProvider {
 
   constructor() {}
 
-  setConnection(connection: Connection): Promise<any> {
-    return new Promise<any>((resolve => {
-      this.localConnection = connection;
-      setInterval(() => {
-        this.localConnection.getRepository("track")
-          .createQueryBuilder("track").getMany()
-          .then((tracks: Track[]) => {
-            this.tracks = tracks;
-          })
-          .catch(e => console.log(e));
-        this.localConnection.getRepository("album")
-          .createQueryBuilder("album").getMany()
-          .then((albums: Album[]) => {
-            this.albums = albums;
-          })
-          .catch(e => console.log(e));
-        this.localConnection.getRepository("artist")
-          .createQueryBuilder("artist").getMany()
-          .then((artists: Artist[]) => {
-            this.artists = artists;
-          })
-          .catch(e => console.log(e));
-        this.localConnection.getRepository("playlist")
-          .createQueryBuilder("playlist").getMany()
-          .then((playlists: Playlist[]) => {
-            this.playlists = playlists;
-            if (this.playlists.filter(p => p.name == "Favoris").length == 0) {
-              this.localConnection.getRepository("playlist").create({
-                name: "Favoris"
-              })
-            }
-          })
-          .catch(e => console.log(e));
-      }, 1000);
-      resolve(true);
-    }));
+  setConnection(connection: Connection): void {
+    this.localConnection = connection;
+    setInterval(() => {
+      this.localConnection.getRepository("track")
+        .createQueryBuilder("track").getMany()
+        .then((tracks: Track[]) => {
+          this.tracks = tracks;
+        });
+      this.localConnection.getRepository("album")
+        .createQueryBuilder("album").getMany()
+        .then((albums: Album[]) => {
+          this.albums = albums;
+        });
+      this.localConnection.getRepository("artist")
+        .createQueryBuilder("artist").getMany()
+        .then((artists: Artist[]) => {
+          this.artists = artists;
+        });
+      this.localConnection.getRepository("playlist")
+        .createQueryBuilder("playlist").getMany()
+        .then((playlists: Playlist[]) => {
+          this.playlists = playlists;
+        });
+    }, 2000);
+    if (this.playlists.filter(p => p.name == "Favoris").length == 0) {
+      this.localConnection.getRepository("playlist").create({
+        name: "Favoris"
+      })
+    }
   }
 
 

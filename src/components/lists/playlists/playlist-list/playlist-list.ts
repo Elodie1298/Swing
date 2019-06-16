@@ -21,13 +21,13 @@ export class PlaylistListComponent {
   constructor(private navCtrl: NavController) {}
 
   more(): void {
-    if (this.max != undefined && this.playlists!=null) {
+    if (this.max != undefined) {
       this.navCtrl.push(MoreListsPage, {title: "Playlists", playlists: this.playlists});
     }
   }
 
   getPlaylists(): Array<any> {
-    if (this.max != undefined && this.playlists!=null) {
+    if (this.max != undefined) {
       return [{letter: "Playlists", list: ListUtil.getFirstItems(this.playlists, this.max)}];
     }
     return ListUtil.getGroupsByName(this.playlists);

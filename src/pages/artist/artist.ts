@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavParams} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {ListUtil} from "../../components/ListUtil";
 import {DataProvider} from "../../providers/data/data";
 import {Artist} from "../../model/artist";
@@ -16,7 +16,7 @@ export class ArtistPage {
   tracks: Array<Track>;
   albums: Array<Album>;
 
-  constructor(navParams: NavParams,
+  constructor(public navCtrl: NavController, public navParams: NavParams,
               data: DataProvider) {
     this.artist = navParams.get("artist");
     this.albums = data.albums.filter(a => a.artists.indexOf(this.artist)>-1);
