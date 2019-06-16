@@ -21,6 +21,7 @@ export class MusicProvider {
     this._mediaObject = this.media.create(trackList[n].file);
     this._mediaObject.play();
     this.on = true;
+    console.log('play');
   }
 
   get currentMusic(): Track {

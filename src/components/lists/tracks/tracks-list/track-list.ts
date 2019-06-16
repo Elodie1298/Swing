@@ -24,13 +24,13 @@ export class MusicListComponent {
   }
 
   more(): void {
-    if (this.max != undefined) {
+    if (this.max != undefined && this.tracks!=null) {
       this.navCtrl.push(MoreListsPage, {title: "Musiques", tracks: this.tracks});
     }
   }
 
   getTracks(): Array<any> {
-    if (this.max != undefined) {
+    if (this.max != undefined && this.tracks!=null) {
       return [{letter: "Musiques", list: ListUtil.getFirstItems(this.tracks, this.max)}];
     }
     return ListUtil.getGroupsByTitle(this.tracks);

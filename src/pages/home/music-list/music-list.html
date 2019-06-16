@@ -1,9 +1,9 @@
-<ion-content>
+<ion-content (swipe)="swipe($event)">
   <ion-list>
 
-    <tracks-list-component
-      [tracks]="tracks"
-    ></tracks-list-component>
+      <tracks-list-component
+        [tracks]="tracks"
+      ></tracks-list-component>
 
   </ion-list>
 </ion-content>

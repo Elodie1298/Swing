@@ -13,6 +13,9 @@ import {Label} from "../model/label";
 import {Track} from "../model/track";
 import {Playlist} from "../model/playlist";
 import {DataProvider} from "../providers/data/data";
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {Storage} from "@ionic/storage";
+import {MetadataProvider} from "../providers/metadata/metadata";
 
 @Component({
   templateUrl: 'app.html'
@@ -23,17 +26,22 @@ export class MyApp {
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
-              private fm: FilesManagerProvider,
-              private data: DataProvider) {
+              screenOrientation: ScreenOrientation,
+              fm: FilesManagerProvider,
+              data: DataProvider,
+              metadata: MetadataProvider,
+              storage: Storage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
+      // statusBar.styleDefault();
+      statusBar.backgroundColorByHexString("#323232");
+      screenOrientation.lock(screenOrientation.ORIENTATIONS.PORTRAIT)
+        .then(e => console.log(e))
+        .catch(e => console.log(e));
       createConnection({
-        type: "cordova",
+        type: "sqlite",
         database: 'jaz.db',
-        location: 'default',
-        synchronize: true,
         entities: [
           Album,
           Artist,
@@ -44,9 +52,19 @@ export class MyApp {
         ]
       })
         .then(connection => {
-          this.data.setConnection(connection);
-          this.fm.init();
+          return data.setConnection(connection)})
+        .then(() => {
           splashScreen.hide();
+
+          return storage.get('filesLoaded');
+        })
+        .then(answer => {
+          if (answer==null || answer==false) {
+            console.log('loading files...');
+            fm.init();
+          } else {
+            console.log('files already logged');
+          }
         })
         .catch(e => console.log(e));
     });

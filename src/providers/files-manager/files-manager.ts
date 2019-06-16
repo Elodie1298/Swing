@@ -2,29 +2,31 @@ import { Injectable } from '@angular/core';
 import {File} from '@ionic-native/file';
 import {DataProvider} from "../data/data";
 import {Track} from "../../model/track";
+import {Storage} from "@ionic/storage";
+import {Util} from "../Util";
 
 @Injectable()
 export class FilesManagerProvider {
   track_ext: string[] = ['mp3'];
-  tracksRoot: string = "file:///storage/9016-4EF8/";
-  dirRoot: string = "Musique";
   temp: number = 10000;
 
   trackRepository;
 
-  constructor(private file: File, private data: DataProvider) {}
+  constructor(private file: File,
+              private data: DataProvider,
+              private storage: Storage) {}
 
 
   init(): void {
     this.trackRepository = this.data.localConnection.getRepository('track');
-    this.file.listDir(this.tracksRoot, this.dirRoot)
+    this.file.listDir(Util.tracksRoot, Util.dirRoot)
       .then((listFiles: any[]) => this.getMusicFiles(listFiles))
       .catch(e => console.log(e));
   }
 
   private getMusicFiles(listFiles): void {
     this.dirLoop(listFiles, 0)
-      .then(_ => console.log("done"));
+      .then(_ => this.storage.set('filesLoaded', true));
   }
 
   private dirLoop(listFiles, i): Promise<any> {

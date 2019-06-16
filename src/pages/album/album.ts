@@ -12,7 +12,7 @@ export class AlbumPage {
   album: Album;
   tracks: Array<Track>;
 
-  constructor(private navParams: NavParams) {
+  constructor(navParams: NavParams) {
     this.album = navParams.get("album");
     for (let track of this.album.tracks) {
       this.tracks.push(track);

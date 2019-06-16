@@ -5,7 +5,6 @@ import {MusicProvider} from "../../../../providers/music/music";
 import {MetadataProvider} from "../../../../providers/metadata/metadata";
 import {Track} from "../../../../model/track";
 import {Album} from "../../../../model/album";
-import {DataProvider} from "../../../../providers/data/data";
 
 
 @Component({
@@ -30,6 +29,7 @@ export class TrackListItemComponent implements OnInit{
   ngOnInit(): void {}
 
   onClick():void {
+    console.log("clicked", this.track.name);
     let n = this.trackList.indexOf(this.track);
     this.musicProvider.setMediaPlaying(this.trackList, n);
     this.navCtrl.push(PlayingListPage, {music: this.track, musicList: this.trackList});
@@ -46,7 +46,7 @@ export class TrackListItemComponent implements OnInit{
         {
           text: "Récupérer les métadonnées",
           handler: () => {
-            this.metadataProvider.acrIdentify(this.track.file);
+            this.metadataProvider.getMetadata(this.track);
           }
         }
       ]
