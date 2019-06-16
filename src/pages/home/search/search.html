@@ -3,29 +3,47 @@
     (ionInput)="getItems($event)"
   ></ion-searchbar>
 
-  <music-list-component
+  <track-list-component
     [isDivTitle]="true"
-    [musics]="musics"
+    [tracks]="tracks"
     [max]="max"
-  ></music-list-component>
+    [moreTitle]="'Musiques: Résultats de la recherche '+searchValue"
+  ></track-list-component>
 
   <album-list-component
     [isDivTitle]="true"
     [albums]="albums"
     [max]="max"
+    [moreTitle]="'Albums: Résultats de la recherche '+searchValue"
   ></album-list-component>
 
   <artist-list-component
     [isDivTitle]="true"
     [artists]="artists"
     [max]="max"
+    [moreTitle]="'Artistes: Résultats de la recherche '+searchValue"
   ></artist-list-component>
 
   <playlist-list-component
     [isDivTitle]="true"
     [playlists]="playlists"
     [max]="max"
+    [moreTitle]="'Playlists: Résultats de la recherche '+searchValue"
   ></playlist-list-component>
+
+  <label-list-component
+    [isDivTitle]="true"
+    [labels]="labels"
+    [max]="max"
+    [moreTitle]="'Labels: Résultats de la recherche '+searchValue"
+  ></label-list-component>
+
+  <genre-list-component
+    [isDivTitle]="true"
+    [genres]="genres"
+    [max]="max"
+    [moreTitle]="'Genres: Résultats de la recherche '+searchValue"
+  ></genre-list-component>
 </ion-content>
 
 <ion-footer>

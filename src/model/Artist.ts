@@ -1,5 +1,5 @@
 import {Album} from "./Album";
-import {DataProvider} from "../providers/data/data";
+import {DataProvider} from "../providers/data";
 
 export class Artist {
   //TODO: adapt class
@@ -15,9 +15,6 @@ export class Artist {
   }
 
   static get (name: string, data: DataProvider, img?: string): Artist {
-    if (data.artists == undefined) {
-      data.artists = new Array<Artist>();
-    }
     let artists = data.artists.filter(a => a.name == name);
     if (artists.length==0) {
       let artist = new Artist();

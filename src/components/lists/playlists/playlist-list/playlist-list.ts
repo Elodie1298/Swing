@@ -4,12 +4,7 @@ import {NavController} from "ionic-angular";
 import {MoreListsPage} from "../../../../pages/more-lists/more-lists";
 import {ListUtil} from "../../../ListUtil";
 
-/**
- * Generated class for the PlaylistListComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+
 @Component({
   selector: 'playlist-list-component',
   templateUrl: 'playlist-list.html'
@@ -20,6 +15,8 @@ export class PlaylistListComponent {
   @Input() isDivTitle: boolean = false;
   @Input() isDivider: boolean = true;
 
+  @Input() moreTitle: string = "Playlists";
+
   @Input() max: number;
 
   @Output() click: EventEmitter<any> = new EventEmitter<any>();
@@ -28,7 +25,8 @@ export class PlaylistListComponent {
 
   more(): void {
     if (this.max != undefined) {
-      this.navCtrl.push(MoreListsPage, {title: "Playlists", playlists: this.playlists});
+      this.navCtrl.push(MoreListsPage, {title: this.moreTitle, playlists: this.playlists})
+        .catch(e => console.log(e));
     }
   }
 

@@ -2,7 +2,8 @@
   <ion-navbar>
     <ion-item no-lines>
       <ion-title>{{title}}</ion-title>
-      <img item-end [src]="img" width="40%">
+      <img *ngIf="img" item-end [src]="img" width="40%">
+      <img *ngIf="!img" item-end src="assets/imgs/album.png" width="40%">
     </ion-item>
   </ion-navbar>
 </div>

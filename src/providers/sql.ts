@@ -17,13 +17,13 @@ export class SqlProvider {
         console.log('database created', this.dataBase);
 
         return this.dataBase.transaction(tx => {
-          tx.executeSql('drop table if exists music', []); //TODO: remove after tests ok
-          tx.executeSql('create table if not exists music(music_id integer primary key autoincrement, music_title text)', []);
-          tx.executeSql('insert into music(music_title) values (?)', ['Test']);
+          tx.executeSql('drop table if exists tracks', []); //TODO: remove after tests ok
+          tx.executeSql('create table if not exists tracks(track_id integer primary key autoincrement, track_title text)', []);
+          tx.executeSql('insert into tracks(track_name) values (?)', ['Test']);
         })
       })
       .then(() => {
-        this.dataBase.executeSql('select * from music', [])
+        this.dataBase.executeSql('select * from tracks', [])
           .then(res => {console.log(res.rows.item(0))})
           .catch(e => console.log(e));
       })

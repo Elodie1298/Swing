@@ -1,0 +1,15 @@
+<ion-item class="track-list-item">
+
+  <ion-avatar item-start (click)="onClick()">
+    <img *ngIf="isNumber() && track.album.cover" [src]="track.album.cover">
+    <img *ngIf="isNumber() && !track.album.cover" src]="assets/imgs/album.png">
+    <h1 text-center *ngIf="!isNumber()">{{number}}</h1>
+  </ion-avatar>
+
+  <h2 (click)="onClick()">{{track.name}}</h2>
+  <p (click)="onClick()">{{track.album.artist.name}}</p>
+  <button ion-button item-end clear large color="dark"
+          (click)="more()" #moreButton>
+    <ion-icon name="more"></ion-icon>
+  </button>
+</ion-item>

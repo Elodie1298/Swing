@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {Music} from "../../model/Music";
+import { NavParams } from 'ionic-angular';
+import {Track} from "../../model/Track";
 import {Album} from "../../model/Album";
 import {Artist} from "../../model/Artist";
 import {Playlist} from "../../model/Playlist";
+import {Label} from "../../model/Label";
+import {Genre} from "../../model/Genre";
 
 @Component({
   selector: 'page-more-lists',
@@ -13,16 +15,20 @@ export class MoreListsPage {
 
   title: string = "More";
 
-  musics: Array<Music>;
+  tracks: Array<Track>;
   albums: Array<Album>;
   artists: Array<Artist>;
   playlists: Array<Playlist>;
+  labels: Array<Label>;
+  genres: Array<Genre>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(navParams: NavParams) {
     this.title = navParams.get("title");
-    this.musics = navParams.get("musics");
+    this.tracks = navParams.get("tracks");
     this.albums = navParams.get("albums");
     this.artists = navParams.get("artists");
     this.playlists = navParams.get("playlists");
+    this.labels = navParams.get("labels");
+    this.genres = navParams.get("genres");
   }
 }

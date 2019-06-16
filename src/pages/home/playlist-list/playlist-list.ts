@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataProvider} from "../../../providers/data/data";
+import {DataProvider} from "../../../providers/data";
 
 @Component({
   selector: 'page-playlist-list',

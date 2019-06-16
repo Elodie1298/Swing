@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
-import {DataProvider} from "../../../providers/data/data";
+import {DataProvider} from "../../../providers/data";
 
 @Component({
   selector: 'page-artist-list',
@@ -8,7 +7,6 @@ import {DataProvider} from "../../../providers/data/data";
 })
 export class ArtistListPage {
 
-  constructor(public navCtrl: NavController,
-              public data: DataProvider) {}
+  constructor(public data: DataProvider) {}
 
 }

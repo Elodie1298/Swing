@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavParams} from 'ionic-angular';
 import {Artist} from "../../model/Artist";
-import {Music} from "../../model/Music";
+import {Track} from "../../model/Track";
 import {Album} from "../../model/Album";
 import {ListUtil} from "../../components/ListUtil";
-import {DataProvider} from "../../providers/data/data";
+import {DataProvider} from "../../providers/data";
 
 @Component({
   selector: 'page-artist',
@@ -13,18 +13,18 @@ import {DataProvider} from "../../providers/data/data";
 export class ArtistPage {
 
   artist: Artist;
-  musics: Array<Music>;
+  tracks: Array<Track>;
   albums: Array<Album>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(navParams: NavParams,
               data: DataProvider) {
     this.artist = navParams.get("artist");
-    this.albums = data.album_list.get(this.artist);
-    this.musics = data.musics.filter(m => m.album.artist == this.artist);
+    this.albums = data.albums.filter(a => a.artist==this.artist);
+    this.tracks = data.tracks.filter(m => m.album.artist == this.artist);
   }
 
   getFirstItems(items: Array<any>): Array<any> {
-    if (items[0] instanceof Music) {
+    if (items[0] instanceof Track) {
       return ListUtil.getFirstItems(items, 3);
     }
     return ListUtil.getFirstItems(items, 6);

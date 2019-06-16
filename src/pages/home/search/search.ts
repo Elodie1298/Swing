@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController} from 'ionic-angular';
 import {Album} from "../../../model/Album";
-import {Music} from "../../../model/Music";
+import {Track} from "../../../model/Track";
 import {Artist} from "../../../model/Artist";
 import {Playlist} from "../../../model/Playlist";
-import {DataProvider} from "../../../providers/data/data";
+import {DataProvider} from "../../../providers/data";
+import {Genre} from "../../../model/Genre";
+import {Label} from "../../../model/Label";
 
 @Component({
   selector: 'page-search',
@@ -12,20 +13,18 @@ import {DataProvider} from "../../../providers/data/data";
 })
 export class SearchPage {
   max: number = 3;
-  searchValue: string;
+  searchValue: string = "";
 
-  constructor(public navCtrl: NavController,
-              private data: DataProvider) {
-  }
+  constructor(private data: DataProvider) {}
 
-  get musics(): Array<Music> {
+  get tracks(): Array<Track> {
     if (this.searchValue && this.searchValue!='') {
-      return this.data.musics.filter((item: Music) => {
-        return (item.title.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+      return this.data.tracks.filter((item: Track) => {
+        return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
       });
     }
     else {
-      return this.data.musics;
+      return this.data.tracks;
     }
   }
 
@@ -43,7 +42,7 @@ export class SearchPage {
   get albums(): Array<Album> {
     if (this.searchValue && this.searchValue!='') {
       return this.data.albums.filter((item: Album) => {
-        return (item.title.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+        return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
       });
     }
     else {
@@ -62,8 +61,30 @@ export class SearchPage {
     }
   }
 
+  get genres(): Array<Genre> {
+    if (this.searchValue && this.searchValue!='') {
+      return this.data.genres.filter((item: Genre) => {
+        return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+      });
+    }
+    else {
+      return this.data.genres;
+    }
+  }
+
+  get labels(): Array<Label> {
+    if (this.searchValue && this.searchValue!='') {
+      return this.data.labels.filter((item: Playlist) => {
+        return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);
+      });
+    }
+    else {
+      return this.data.labels;
+    }
+  }
+
   getItems(ev: any): void {
-    this.searchValue = ev.target.value;
+    if (ev.target.value) this.searchValue = ev.target.value;
   }
 
 }

@@ -4,8 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/home/tabs/tabs';
-import {SqlProvider} from "../providers/sql/sql";
-import {FilesManagerProvider} from "../providers/files-manager/files-manager";
+import {SqlProvider} from "../providers/sql";
+import {FilesManagerProvider} from "../providers/files-manager";
 
 @Component({
   templateUrl: 'app.html'

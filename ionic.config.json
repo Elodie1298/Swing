@@ -1,14 +1,13 @@
 {
   "name": "Swing_2",
-  "app_id": "",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
   },
+  "type": "ionic-angular",
   "proxies": [
     {
       "path": "/apiACR",
-      "proxyUrl": "http://identify-eu-wet-1.acrcloud.com/v1/identify"
+      "proxyUrl": "http://identify-eu-west-1.acrcloud.com/v1/identify"
     }
   ]
 }

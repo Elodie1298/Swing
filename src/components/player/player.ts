@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MusicProvider} from "../../providers/music/music";
+import {MusicProvider} from "../../providers/music";
 
 
 @Component({

@@ -1,23 +1,20 @@
-import {Music} from "./Music";
-import {DataProvider} from "../providers/data/data";
+import {Track} from "./Track";
+import {DataProvider} from "../providers/data";
 
 export class Playlist {
   //TODO: adapt class
-  trackList: Array<Music>;
+  trackList: Array<Track>;
   name: string;
   cover: string;
   description: string;
 
   constructor() {
-    this.trackList = new Array<Music>();
+    this.trackList = new Array<Track>();
     this.name = "Playlist test";
     this.cover = "assets/imgs/logo.png";
   }
 
   static get (data: DataProvider, name: string, cover?: string): Playlist {
-    if (data.playlists == undefined) {
-      data.playlists = new Array<Playlist>();
-    }
 
     let p = data.playlists.filter(p => p.name = name);
     if (p.length == 0) {

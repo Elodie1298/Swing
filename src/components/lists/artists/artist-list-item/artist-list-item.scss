@@ -1,3 +1,11 @@
-artist-list-item {
+.artist-list-item {
+  ion-avatar {
+    position: relative;
 
+    button {
+      position: absolute;
+      top: -10px;
+      right: -5px;
+    }
+  }
 }

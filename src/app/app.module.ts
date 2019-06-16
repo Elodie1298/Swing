@@ -8,7 +8,7 @@ import { File } from '@ionic-native/file';
 
 import { MyApp } from './app.component';
 import {TabsPage} from "../pages/home/tabs/tabs";
-import {MusicListPage} from "../pages/home/music-list/music-list";
+import {TrackListPage} from "../pages/home/track-list/track-list";
 import {ArtistListPage} from "../pages/home/artist-list/artist-list";
 import {PlaylistListPage} from "../pages/home/playlist-list/playlist-list";
 import {ComponentsModule} from "../components/components.module";
@@ -19,19 +19,21 @@ import {AlbumPage} from "../pages/album/album";
 import {PlaylistPage} from "../pages/playlist/playlist";
 import {MoreListsPage} from "../pages/more-lists/more-lists";
 import {SQLite} from "@ionic-native/sqlite";
-import {SqlProvider} from "../providers/sql/sql";
-import { FilesManagerProvider } from '../providers/files-manager/files-manager';
-import { DataProvider } from '../providers/data/data';
-import { MusicProvider } from '../providers/music/music';
+import {SqlProvider} from "../providers/sql";
+import { FilesManagerProvider } from '../providers/files-manager';
+import { DataProvider } from '../providers/data';
+import { MusicProvider } from '../providers/music';
 import {Media} from "@ionic-native/media";
-import { MetadataProvider } from '../providers/metadata/metadata';
+import { MetadataProvider } from '../providers/metadata';
 import {HttpClientModule} from "@angular/common/http";
+import { ExtractId3Provider } from '../providers/extract-id3';
+import {OrderModule} from "ngx-order-pipe";
 
 @NgModule({
   declarations: [
     MyApp,
     TabsPage,
-    MusicListPage,
+    TrackListPage,
     ArtistListPage,
     PlaylistListPage,
     SearchPage,
@@ -47,13 +49,14 @@ import {HttpClientModule} from "@angular/common/http";
       tabsHideOnSubPages: true
     }),
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    OrderModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     TabsPage,
-    MusicListPage,
+    TrackListPage,
     ArtistListPage,
     PlaylistListPage,
     SearchPage,
@@ -74,7 +77,8 @@ import {HttpClientModule} from "@angular/common/http";
     DataProvider,
     MusicProvider,
     Media,
-    MetadataProvider
+    MetadataProvider,
+    ExtractId3Provider
   ]
 })
 export class AppModule {}

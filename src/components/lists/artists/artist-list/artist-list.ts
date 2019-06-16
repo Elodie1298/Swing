@@ -4,12 +4,6 @@ import {ListUtil} from "../../../ListUtil";
 import {NavController} from "ionic-angular";
 import {MoreListsPage} from "../../../../pages/more-lists/more-lists";
 
-/**
- * Generated class for the ArtistListComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'artist-list-component',
   templateUrl: 'artist-list.html'
@@ -19,6 +13,8 @@ export class ArtistListComponent {
   @Input() isDivTitle: boolean = false;
   @Input() isDivider: boolean = true;
   @Input() max: number;
+
+  @Input() moreTitle: string = "Artistes";
 
   @Output() click: EventEmitter<any> = new EventEmitter<any>();
 
@@ -40,7 +36,8 @@ export class ArtistListComponent {
 
   more(): void {
     if (this.max != undefined) {
-      this.navCtrl.push(MoreListsPage, {title:"Artists", artists: this.artists});
+      this.navCtrl.push(MoreListsPage, {title: this.moreTitle, artists: this.artists})
+        .catch(e => console.log(e));
     }
   }
 

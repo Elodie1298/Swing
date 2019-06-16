@@ -1,19 +1,21 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Music} from "../../../../model/Music";
+import {Track} from "../../../../model/Track";
 import {NavController} from "ionic-angular";
 import {MoreListsPage} from "../../../../pages/more-lists/more-lists";
 import {ListUtil} from "../../../ListUtil";
 
 @Component({
-  selector: 'music-list-component',
-  templateUrl: 'music-list.html',
+  selector: 'track-list-component',
+  templateUrl: 'track-list.html',
 })
 export class MusicListComponent {
-  @Input() musics: Array<Music>;
+  @Input() tracks: Array<Track>;
   @Input() isDivTitle: boolean = false;
   @Input() isDivider: boolean = true;
-  @Input() number: number = 0;
+  @Input() number: number;
   @Input() max: number;
+
+  @Input() moreTitle: string = "Musiques";
 
   @Output() click: EventEmitter<any> = new EventEmitter<any>();
 
@@ -25,15 +27,20 @@ export class MusicListComponent {
 
   more(): void {
     if (this.max != undefined) {
-      this.navCtrl.push(MoreListsPage, {title: "Musiques", musics: this.musics});
+      this.navCtrl.push(MoreListsPage, {title: this.moreTitle, tracks: this.tracks})
+        .catch(e => console.log(e));
     }
   }
 
   getMusics(): Array<any> {
-    if (this.max != undefined) {
-      return [{letter: "Musiques", list: ListUtil.getFirstItems(this.musics, this.max)}];
+    if (this.isDivider || this.isDivTitle) {
+      if (this.max != undefined) {
+        return [{letter: "Musiques", list: ListUtil.getFirstItems(this.tracks, this.max)}];
+      }
+      return ListUtil.getGroupsByTitle(this.tracks);
     }
-    return ListUtil.getGroupsByTitle(this.musics);
+    else {
+      return [{list: this.tracks}];
+    }
   }
-
 }

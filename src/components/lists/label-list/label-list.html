@@ -1,0 +1,12 @@
+<ion-item-group *ngFor="let group of getLabels()">
+  <ion-item-divider *ngIf="isDivider" (click)="more()">
+    {{group.letter}}
+    <ion-icon *ngIf="isDivTitle" item-end name="arrow-dropright"></ion-icon>
+  </ion-item-divider>
+
+  <ion-item *ngFor="let label of group.list" no-padding>
+    <label-or-genre-item
+      [label]="label"
+    ></label-or-genre-item>
+  </ion-item>
+</ion-item-group>

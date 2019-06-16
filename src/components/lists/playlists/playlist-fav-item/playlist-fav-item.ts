@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {PlaylistPage} from "../../../../pages/playlist/playlist";
 import {NavController} from "ionic-angular";
 import {Playlist} from "../../../../model/Playlist";
-import {DataProvider} from "../../../../providers/data/data";
+import {DataProvider} from "../../../../providers/data";
 
 @Component({
   selector: 'playlist-fav-item',
@@ -14,7 +14,8 @@ export class PlaylistFavItemComponent {
   }
 
   onClick(): void {
-    this.navCtrl.push(PlaylistPage, {playlist: Playlist.get(this.data, "PL")});
+    this.navCtrl.push(PlaylistPage, {playlist: Playlist.get(this.data, "PL")})
+      .catch(e => console.log(e));
   }
 
 }

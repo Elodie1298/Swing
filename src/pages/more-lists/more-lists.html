@@ -6,24 +6,39 @@
 
 <ion-content>
 
-  <music-list-component *ngIf="!!musics"
-                        [musics]="musics"
+  <track-list-component *ngIf="tracks"
+                        [tracks]="tracks"
                         [isDivTitle]="false"
-  ></music-list-component>
+  ></track-list-component>
 
-  <album-list-component *ngIf="!!albums"
+  <album-list-component *ngIf="albums"
                         [albums]="albums"
                         [isDivTitle]="false"
   ></album-list-component>
 
-  <artist-list-component *ngIf="!!artists"
+  <artist-list-component *ngIf="artists"
                         [artists]="artists"
                         [isDivTitle]="false"
   ></artist-list-component>
 
-  <playlist-list-component *ngIf="!!playlists"
+  <playlist-list-component *ngIf="playlists"
                         [playlists]="playlists"
                         [isDivTitle]="false"
   ></playlist-list-component>
 
+  <label-list-component *ngIf="labels"
+                        [labels]="labels"
+                        [isDivTitle]="false"
+  ></label-list-component>
+
+  <genre-list-component *ngIf="genres"
+                        [genres]="genres"
+                        [isDivTitle]="false"
+  ></genre-list-component>
+
 </ion-content>
+
+
+<ion-footer>
+  <playbar-component></playbar-component>
+</ion-footer>

@@ -1,6 +1,6 @@
-<ion-item class="playbar-slider">
-  <ion-range min="0" max="songTime" [ngModel]="time/1000">
-    <ion-label range-left>{{time | date:'mm:ss'}}</ion-label>
-    <ion-label range-right>{{music.duration | date:'mm:ss'}}</ion-label>
+<ion-item class="playbar-slider" [formGroup]="rangeForm">
+  <ion-range [min]="0" [max]="max" formControlName="range">
+    <ion-label range-left>{{time}}</ion-label>
+    <ion-label range-right>{{duration}}</ion-label>
   </ion-range>
 </ion-item>
