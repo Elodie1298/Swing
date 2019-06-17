@@ -7,6 +7,7 @@ import { TabsPage } from '../pages/home/tabs/tabs';
 import {SqlProvider} from "../providers/sql";
 import {FilesManagerProvider} from "../providers/files-manager";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {Storage} from "@ionic/storage";
 
 @Component({
   templateUrl: 'app.html'
@@ -18,6 +19,7 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               screenOrientation: ScreenOrientation,
+              storage: Storage,
               private sqlLite: SqlProvider,
               private fm: FilesManagerProvider) {
     platform.ready().then(() => {

@@ -4,8 +4,8 @@ import {Track} from "../model/Track";
 import {Album} from "../model/Album";
 import {Artist} from "../model/Artist";
 import {DataProvider} from "./data";
-import {Util} from "./Util";
 import {MetadataProvider} from "./metadata";
+import {Storage} from "@ionic/storage";
 
 @Injectable()
 export class FilesManagerProvider {
@@ -20,13 +20,22 @@ export class FilesManagerProvider {
 
   constructor(private file: File,
               private data: DataProvider,
+              private storage: Storage,
               private metadata: MetadataProvider) {}
 
 
   init(): void {
-    this.file.listDir(Util.tracksRoot, Util.dirRoot)
-      .then((listFiles: any[]) => this.getTrackFiles(listFiles))
-      .catch(e => console.log(e));
+    this.storage.get('tracksRoot')
+      .then((tracksRoot: string) => {
+        this.tracksRoot = tracksRoot;
+        return this.storage.get('dirRoot');
+      })
+      .then((dirRoot: string) => {
+        this.dirRoot = dirRoot;
+        this.file.listDir(this.tracksRoot, this.dirRoot)
+          .then((listFiles: any[]) => this.getTrackFiles(listFiles))
+          .catch(e => console.log(e));
+      })
   }
 
   private getTrackFiles(listFiles: any[]): Promise<any> {
@@ -71,11 +80,11 @@ export class FilesManagerProvider {
 
               //TODO : check img and covers
               let path = file.fullPath.split('/');
-              if (path[path.length-4]==Util.dirRoot) {
+              if (path[path.length-4]==this.dirRoot) {
                 let artist = Artist.get(path[path.length-3], this.data);
                 let album = Album.get(artist, this.data, path[path.length-2]);
                 album.cover = file.fullPath;
-              } else if (path[path.length-3]==Util.dirRoot) {
+              } else if (path[path.length-3]==this.dirRoot) {
                 let artist = Artist.get(path[path.length-2], this.data);
                 artist.img = file.fullPath;
               }
@@ -102,10 +111,10 @@ export class FilesManagerProvider {
       let title = fileName.substring(0, fileName.length - (ext.length + 1));
 
       let album: Album;
-      if (pathL[pathL.length-4]==Util.dirRoot) {
+      if (pathL[pathL.length-4]==this.dirRoot) {
         let artist = Artist.get(pathL[pathL.length-3], this.data);
         album = Album.get(artist, this.data, pathL[pathL.length-2]);
-      } else if (pathL[pathL.length-3]==Util.dirRoot) {
+      } else if (pathL[pathL.length-3]==this.dirRoot) {
         let artist = Artist.get(pathL[pathL.length-2], this.data);
         album = artist.default_alb;
       }

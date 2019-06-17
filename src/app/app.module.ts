@@ -28,6 +28,7 @@ import { MetadataProvider } from '../providers/metadata';
 import {HttpClientModule} from "@angular/common/http";
 import { ExtractId3Provider } from '../providers/extract-id3';
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true
     }),
+    IonicStorageModule.forRoot(),
     ComponentsModule,
     HttpClientModule
   ],
@@ -79,7 +81,6 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
     Media,
     MetadataProvider,
     ExtractId3Provider,
-    BackgroundMode
   ]
 })
 export class AppModule {}
