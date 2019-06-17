@@ -10,7 +10,6 @@ export class Album {
   artists: Array<Artist>;
   year: number;
   labels: Array<Label>;
-  id: number;
 
   //TODO: check if Album.get ok or need to be staticly sotkced in dataProvider
   static default: Album = new Album();
@@ -23,7 +22,8 @@ export class Album {
     this.labels = new Array<Label>();
   }
 
-  static get (artist: Artist, data: DataProvider, name?: string, cover?: string, year?: number, id?: number) : Album {
+  static get (artist: Artist, data: DataProvider, name?: string,
+              cover?: string, year?: number) : Album {
     let a = data.albums.filter(a => a.name == name).filter(a => a.artist == artist);
     if (a.length == 0){
       let album = new Album();
@@ -31,7 +31,6 @@ export class Album {
       if (name) album.name = name;
       if (cover) album.cover = cover;
       if (year) album.year = year;
-      if (id) album.id = id;
       data.albums.push(album);
       return album;
 

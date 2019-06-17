@@ -7,7 +7,6 @@ export class Playlist {
   name: string;
   cover: string;
   description: string;
-  id: number;
 
   constructor() {
     this.trackList = new Array<Track>();
@@ -15,14 +14,14 @@ export class Playlist {
     this.cover = "assets/imgs/logo.png";
   }
 
-  static get (data: DataProvider, name: string, cover?: string, id?: number, description?: string): Playlist {
+  static get (data: DataProvider, name: string, cover?: string,
+              description?: string): Playlist {
 
     let p = data.playlists.filter(p => p.name = name);
     if (p.length == 0) {
       let playlist = new Playlist();
       playlist.name = name;
       if (cover) playlist.cover = cover;
-      if (id) playlist.id = id;
       if (description) playlist.description = description;
       data.playlists.push(playlist);
       return playlist;

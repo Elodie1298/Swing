@@ -12,14 +12,13 @@ export class Track {
   duration: number
   genres: Array<Genre>;
   language: Language;
-  id: number;
 
   constructor() {
     this.genres = new Array<Genre>();
   }
 
-  static get (data: DataProvider, name: string, file: string, album?: Album, album_nb?: number,
-              duration?: number, language?: Language, id?: number): Track {
+  static get (data: DataProvider, name: string, file: string, album?: Album,
+              album_nb?: number, duration?: number, language?: Language): Track {
     if (!album) album = Album.default;
 
     let m = data.tracks.filter(m => m.name == m.name).filter(m => m.album == album);
@@ -31,7 +30,6 @@ export class Track {
       if (album_nb) track.album_nb = album_nb;
       if (duration) track.duration = duration;
       if (language) track.language = language;
-      if (id) track.id = id;
       data.tracks.push(track);
       return track;
     } else {
