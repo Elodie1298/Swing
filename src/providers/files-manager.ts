@@ -6,6 +6,10 @@ import {Artist} from "../model/Artist";
 import {DataProvider} from "./data";
 import {MetadataProvider} from "./metadata";
 import {Storage} from "@ionic/storage";
+import {IAudioMetadata} from "music-metadata";
+import {Label} from "../model/Label";
+import {Genre} from "../model/Genre";
+import {Language} from "../model/Language";
 
 @Injectable()
 export class FilesManagerProvider {
@@ -68,11 +72,40 @@ export class FilesManagerProvider {
               let pathL = file.fullPath.split('/');
               let fileName = pathL[pathL.length - 1];
               let name = fileName.substring(0, fileName.length - (ext.length + 1));
-              this.metadata.musicMetadata(Track.get(this.data, name, file.fullPath))
-                .then(() => {
+              this.metadata.musicMetadata(file.fullPath)
+                .then((metadata: IAudioMetadata) => {
+                  let year = (metadata.common.year)?
+                    metadata.common.year :
+                    (metadata.common.date)? parseInt(metadata.common.date): undefined;
+                  let artists = undefined;
+                  if (metadata.common.artists) {
+                    let artists = new Array<Artist>();
+                    for (let artistName of metadata.common.artists) {
+                      artists.push(Artist.get(artistName, this.data));
+                    }
+                  }
+                  let labels = undefined;
+                  if (metadata.common.label) {
+                    labels = new Array<Label>();
+                    for (let labelName of metadata.common.label) {
+                      labels.push(Label.get(labelName, this.data));
+                    }
+                  }
+                  let genres = undefined;
+                  if (metadata.common.genre) {
+                    genres = new Array<Label>();
+                    for (let genreName of metadata.common.genre) {
+                      genres.push(Genre.get(genreName, this.data));
+                    }
+                  }
+                  Track.get(this.data, name, file.fullpath,
+                    Album.get(Artist.get(metadata.common.artist, this.data), this.data,
+                      metadata.common.album, undefined, year, artists, labels),
+                    metadata.common.disk.no, metadata.format.duration,
+                    Language.get(metadata.common.language, this.data), genres);
                   resolve(true);
                 })
-                .catch(err => reject(err));
+                .catch(e => reject(e));
             } else if (this.cover_ext.indexOf(ext) > -1) {
 
               //TODO : check img and covers

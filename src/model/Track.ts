@@ -18,7 +18,8 @@ export class Track {
   }
 
   static get (data: DataProvider, name: string, file: string, album?: Album,
-              album_nb?: number, duration?: number, language?: Language): Track {
+              album_nb?: number, duration?: number, language?: Language,
+              genres?: Array<Genre>): Track {
     if (!album) album = Album.default;
 
     let m = data.tracks.filter(m => m.name == name).filter(m => m.album == album);
@@ -30,6 +31,7 @@ export class Track {
       if (album_nb) track.album_nb = album_nb;
       if (duration) track.duration = duration;
       if (language) track.language = language;
+      if (genres) track.genres = genres;
       data.tracks.push(track);
       return track;
     } else {

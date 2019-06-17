@@ -23,7 +23,8 @@ export class Album {
   }
 
   static get (artist: Artist, data: DataProvider, name?: string,
-              cover?: string, year?: number) : Album {
+              cover?: string, year?: number, artists?: Array<Artist>,
+              labels?: Array<Label>) : Album {
     let a = data.albums.filter(a => a.name == name).filter(a => a.artist == artist);
     if (a.length == 0){
       let album = new Album();
@@ -31,6 +32,8 @@ export class Album {
       if (name) album.name = name;
       if (cover) album.cover = cover;
       if (year) album.year = year;
+      if (artists) album.artists = artists;
+      if (labels) album.labels = labels;
       data.albums.push(album);
       return album;
 
