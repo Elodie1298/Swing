@@ -21,7 +21,7 @@ export class Track {
               album_nb?: number, duration?: number, language?: Language): Track {
     if (!album) album = Album.default;
 
-    let m = data.tracks.filter(m => m.name == m.name).filter(m => m.album == album);
+    let m = data.tracks.filter(m => m.name == name).filter(m => m.album == album);
     if (m.length == 0) {
       let track = new Track();
       track.name = name;
