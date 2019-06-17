@@ -1,3 +1,4 @@
+import {Album} from "./Album";
 import {DataProvider} from "../providers/data";
 
 export class Artist {
@@ -6,10 +7,11 @@ export class Artist {
   img: string;
   id: number;
 
+  default_alb: Album;
   static default: Artist = new Artist();
 
   constructor() {
-    this.name = "Artist Inconnu";
+    this.name = "Artist";
     this.img = "assets/imgs/logo.png";
   }
 

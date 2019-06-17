@@ -29,7 +29,6 @@ import {HttpClientModule} from "@angular/common/http";
 import { ExtractId3Provider } from '../providers/extract-id3';
 import {OrderModule} from "ngx-order-pipe";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
-import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -50,7 +49,6 @@ import {IonicStorageModule} from "@ionic/storage";
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true
     }),
-    IonicStorageModule.forRoot(),
     ComponentsModule,
     HttpClientModule,
     OrderModule
