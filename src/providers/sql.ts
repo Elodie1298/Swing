@@ -16,8 +16,8 @@ export class SqlProvider {
   constructor(private sqlite: SQLite,
               private data: DataProvider) {}
 
-  initialize(): void {
-    this.sqlite.create({
+  initialize(): Promise<any> {
+    return this.sqlite.create({
       name: 'jaz.db',
       location: 'default'
     })
@@ -25,15 +25,6 @@ export class SqlProvider {
         this.dataBase = db;
         console.log('database created', this.dataBase);
 
-        //TODO: remove after tests ok
-        this.dataBase.executeSql('drop table if exists tracks', []);
-        this.dataBase.executeSql('drop table if exists albums', []);
-        this.dataBase.executeSql('drop table if exists artist', []); //TODO: add 's'
-        this.dataBase.executeSql('drop table if exists artists', []);
-        this.dataBase.executeSql('drop table if exists playlists', []);
-        this.dataBase.executeSql('drop table if exists tracks', []);
-        this.dataBase.executeSql('drop table if exists tracks', []);
-        this.dataBase.executeSql('drop table if exists tracks', []);
         this.dataBase.executeSql('create table if not exists tracks(' +
           'track_name text,' +
           'track_file text,' +

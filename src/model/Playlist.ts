@@ -11,7 +11,7 @@ export class Playlist {
   constructor() {
     this.trackList = new Array<Track>();
     this.name = "Playlist test";
-    this.cover = "assets/imgs/logo.png";
+    this.cover = "assets/imgs/playlist.png";
   }
 
   static get (data: DataProvider, name: string, cover?: string,

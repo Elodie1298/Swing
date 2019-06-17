@@ -8,6 +8,7 @@ import {SqlProvider} from "../providers/sql";
 import {FilesManagerProvider} from "../providers/files-manager";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import {Storage} from "@ionic/storage";
+import {c} from "@angular/core/src/render3";
 
 @Component({
   templateUrl: 'app.html'
@@ -47,14 +48,20 @@ export class MyApp {
   }
 
   initialize(): void {
-    this.sqlLite.initialize();
+    this.sqlLite.initialize()
+      .then(() => {
+        return this.sqlLite.getAll();
+      })
+      .then(() => {
+        console.info('Data successfully initialized from database !');
+      });
     this.fm.init()
       .then(() => {
-        console.log("Files loaded successfully !");
+        console.info("Files loaded successfully !");
         return this.sqlLite.saveAll();
       })
       .then(() => {
-        console.log("Data successfully saved in base !");
+        console.info("Data successfully saved in base !");
       })
       .catch(e => console.error(e));
   }

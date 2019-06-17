@@ -16,7 +16,7 @@ export class Album {
 
   constructor() {
     this.name = "Album";
-    this.cover = "assets/imgs/logo.png";
+    this.cover = "assets/imgs/album.png";
     this.artist = Artist.default;
     this.artists = new Array<Artist>();
     this.labels = new Array<Label>();

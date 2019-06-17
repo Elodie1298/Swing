@@ -13,7 +13,7 @@ export class FilesManagerProvider {
   cover_ext: string[] = ['jpg', 'png'];
   temp: number = 10000;
 
-  achieved: number = 0;
+  achieved: number = 0; // Pourcentage
 
   tracksRoot: string;
   dirRoot: string;
@@ -43,7 +43,7 @@ export class FilesManagerProvider {
   private dirLoop(listFiles: any[], i: number): Promise<any> {
 
     return new Promise<any>(resolve => {
-      if (i < listFiles.length && this.data.tracks.length<3) {
+      if (i < listFiles.length) {
         new Promise((resolve, reject) => {
 
           let file = listFiles[i];

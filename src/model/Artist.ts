@@ -11,7 +11,7 @@ export class Artist {
 
   constructor() {
     this.name = "Artist";
-    this.img = "assets/imgs/logo.png";
+    this.img = "assets/imgs/artist.png";
   }
 
   static get (name: string, data: DataProvider, img?: string): Artist {
