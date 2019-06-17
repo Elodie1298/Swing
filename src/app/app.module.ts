@@ -27,8 +27,8 @@ import {Media} from "@ionic-native/media";
 import { MetadataProvider } from '../providers/metadata';
 import {HttpClientModule} from "@angular/common/http";
 import { ExtractId3Provider } from '../providers/extract-id3';
-import {OrderModule} from "ngx-order-pipe";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -50,8 +50,7 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
       tabsHideOnSubPages: true
     }),
     ComponentsModule,
-    HttpClientModule,
-    OrderModule
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -80,7 +79,8 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
     MusicProvider,
     Media,
     MetadataProvider,
-    ExtractId3Provider
+    ExtractId3Provider,
+    BackgroundMode
   ]
 })
 export class AppModule {}

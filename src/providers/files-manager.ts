@@ -13,6 +13,11 @@ export class FilesManagerProvider {
   cover_ext: string[] = ['jpg', 'png'];
   temp: number = 10000;
 
+  achieved: number = 0;
+
+  tracksRoot: string;
+  dirRoot: string;
+
   constructor(private file: File,
               private data: DataProvider,
               private metadata: MetadataProvider) {}
@@ -24,8 +29,8 @@ export class FilesManagerProvider {
       .catch(e => console.log(e));
   }
 
-  private getTrackFiles(listFiles: any[]): void {
-    this.dirLoop(listFiles, 0)
+  private getTrackFiles(listFiles: any[]): Promise<any> {
+    return this.dirLoop(listFiles, 0)
       .then(() => {
         console.log("File loading done");
         this.metadata.loadAllMetadata();
@@ -39,6 +44,9 @@ export class FilesManagerProvider {
         new Promise((resolve, reject) => {
 
           let file = listFiles[i];
+          if (file.nativeURL.substring(this.tracksRoot.length, file.nativeURL.length-2).split('/').length < 3) {
+            this.achieved = Math.trunc((i/listFiles.length)*100);
+          }
 
           if (file.isDirectory) {
             this.file.listDir("file:///", file.fullPath.substring(1))
