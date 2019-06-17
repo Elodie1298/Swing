@@ -39,8 +39,14 @@ export class MusicProvider {
     this.on = true;
   }
 
-  //TODO
-  shuffle(): void {}
+  shuffle(trackList: Array<Track>): Array<Track> {
+    let tracks = new Array<Track>();
+    for (let track of trackList){
+      tracks.push(track);
+    }
+    tracks.sort(() => Math.random()-0.5);
+    return tracks;
+  }
 
   get currentMusic(): Track {
     return this._trackList[this._nTrack];
@@ -99,8 +105,8 @@ export class MusicProvider {
 
   addTrackRandomPlace(track: Track): void {
     if (!this.on) {
-      this.setMediaPlaying(this.data.tracks, this.data.tracks.indexOf(track));
-      this.shuffle();
+      let tracks = this.shuffle(this.data.tracks);
+      this.setMediaPlaying(tracks, tracks.indexOf(track));
     }
     else {
       let n = Math.floor(Math.random() * (this._trackList.length - this._nTrack) + this._nTrack);
@@ -152,24 +158,27 @@ export class MusicProvider {
   }
 
   improFromTrack(track: Track): void {
-    let n = this.data.tracks.indexOf(track);
-    this.setMediaPlaying(this.data.tracks, n);
+    let tracks = this.shuffle(this.data.tracks);
+    let n = tracks.indexOf(track);
+    this.setMediaPlaying(tracks, n);
   }
   improFromAlbum(album: Album): void {
-    let n = this.data.tracks.indexOf(this.data.tracks.filter(t => t.album == album)[0]);
-    this.setMediaPlaying(this.data.tracks, n);
+    let tracks = this.shuffle(this.data.tracks.filter(t => t.album == album));
+    let n = Math.floor(Math.random() * tracks.length);
+    this.setMediaPlaying(tracks, n);
   }
   improFromArtist(artist: Artist): void {
-    let n = this.data.tracks.indexOf(this.data.tracks.filter(t => t.album.artist == artist)[0]);
-    this.setMediaPlaying(this.data.tracks, n);
+    let tracks = this.shuffle(this.data.tracks.filter(t => t.album.artists.indexOf(artist)>-1));
+    let n = Math.floor(Math.random() * tracks.length);
+    this.setMediaPlaying(tracks, n);
   }
   improFromGenre(genre: Genre): void {
-    let tracks = this.data.tracks.filter(t => t.genres.indexOf(genre)>-1);
+    let tracks = this.shuffle(this.data.tracks.filter(t => t.genres.indexOf(genre)>-1));
     let n = Math.floor(Math.random() * tracks.length);
     this.setMediaPlaying(tracks, n);
   }
   improFromLabel(label: Label): void {
-    let tracks = this.data.tracks.filter(t => t.album.labels.indexOf(label)>-1);
+    let tracks = this.shuffle(this.data.tracks.filter(t => t.album.labels.indexOf(label)>-1));
     let n = Math.floor(Math.random() * tracks.length);
     this.setMediaPlaying(tracks, n);
   }
