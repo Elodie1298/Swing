@@ -42,55 +42,57 @@ export class MetadataProvider {
     // this.acrIdentify(track.file);
   }
 
-  musicMetadata(track: Track): void {
+  musicMetadata(track: Track): Promise<any> {
     let fileName = track.file.split('/')[track.file.split('/').length-1];
     let directory = track.file.substring(0, track.file.length-fileName.length);
-    this.file.readAsArrayBuffer("file://" + directory, fileName)
-      .then((arrayBuffer: ArrayBuffer) => {
-        metadata.parseBuffer(new Buffer(arrayBuffer))
-          .then((metadata: IAudioMetadata) => {
-            track.duration = metadata.format.duration;
-            let meta = metadata.common;
-            let artist = track.album.artist;
-            let album = track.album;
-            if (meta.artist) {
-              artist = Artist.get(meta.artist, this.data);
-            }
-            if (meta.album) {
-              album = Album.get(artist, this.data, meta.album);
-            }
-            track.album = album;
-            for (let artist of meta.artists) {
-              track.album.artists.push(Artist.get(artist, this.data));
-            }
-            if (meta.year) {
-              track.album.year = meta.year;
-            }
-            else if(meta.date) {
-              try {
-                track.album.year = parseInt(meta.date);
-              } catch (e) {
-                console.log(e);
-              }
-            }
-            track.album_nb = meta.disk.no;
-            if (meta.genre) {
-              for (let genre of meta.genre) {
-                track.genres.push(Genre.get(genre, this.data));
-              }
-            }
-            if (meta.label) {
-              for (let label of meta.label) {
-                track.album.labels.push(Label.get(label, this.data));
-              }
-            }
-            if (meta.language) {
-              track.language = Language.get(meta.language, this.data);
-            }
+    return new Promise<any>((resolve, reject) => {
+      this.file.readAsArrayBuffer("file://" + directory, fileName)
+        .then((arrayBuffer: ArrayBuffer) => {
+          return metadata.parseBuffer(new Buffer(arrayBuffer))
         })
-          .catch(e => console.log(e));
-      })
-      .catch(e => console.log(e));
+        .then((metadata: IAudioMetadata) => {
+          track.duration = metadata.format.duration;
+          let meta = metadata.common;
+          let artist = track.album.artist;
+          let album = track.album;
+          if (meta.artist) {
+            artist = Artist.get(meta.artist, this.data);
+          }
+          if (meta.album) {
+            album = Album.get(artist, this.data, meta.album);
+          }
+          track.album = album;
+          for (let artist of meta.artists) {
+            track.album.artists.push(Artist.get(artist, this.data));
+          }
+          if (meta.year) {
+            track.album.year = meta.year;
+          }
+          else if(meta.date) {
+            try {
+              track.album.year = parseInt(meta.date);
+            } catch (e) {
+              console.log(e);
+            }
+          }
+          track.album_nb = meta.disk.no;
+          if (meta.genre) {
+            for (let genre of meta.genre) {
+              track.genres.push(Genre.get(genre, this.data));
+            }
+          }
+          if (meta.label) {
+            for (let label of meta.label) {
+              track.album.labels.push(Label.get(label, this.data));
+            }
+          }
+          if (meta.language) {
+            track.language = Language.get(meta.language, this.data);
+          }
+          resolve(true);
+        })
+        .catch(e => reject(e));
+    })
   }
 
   acrIdentify(path: string): void {

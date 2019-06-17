@@ -49,7 +49,7 @@ export class FilesManagerProvider {
   private dirLoop(listFiles: any[], i: number): Promise<any> {
 
     return new Promise<any>(resolve => {
-      if (i < listFiles.length) {
+      if (i < listFiles.length && this.data.tracks.length<3) {
         new Promise((resolve, reject) => {
 
           let file = listFiles[i];
@@ -71,7 +71,10 @@ export class FilesManagerProvider {
             let ext = file.name.split('.');
             ext = ext[ext.length - 1];
             if (this.track_ext.indexOf(ext) > -1) {
-              this.getMetadata(file, ext)
+              let pathL = file.fullPath.split('/');
+              let fileName = pathL[pathL.length - 1];
+              let name = fileName.substring(0, fileName.length - (ext.length + 1));
+              this.metadata.musicMetadata(Track.get(this.data, name, file.fullPath))
                 .then(() => {
                   resolve(true);
                 })
@@ -100,26 +103,6 @@ export class FilesManagerProvider {
       } else {
         resolve(true);
       }
-    });
-  }
-
-
-  getMetadata(file: FileEntry, ext: string): Promise<Track> {
-    return new Promise<Track>((resolve) => {
-      let pathL = file.fullPath.split('/');
-      let fileName = pathL[pathL.length - 1];
-      let title = fileName.substring(0, fileName.length - (ext.length + 1));
-
-      let album: Album;
-      if (pathL[pathL.length-4]==this.dirRoot) {
-        let artist = Artist.get(pathL[pathL.length-3], this.data);
-        album = Album.get(artist, this.data, pathL[pathL.length-2]);
-      } else if (pathL[pathL.length-3]==this.dirRoot) {
-        let artist = Artist.get(pathL[pathL.length-2], this.data);
-        album = artist.default_alb;
-      }
-      let track = Track.get(this.data, title, file.fullPath, album);
-      resolve(track);
     });
   }
 }
