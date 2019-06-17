@@ -4,6 +4,8 @@ import {Track} from "../model/Track";
 import {DataProvider} from "./data";
 import {Album} from "../model/Album";
 import {Artist} from "../model/Artist";
+import {Genre} from "../model/Genre";
+import {Label} from "../model/Label";
 
 
 @Injectable()
@@ -160,5 +162,15 @@ export class MusicProvider {
   improFromArtist(artist: Artist): void {
     let n = this.data.tracks.indexOf(this.data.tracks.filter(t => t.album.artist == artist)[0]);
     this.setMediaPlaying(this.data.tracks, n);
+  }
+  improFromGenre(genre: Genre): void {
+    let tracks = this.data.tracks.filter(t => t.genres.indexOf(genre)>-1);
+    let n = Math.floor(Math.random() * tracks.length);
+    this.setMediaPlaying(tracks, n);
+  }
+  improFromLabel(label: Label): void {
+    let tracks = this.data.tracks.filter(t => t.album.labels.indexOf(label)>-1);
+    let n = Math.floor(Math.random() * tracks.length);
+    this.setMediaPlaying(tracks, n);
   }
 }

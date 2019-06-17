@@ -20,7 +20,7 @@
 ///////////////// Colors
 
 // Background
-.tabbar, .header, .footer {
+.tabbar, .header, .footer, ion-alert .alert-wrapper  {
   background: color($theme-colors, dark, base) !important;
 }
 .content, .item {
@@ -35,7 +35,8 @@
 
 // Text color
 .tabbar .tab-button ion-icon, p, h1, h2, .label,
-.header ion-icon, .toolbar-title {
+.header ion-icon, .toolbar-title, ion-alert .button-playlist,
+ion-alert input, ion-alert .alert-input-wrapper {
   color: color($theme-colors, light, base) !important;
 }
 .tabbar .tab-button[aria-selected=true] .tab-button-icon {
@@ -79,7 +80,6 @@ ion-item-group {
 
 
 //////////////////// Shapes
-
 .card img, .item img {
   border-radius: 1% !important;
 }
@@ -90,3 +90,17 @@ ion-item-group {
   padding: 0 !important;
 }
 
+.alert-button-group {
+  flex-wrap: wrap !important;
+}
+ion-alert button {
+  width: 100%;
+  text-transform: none !important;
+  justify-content: flex-start;
+}
+ion-alert button span {
+  justify-content: flex-start !important;
+}
+ion-alert .button-playlist {
+  font-weight: 100 !important;
+}

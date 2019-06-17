@@ -4,6 +4,7 @@ import {Label} from "../../../model/Label";
 import {Genre} from "../../../model/Genre";
 import {MoreListsPage} from "../../../pages/more-lists/more-lists";
 import {DataProvider} from "../../../providers/data";
+import {MusicProvider} from "../../../providers/music";
 
 
 @Component({
@@ -19,7 +20,8 @@ export class LabelOrGenreItemComponent {
 
   constructor(private navCtrl: NavController,
               private data: DataProvider,
-              private actionSheetCtrl: ActionSheetController) {}
+              private actionSheetCtrl: ActionSheetController,
+              private musicProvider: MusicProvider) {}
 
   onClick():void {
     if (this.label) {
@@ -40,8 +42,14 @@ export class LabelOrGenreItemComponent {
       title: title,
       buttons: [
         {
-          text: "Récupérer les métadonnées",
+          text: "Impro",
+          icon: 'bonfire',
           handler: () => {
+            if (this.genre) {
+              this.musicProvider.improFromGenre(this.genre);
+            } else if (this.label) {
+              this.musicProvider.improFromLabel(this.genre);
+            }
           }
         }
       ]

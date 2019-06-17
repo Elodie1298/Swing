@@ -1,9 +1,10 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Artist} from "../../../../model/Artist";
-import {ActionSheetController, NavController} from "ionic-angular";
+import {ActionSheetController, AlertController, NavController} from "ionic-angular";
 import {ArtistPage} from "../../../../pages/artist/artist";
 import {MusicProvider} from "../../../../providers/music";
 import {DataProvider} from "../../../../providers/data";
+import {Playlist} from "../../../../model/Playlist";
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ArtistListItemComponent {
 
   constructor(private navCtrl: NavController,
               private actionSheetCtrl: ActionSheetController,
+              private alertCtrl: AlertController,
               private musicProvider: MusicProvider,
               private data: DataProvider) {}
 
@@ -53,14 +55,74 @@ export class ArtistListItemComponent {
           text: "Ajouter à une playlist",
           icon: 'list',
           handler: () => {
-            //TODO: add to a playlist
-            console.log('add to playlist');
+            this.addPlaylist();
           }
         }
       ]
     });
     actionSheet.present()
       .catch(e => console.log(e));
+  }
+
+  addPlaylist() {
+    let buttons: Array<any> = new Array<any>();
+    if (this.data.playlists.filter(p => p.name=='Favoris').length == 0) {
+      Playlist.get(this.data, 'Favoris');
+    }
+    for (let playlist of this.data.playlists) {
+      buttons.push({
+        text: playlist.name,
+        cssClass: 'button-playlist',
+        handler: () => {
+          for (let track of this.data.tracks.filter(t => t.album.artists.indexOf(this.artist)>-1)) {
+            playlist.trackList.push(track);
+          }
+        }
+      });
+    }
+    buttons.push({
+      text: 'Nouvelle playlist',
+      handler: () => {
+        this.newPlaylist();
+      }
+    });
+
+    console.log(buttons);
+
+    let alert = this.alertCtrl.create({
+      title: 'Mes playlists',
+      buttons: buttons
+    });
+    alert.present()
+      .then(d => console.log(d))
+      .catch(e => console.error(e));
+  }
+
+  newPlaylist() {
+    let alert = this.alertCtrl.create({
+      title: 'Nouvelle playlist',
+      inputs: [
+        {
+          name: 'playlist',
+          placeholder: 'name'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Valider',
+          handler: (data: any) => {
+            let playlist = Playlist.get(this.data, data.playlist);
+            for (let track of this.data.tracks.filter(t => t.album.artists.indexOf(this.artist)>-1)) {
+              playlist.trackList.push(track);
+            }
+          }
+        }
+      ]
+
+    });
+    alert.present()
+      .then(d => console.log(d))
+      .catch(e => console.error(e));
   }
 
 }
