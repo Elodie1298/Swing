@@ -12,6 +12,7 @@ import {DataProvider} from "./data";
 import {Label} from "../model/Label";
 import {Album} from "../model/Album";
 import {Genre} from "../model/Genre";
+import {Language} from "../model/Language";
 
 declare var Buffer: any;
 
@@ -84,7 +85,7 @@ export class MetadataProvider {
               }
             }
             if (meta.language) {
-              track.language = meta.language;
+              track.language = Language.get(meta.language, this.data);
             }
         })
           .catch(e => console.log(e));

@@ -16,7 +16,10 @@ export class MusicProvider {
   on: boolean = false;
 
   constructor(private media: Media,
-              private data: DataProvider) {}
+              private data: DataProvider) {
+    this._trackList = new Array<Track>();
+    this._nTrack = 0;
+  }
 
   setMediaPlaying(tracks: Array<Track>, n: number): void {
     this._trackList = tracks;
@@ -33,6 +36,9 @@ export class MusicProvider {
       .catch(e => console.log(e));
     this.on = true;
   }
+
+  //TODO
+  shuffle(): void {}
 
   get currentMusic(): Track {
     return this._trackList[this._nTrack];
@@ -90,21 +96,42 @@ export class MusicProvider {
   }
 
   addTrackRandomPlace(track: Track): void {
-    let n = Math.floor(Math.random()*(this._trackList.length-this._nTrack) + this._nTrack);
-    this.insertTrack(track, n);
+    if (!this.on) {
+      this.setMediaPlaying(this.data.tracks, this.data.tracks.indexOf(track));
+      this.shuffle();
+    }
+    else {
+      let n = Math.floor(Math.random() * (this._trackList.length - this._nTrack) + this._nTrack);
+      this.insertTrack(track, n);
+    }
   }
   addTracksRandomPlace(tracks: Array<Track>): void {
-    for (let track of tracks) {
-      this.addTrackRandomPlace(track);
+    if (!this.on) {
+      let n = Math.trunc(Math.random()*tracks.length);
+      this.setMediaPlaying(tracks, n);
+    } else {
+      for (let track of tracks) {
+        this.addTrackRandomPlace(track);
+      }
     }
   }
 
   addTrackNextPlace(track): void {
-    this.insertTrack(track, this._nTrack+1);
+    if (!this.on) {
+      this.setMediaPlaying(this.data.tracks, this.data.tracks.indexOf(track));
+    }
+    else {
+      this.insertTrack(track, this._nTrack+1);
+    }
   }
   addTracksNextPlace(tracks: Array<Track>): void {
-    for (let i=tracks.length-1; i>=0; i--) {
-      this.addTrackNextPlace(tracks[i]);
+    if (!this.on) {
+      let n = Math.trunc(Math.random()*tracks.length);
+      this.setMediaPlaying(tracks, n);
+    } else {
+      for (let i = tracks.length - 1; i >= 0; i--) {
+        this.addTrackNextPlace(tracks[i]);
+      }
     }
   }
 

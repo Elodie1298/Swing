@@ -33,8 +33,7 @@ export class MyApp {
   }
 
   initialize(): void {
-    //TODO: finish with sqlLite or start TypeORM
-    // this.sqlLite.initialize();
+    this.sqlLite.initialize();
     this.fm.init();
   }
 }

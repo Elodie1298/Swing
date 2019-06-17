@@ -5,6 +5,7 @@ import {Playlist} from "../model/Playlist";
 import {Artist} from "../model/Artist";
 import {Genre} from "../model/Genre";
 import {Label} from "../model/Label";
+import {Language} from "../model/Language";
 
 @Injectable()
 export class DataProvider {
@@ -14,6 +15,7 @@ export class DataProvider {
   artists: Array<Artist> = new Array<Artist>();
   genres: Array<Genre> = new Array<Genre>();
   labels: Array<Label> = new Array<Label>();
+  languages: Array<Language> = new Array<Language>();
 
   constructor() { }
 }
