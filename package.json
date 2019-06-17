@@ -11,7 +11,8 @@
     "lint": "ionic-app-scripts lint",
     "run android": "ionic cordova run android",
     "run android lr": "ionic cordova run android --livereload",
-    "run browser lr": "ionic cordova run browser --livereload"
+    "run browser lr": "ionic cordova run browser --livereload",
+    "build prod": "ionic cordova build android --prod --release"
   },
   "dependencies": {
     "@angular/animations": "5.2.11",

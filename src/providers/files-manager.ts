@@ -95,12 +95,10 @@ export class FilesManagerProvider {
                   }
                   let genres = undefined;
                   if (metadata.common.genre) {
-                    console.log('--- genre', metadata.common.genre);
                     genres = new Array<Label>();
                     for (let genreName of metadata.common.genre) {
                       genres.push(Genre.get(genreName, this.data));
                     }
-                    console.log('--- genre', genres);
                   }
                   let artist = Artist.get(metadata.common.artist, this.data);
                   this.sql.saveArtist(artist)
