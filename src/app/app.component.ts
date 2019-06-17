@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
+import {Storage} from "@ionic/storage";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
 
 import { TabsPage } from '../pages/home/tabs/tabs';
-import {SqlProvider} from "../providers/sql";
+import {Playlist} from "../model/Playlist";
 import {FilesManagerProvider} from "../providers/files-manager";
-import {ScreenOrientation} from "@ionic-native/screen-orientation";
-import {Storage} from "@ionic/storage";
-import {c} from "@angular/core/src/render3";
+import {DataProvider} from "../providers/data";
+import {SqlProvider} from "../providers/sql";
 
 @Component({
   templateUrl: 'app.html'
@@ -21,6 +22,7 @@ export class MyApp {
               splashScreen: SplashScreen,
               screenOrientation: ScreenOrientation,
               storage: Storage,
+              private data: DataProvider,
               private sqlLite: SqlProvider,
               private fm: FilesManagerProvider) {
     platform.ready().then(() => {
@@ -53,6 +55,10 @@ export class MyApp {
         return this.sqlLite.getAll();
       })
       .then(() => {
+        if (this.data.playlists.filter(p => p.name=='Favoris').length == 0) {
+          let playlist = Playlist.get(this.data, 'Favoris');
+          this.sqlLite.savePlaylist(playlist);
+        }
         console.info('Data successfully initialized from database !');
       });
     this.fm.init()

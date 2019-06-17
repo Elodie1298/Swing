@@ -40,7 +40,7 @@ export class MusicProvider {
   }
 
   shuffle(trackList: Array<Track>): Array<Track> {
-    let tracks = new Array<Track>();
+    let tracks: Array<Track> = new Array<Track>();
     for (let track of trackList){
       tracks.push(track);
     }

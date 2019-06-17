@@ -3,12 +3,10 @@ import {Track} from "../../../../model/Track";
 import {ActionSheetController, AlertController, NavController} from "ionic-angular";
 import {PlayingListPage} from "../../../../pages/playing-list/playing-list";
 import {MusicProvider} from "../../../../providers/music";
-import {MetadataProvider} from "../../../../providers/metadata";
 import {AlbumPage} from "../../../../pages/album/album";
 import {ArtistPage} from "../../../../pages/artist/artist";
 import {DataProvider} from "../../../../providers/data";
-import {Playlist} from "../../../../model/Playlist";
-import {connectableObservableDescriptor} from "rxjs/observable/ConnectableObservable";
+import {SqlProvider} from "../../../../providers/sql";
 
 
 @Component({
@@ -27,6 +25,7 @@ export class MusicListItemComponent {
               private musicProvider: MusicProvider,
               private actionSheetCtrl: ActionSheetController,
               private alertCtrl: AlertController,
+              private sql: SqlProvider,
               private data: DataProvider) {}
 
   onClick():void {
@@ -84,15 +83,12 @@ export class MusicListItemComponent {
 
   addPlaylist() {
     let buttons: Array<any> = new Array<any>();
-    if (this.data.playlists.filter(p => p.name=='Favoris').length == 0) {
-      Playlist.get(this.data, 'Favoris');
-    }
     for (let playlist of this.data.playlists) {
       buttons.push({
         text: playlist.name,
         cssClass: 'button-playlist',
         handler: () => {
-          playlist.trackList.push(this.track);
+          DataProvider.addTrackToPlaylist(this.sql, playlist, this.track);
         }
       });
     }
@@ -127,8 +123,8 @@ export class MusicListItemComponent {
         {
           text: 'Valider',
           handler: (data: any) => {
-            let playlist = Playlist.get(this.data, data.playlist);
-            playlist.trackList.push(this.track);
+            let playlist = DataProvider.getPlaylist(this.sql, this.data, data.playlist);
+            DataProvider.addTrackToPlaylist(this.sql, playlist, this.track);
           }
         }
       ]

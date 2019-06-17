@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {DbTransaction, SQLite, SQLiteObject} from "@ionic-native/sqlite";
+import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 import {DataProvider} from "./data";
 import {Artist} from "../model/Artist";
 import {Album} from "../model/Album";
@@ -76,56 +76,98 @@ export class SqlProvider {
   }
 
   saveAll(): Promise<any> {
-    return this.dataBase.transaction((tx: DbTransaction) => {
+    return new Promise<any>((resolve, reject) => {
       // Insert artist
       for (let artist of this.data.artists) {
-        tx.executeSql('insert into artists(artist_name, artist_img) values (?, ?)',
-          [artist.name, artist.img]);
-        console.log('insert artist', artist.name);
+        this.saveArtist(artist)
+          .catch(e => reject(e));
       }
 
       // Insert playlist
       for (let playlist of this.data.playlists) {
-        tx.executeSql('insert into playlists(playlist_name, playlist_cover, playlist_description) values (?, ?, ?)',
-          [playlist.name, playlist.cover, playlist.description]);
-        console.log('insert playlist', playlist.name);
+        this.savePlaylist(playlist)
+          .catch(e => reject(e));
       }
 
       // Insert album, album_label, album_artist
       for (let album of this.data.albums) {
-        tx.executeSql('insert into albums(album_name, album_cover, album_artist, album_year) values (?, ?, ?, ?)',
-          [album.name, album.cover, (album.artist) ? album.artist.name : null, album.year]);
-        console.log('insert album', album.name);
+        this.saveAlbum(album)
+          .catch(e => reject(e));
 
         for (let label of album.labels) {
-          tx.executeSql('insert into album_label(album_name, label_name) values (?, ?)', [album.name, label.name]);
-          console.log('insert album label', album.name, label.name);
+          this.saveAlbumLabel(album, label)
+          .catch(e => reject(e));
         }
 
         for (let artist of album.artists) {
-          tx.executeSql('insert into album_artist(album_name, artist_name) values (?, ?)', [album.name, artist.name]);
-          console.log('insert album artist', album.name, artist.name);
+          this.saveAlbumArtist(album, artist)
+          .catch(e => reject(e));
         }
       }
 
       // Insert track, track_genre, playlist_track
       for (let track of this.data.tracks) {
-        tx.executeSql('insert into tracks(track_name, track_file, track_album, track_album_nb, track_duration, track_language)' +
-          ' values (?, ?, ?, ?, ?, ?)',
-          [track.name, track.file, (track.album) ? track.album.name : null, track.album_nb, track.duration,
-            (track.language)? track.language.name : null]);
-        console.log('insert track', track.name);
+        this.saveTrack(track)
+          .catch(e => reject(e));
 
         for (let genre of track.genres) {
-          tx.executeSql('insert into track_genre(track_name, genre_name) values (?, ?)', [track.name, genre.name]);
-          console.log('insert track genre', track.name, genre.name);
+          this.saveTrackGenre(track, genre)
+          .catch(e => reject(e));
         }
 
         for (let playlist of this.data.playlists.filter(p => p.trackList.indexOf(track)>-1)) {
-          tx.executeSql('insert into playlist_track(track_name, playlist_name) values (?, ?)', [track.name, playlist.name]);
+          this.savePlaylistTrack(playlist, track)
+          .catch(e => reject(e));
         }
       }
+      resolve(true);
     })
+  }
+
+  saveArtist(artist: Artist): Promise<any> {
+    console.log('insert artist', artist.name);
+    return this.dataBase.executeSql('insert into artists(artist_name, artist_img) values (?, ?)',
+      [artist.name, artist.img]);
+  }
+
+  savePlaylist(playlist: Playlist): Promise<any> {
+    console.log('insert playlist', playlist.name);
+    return this.dataBase.executeSql('insert into playlists(playlist_name, playlist_cover, playlist_description) values (?, ?, ?)',
+      [playlist.name, playlist.cover, playlist.description]);
+  }
+
+  saveAlbum(album: Album): Promise<any> {
+    console.log('insert album', album.name);
+    return this.dataBase.executeSql('insert into albums(album_name, album_cover, album_artist, album_year) values (?, ?, ?, ?)',
+      [album.name, album.cover, (album.artist) ? album.artist.name : null, album.year]);
+  }
+
+  saveAlbumLabel(album: Album, label: Label): Promise<any> {
+    console.log('insert album label', album.name, label.name);
+    return this.dataBase.executeSql('insert into album_label(album_name, label_name) values (?, ?)', [album.name, label.name]);
+  }
+
+  saveAlbumArtist(album: Album, artist: Artist): Promise<any> {
+    console.log('insert album artist', album.name, artist.name);
+    return this.dataBase.executeSql('insert into album_artist(album_name, artist_name) values (?, ?)', [album.name, artist.name]);
+  }
+
+  saveTrack(track: Track): Promise<any> {
+    console.log('insert track', track.name);
+    return this.dataBase.executeSql('insert into tracks(track_name, track_file, track_album, track_album_nb, track_duration, track_language)' +
+      ' values (?, ?, ?, ?, ?, ?)',
+      [track.name, track.file, (track.album) ? track.album.name : null, track.album_nb, track.duration,
+        (track.language)? track.language.name : null]);
+  }
+
+  saveTrackGenre(track: Track, genre: Genre): Promise<any> {
+    console.log('insert track genre', track.name, genre.name);
+    return this.dataBase.executeSql('insert into track_genre(track_name, genre_name) values (?, ?)', [track.name, genre.name]);
+  }
+
+  savePlaylistTrack(playlist: Playlist, track: Track): Promise<any> {
+    console.log('insert playlist track', playlist.name, track.name);
+    return this.dataBase.executeSql('insert into playlist_track(track_name, playlist_name) values (?, ?)', [track.name, playlist.name]);
   }
 
   getAll(): void {

@@ -62,6 +62,7 @@ export class SearchPage {
   }
 
   get genres(): Array<Genre> {
+    console.log(this.data.genres);
     if (this.searchValue && this.searchValue!='') {
       return this.data.genres.filter((item: Genre) => {
         return (item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1);

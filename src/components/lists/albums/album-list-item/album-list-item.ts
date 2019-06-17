@@ -6,6 +6,7 @@ import {ArtistPage} from "../../../../pages/artist/artist";
 import {MusicProvider} from "../../../../providers/music";
 import {DataProvider} from "../../../../providers/data";
 import {Playlist} from "../../../../model/Playlist";
+import {SqlProvider} from "../../../../providers/sql";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class AlbumListItemComponent {
               private actionSheetCtrl: ActionSheetController,
               private alertCtrl: AlertController,
               private musicProvider: MusicProvider,
+              private sql: SqlProvider,
               private data: DataProvider) {}
 
   onClick(): void {
@@ -68,17 +70,13 @@ export class AlbumListItemComponent {
 
   addPlaylist() {
     let buttons: Array<any> = new Array<any>();
-    if (this.data.playlists.filter(p => p.name=='Favoris').length == 0) {
-      Playlist.get(this.data, 'Favoris');
-    }
     for (let playlist of this.data.playlists) {
       buttons.push({
         text: playlist.name,
         cssClass: 'button-playlist',
         handler: () => {
-          for (let track of this.data.tracks.filter(t => t.album==this.album)) {
-            playlist.trackList.push(track);
-          }
+          DataProvider.addTracksToPlaylist(this.sql, playlist,
+            this.data.tracks.filter(t => t.album==this.album));
         }
       });
     }
@@ -113,10 +111,9 @@ export class AlbumListItemComponent {
         {
           text: 'Valider',
           handler: (data: any) => {
-            let playlist = Playlist.get(this.data, data.playlist);
-            for (let track of this.data.tracks.filter(t => t.album==this.album)) {
-              playlist.trackList.push(track);
-            }
+            let playlist = DataProvider.getPlaylist(this.sql, this.data, data.playlist);
+            DataProvider.addTracksToPlaylist(this.sql, playlist,
+              this.data.tracks.filter(t => t.album==this.album));
           }
         }
       ]

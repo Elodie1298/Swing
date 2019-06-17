@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {File, FileEntry} from '@ionic-native/file';
+import {File} from '@ionic-native/file';
 import {Track} from "../model/Track";
 import {Album} from "../model/Album";
 import {Artist} from "../model/Artist";
@@ -10,6 +10,7 @@ import {IAudioMetadata} from "music-metadata";
 import {Label} from "../model/Label";
 import {Genre} from "../model/Genre";
 import {Language} from "../model/Language";
+import {SqlProvider} from "./sql";
 
 @Injectable()
 export class FilesManagerProvider {
@@ -25,6 +26,7 @@ export class FilesManagerProvider {
   constructor(private file: File,
               private data: DataProvider,
               private storage: Storage,
+              private sql: SqlProvider,
               private metadata: MetadataProvider) {}
 
 
@@ -93,16 +95,40 @@ export class FilesManagerProvider {
                   }
                   let genres = undefined;
                   if (metadata.common.genre) {
+                    console.log('--- genre', metadata.common.genre);
                     genres = new Array<Label>();
                     for (let genreName of metadata.common.genre) {
                       genres.push(Genre.get(genreName, this.data));
                     }
+                    console.log('--- genre', genres);
                   }
-                  Track.get(this.data, name, file.fullpath,
-                    Album.get(Artist.get(metadata.common.artist, this.data), this.data,
-                      metadata.common.album, undefined, year, artists, labels),
+                  let artist = Artist.get(metadata.common.artist, this.data);
+                  this.sql.saveArtist(artist)
+                    .catch(e => console.log(e));
+                  let album = Album.get(artist, this.data, metadata.common.album, undefined, year, artists, labels);
+                  this.sql.saveAlbum(album)
+                    .catch(e => console.log(e));
+                  if (artists) {
+                    for (let a of artists) {
+                      this.sql.saveAlbumArtist(album, a)
+                        .catch(e => console.log(e));
+                    }
+                  }
+                  if (labels) {
+                    for (let l of labels) {
+                      this.sql.saveAlbumLabel(album, l)
+                        .catch(e => console.log(e));
+                    }
+                  }
+                  let track = Track.get(this.data, name, file.fullpath, album,
                     metadata.common.disk.no, metadata.format.duration,
                     Language.get(metadata.common.language, this.data), genres);
+                  this.sql.saveTrack(track)
+                    .catch(e => console.log(e));
+                  for (let g of genres) {
+                    this.sql.saveTrackGenre(track, g)
+                      .catch(e => console.log(e));
+                  }
                   resolve(true);
                 })
                 .catch(e => reject(e));

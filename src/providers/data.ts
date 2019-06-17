@@ -6,6 +6,7 @@ import {Artist} from "../model/Artist";
 import {Genre} from "../model/Genre";
 import {Label} from "../model/Label";
 import {Language} from "../model/Language";
+import {SqlProvider} from "./sql";
 
 @Injectable()
 export class DataProvider {
@@ -18,4 +19,23 @@ export class DataProvider {
   languages: Array<Language> = new Array<Language>();
 
   constructor() { }
+
+  static getPlaylist(sql: SqlProvider, data: DataProvider, name: string): Playlist {
+    let playlist = Playlist.get(data, name);
+    sql.savePlaylist(playlist)
+      .catch(e => console.log(e));
+    return playlist;
+  }
+
+  static addTrackToPlaylist(sql: SqlProvider, playlist: Playlist, track: Track): void {
+    playlist.trackList.push(track);
+    sql.savePlaylistTrack(playlist, track)
+      .catch(e => console.log(e));
+  }
+
+  static addTracksToPlaylist(sql: SqlProvider, playlist: Playlist, tracks: Array<Track>): void {
+    for (let t of tracks) {
+      DataProvider.addTrackToPlaylist(sql, playlist, t);
+    }
+  }
 }

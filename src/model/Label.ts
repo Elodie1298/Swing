@@ -10,6 +10,7 @@ export class Label {
     if (labels.length == 0) {
       let label = new Label();
       label.name = name;
+      data.labels.push(label);
       return label;
     } else {
       return labels[0];

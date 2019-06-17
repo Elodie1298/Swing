@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { File } from '@ionic-native/file';
 
-
 import { MyApp } from './app.component';
 import {TabsPage} from "../pages/home/tabs/tabs";
 import {TrackListPage} from "../pages/home/track-list/track-list";
@@ -26,7 +25,6 @@ import { MusicProvider } from '../providers/music';
 import {Media} from "@ionic-native/media";
 import { MetadataProvider } from '../providers/metadata';
 import {HttpClientModule} from "@angular/common/http";
-import { ExtractId3Provider } from '../providers/extract-id3';
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import {IonicStorageModule} from "@ionic/storage";
 
@@ -79,8 +77,7 @@ import {IonicStorageModule} from "@ionic/storage";
     DataProvider,
     MusicProvider,
     Media,
-    MetadataProvider,
-    ExtractId3Provider,
+    MetadataProvider
   ]
 })
 export class AppModule {}

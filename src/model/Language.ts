@@ -10,6 +10,7 @@ export class Language {
     if (languages.length == 0) {
       let language = new Language();
       language.name = name;
+      data.languages.push(language);
       return language;
     } else {
       return languages[0];
