@@ -8,6 +8,10 @@ import {DataProvider} from "../../../providers/data";
 export class PlaylistListPage {
 
   constructor(private data: DataProvider) {}
+
+  get playlist() {
+    return this.data.playlists.filter(p => p.name!='Favoris')
+  }
 }
 
 

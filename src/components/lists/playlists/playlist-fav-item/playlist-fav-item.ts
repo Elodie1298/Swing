@@ -14,7 +14,7 @@ export class PlaylistFavItemComponent {
   }
 
   onClick(): void {
-    this.navCtrl.push(PlaylistPage, {playlist: Playlist.get(this.data, "PL")})
+    this.navCtrl.push(PlaylistPage, {playlist: Playlist.get(this.data, "Favoris")})
       .catch(e => console.log(e));
   }
 

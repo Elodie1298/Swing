@@ -121,7 +121,8 @@ export class SqlProvider {
       for (let track of this.data.tracks) {
         tx.executeSql('insert into tracks(track_name, track_file, track_album, track_album_nb, track_duration, track_language)' +
           ' values (?, ?, ?, ?, ?, ?)',
-          [track.name, track.file, (track.album) ? track.album.name : null, track.album_nb, track.duration, track.language.name]);
+          [track.name, track.file, (track.album) ? track.album.name : null, track.album_nb, track.duration,
+            (track.language)? track.language.name : null]);
         console.log('insert track', track.name);
 
         for (let genre of track.genres) {

@@ -48,6 +48,14 @@ export class MyApp {
 
   initialize(): void {
     this.sqlLite.initialize();
-    this.fm.init();
+    this.fm.init()
+      .then(() => {
+        console.log("Files loaded successfully !");
+        return this.sqlLite.saveAll();
+      })
+      .then(() => {
+        console.log("Data successfully saved in base !");
+      })
+      .catch(e => console.error(e));
   }
 }

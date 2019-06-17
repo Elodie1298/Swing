@@ -24,26 +24,20 @@ export class FilesManagerProvider {
               private metadata: MetadataProvider) {}
 
 
-  init(): void {
-    this.storage.get('tracksRoot')
+  init(): Promise<any> {
+    return this.storage.get('tracksRoot')
       .then((tracksRoot: string) => {
         this.tracksRoot = tracksRoot;
         return this.storage.get('dirRoot');
       })
       .then((dirRoot: string) => {
         this.dirRoot = dirRoot;
-        this.file.listDir(this.tracksRoot, this.dirRoot)
-          .then((listFiles: any[]) => this.getTrackFiles(listFiles))
-          .catch(e => console.log(e));
+        return this.file.listDir(this.tracksRoot, this.dirRoot)
       })
-  }
-
-  private getTrackFiles(listFiles: any[]): Promise<any> {
-    return this.dirLoop(listFiles, 0)
-      .then(() => {
-        console.log("File loading done");
-        this.metadata.loadAllMetadata();
-      });
+      .then((listFiles: any[]) => {
+        return this.dirLoop(listFiles, 0)}
+        )
+      .catch(e => console.log(e));
   }
 
   private dirLoop(listFiles: any[], i: number): Promise<any> {

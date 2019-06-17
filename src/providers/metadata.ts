@@ -50,7 +50,7 @@ export class MetadataProvider {
         .then((arrayBuffer: ArrayBuffer) => {
           return metadata.parseBuffer(new Buffer(arrayBuffer))
         })
-        .then((metadata: IAudioMetadata) => {
+        .then(async (metadata: IAudioMetadata) => {
           track.duration = metadata.format.duration;
           let meta = metadata.common;
           let artist = track.album.artist;
