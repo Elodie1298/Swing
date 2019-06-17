@@ -19,8 +19,8 @@ export class ArtistPage {
   constructor(navParams: NavParams,
               data: DataProvider) {
     this.artist = navParams.get("artist");
-    this.albums = data.albums.filter(a => a.artist==this.artist);
-    this.tracks = data.tracks.filter(m => m.album.artist == this.artist);
+    this.albums = data.albums.filter(a => (a.artist==this.artist || a.artists.indexOf(this.artist)>-1));
+    this.tracks = data.tracks.filter(m => (m.album.artist == this.artist || m.album.artists.indexOf(this.artist)>-1));
   }
 
   getFirstItems(items: Array<any>): Array<any> {

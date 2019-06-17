@@ -9,7 +9,7 @@ export class Track {
   album: Album;
   file: string;
   album_nb: number;
-  duration: number
+  duration: number;
   genres: Array<Genre>;
   language: Language;
   id: number;
@@ -22,8 +22,9 @@ export class Track {
               duration?: number, language?: Language, id?: number): Track {
     if (!album) album = Album.default;
 
-    let m = data.tracks.filter(m => m.name == m.name).filter(m => m.album == album);
-    if (m.length == 0) {
+    let t= data.tracks.filter(t => (t.name == name && t.album == album));
+
+    if (t.length == 0) {
       let track = new Track();
       track.name = name;
       track.file = file;
@@ -35,7 +36,7 @@ export class Track {
       data.tracks.push(track);
       return track;
     } else {
-      return m[0];
+      return t[0];
     }
   }
 }

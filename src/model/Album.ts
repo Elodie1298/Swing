@@ -16,7 +16,7 @@ export class Album {
   static default: Album = new Album();
 
   constructor() {
-    this.name = "Album";
+    this.name = "Album Inconnu";
     this.cover = "assets/imgs/logo.png";
     this.artist = Artist.default;
     this.artists = new Array<Artist>();
