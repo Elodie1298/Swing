@@ -29,6 +29,7 @@ export class MusicListItemComponent {
               private data: DataProvider) {}
 
   onClick():void {
+    console.log('play music', this.track);
     let n = this.trackList.indexOf(this.track);
     this.musicProvider.setMediaPlaying(this.trackList, n);
     this.navCtrl.push(PlayingListPage, {track: this.track, trackList: this.trackList})

@@ -49,7 +49,7 @@ export class FilesManagerProvider {
   private dirLoop(listFiles: any[], i: number): Promise<any> {
 
     return new Promise<any>(resolve => {
-      if (i < listFiles.length) {
+      if (i < listFiles.length && this.data.tracks.length < 100) {
         new Promise((resolve, reject) => {
 
           let file = listFiles[i];
@@ -74,6 +74,7 @@ export class FilesManagerProvider {
               let pathL = file.fullPath.split('/');
               let fileName = pathL[pathL.length - 1];
               let name = fileName.substring(0, fileName.length - (ext.length + 1));
+              let path = file.fullPath;
               this.metadata.musicMetadata(file.fullPath)
                 .then((metadata: IAudioMetadata) => {
                   let year = (metadata.common.year)?
@@ -118,14 +119,16 @@ export class FilesManagerProvider {
                         .catch(e => console.log(e));
                     }
                   }
-                  let track = Track.get(this.data, name, file.fullpath, album,
+                  let track = Track.get(this.data, name, path, album,
                     metadata.common.disk.no, metadata.format.duration,
                     Language.get(metadata.common.language, this.data), genres);
                   this.sql.saveTrack(track)
                     .catch(e => console.log(e));
-                  for (let g of genres) {
-                    this.sql.saveTrackGenre(track, g)
-                      .catch(e => console.log(e));
+                  if (genres) {
+                    for (let g of genres) {
+                      this.sql.saveTrackGenre(track, g)
+                        .catch(e => console.log(e));
+                    }
                   }
                   resolve(true);
                 })
@@ -150,7 +153,7 @@ export class FilesManagerProvider {
           .then(() => {
             this.dirLoop(listFiles, i+1).then(() => resolve(true));
           })
-          .catch(e => console.log(e));
+          // .catch(e => console.log(e));
       } else {
         resolve(true);
       }

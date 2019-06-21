@@ -36,8 +36,8 @@ export class MyApp {
         .catch(e => console.log(e));
 
       // Getting/Setting native storaged data
-      storage.set('tracksRoot', "file:///storage/9016-4EF8/");
-      storage.set('dirRoot', "Musique");
+      storage.set('tracksRoot', "file:///storage/emulated/");
+      storage.set('dirRoot', "0");
 
       // hide splachscreen
       splashScreen.hide();

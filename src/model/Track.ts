@@ -9,7 +9,7 @@ export class Track {
   album: Album;
   file: string;
   album_nb: number;
-  duration: number
+  duration: number;
   genres: Array<Genre>;
   language: Language;
 
@@ -21,6 +21,8 @@ export class Track {
               album_nb?: number, duration?: number, language?: Language,
               genres?: Array<Genre>): Track {
     if (!album) album = Album.default;
+
+    console.log('-- file', file);
 
     let m = data.tracks.filter(m => m.name == name).filter(m => m.album == album);
     if (m.length == 0) {
